@@ -23,7 +23,7 @@ Cet exercice a pour but de vous familiariser avec la configuration de Sysmon sur
    - **Téléchargement du fichier de configuration :** Vous pouvez utiliser un fichier de configuration personnalisé tel que celui disponible sur GitHub [SwiftOnSecurity Sysmon Config](https://github.com/SwiftOnSecurity/sysmon-config).
    - **Application de la configuration :** Pour appliquer cette configuration, utilisez la commande suivante :
      ```bash
-     sysmon.exe -c cheminers\sysmonconfig-export.xml
+     sysmon.exe -c cheminVers\sysmonconfig-export.xml
      ```
    - **Explication :** Ce fichier de configuration permet de surveiller des événements spécifiques tels que la création de processus, les connexions réseau, et les modifications de fichiers, en fonction des besoins spécifiques de l'entreprise.
 
