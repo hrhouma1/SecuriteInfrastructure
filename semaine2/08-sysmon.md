@@ -25,7 +25,7 @@ Sysmon est particulièrement utile pour les professionnels de la sécurité qui 
 
 Sysinternals est un ensemble d'outils et d'utilitaires avancés développés par Mark Russinovich et distribués par Microsoft, destinés à l'administration, au diagnostic et à la résolution de problèmes sur les systèmes Windows. Ces outils sont très utiles pour les administrateurs systèmes, les ingénieurs en sécurité et les professionnels de l'informatique, car ils permettent d'analyser en profondeur le comportement du système, de surveiller les processus en cours, de gérer les fichiers, de déboguer des applications, et bien plus encore.
 
-Voici quelques-uns des outils les plus populaires inclus dans Sysinternals :
+Je vous propose quelques-uns des outils les plus populaires inclus dans Sysinternals :
 
 1. **Process Explorer** : Un gestionnaire de tâches avancé qui offre une vue détaillée des processus en cours d'exécution, des fichiers et des clés de registre utilisés par ces processus, ainsi que des informations sur les DLL chargées et les dépendances.
 
