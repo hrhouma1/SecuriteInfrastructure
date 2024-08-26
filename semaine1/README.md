@@ -1,6 +1,6 @@
 # Déroulement de la séance 1 - Partie Théorique et Partie Pratique
 
-### **Tableau du Déroulement de la Séance 1 - Partie Théorique**
+### *Partie Théorique*
 
 | **Session** | **Sujet** | **Contenu** | **Objectifs** |
 |-------------|------------|-------------|---------------|
@@ -16,7 +16,7 @@
 | **10**      | Collecte des Preuves | Processus de collecte et préservation des preuves numériques. | Apprendre à sécuriser et analyser les preuves d'une attaque. |
 | **11**      | Journaux d'Événements | Importance de l'analyse des journaux pour la détection des anomalies. | Utiliser les journaux pour la surveillance et la réponse aux incidents. |
 
-### **Tableau du Déroulement de la Séance 1 - Partie Pratique**
+### *Partie Pratique*
 
 | **Étape**   | **Tâche** | **Contenu** | **Objectifs** |
 |-------------|------------|-------------|---------------|
