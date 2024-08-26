@@ -2,7 +2,7 @@
 ## 7.2 Questions et Réponses
 
 ### Introduction :
-Cette section est dédiée aux questions et réponses, offrant aux participants l'opportunité de clarifier les points abordés au cours de la formation, de discuter des scénarios spécifiques, et d'approfondir leur compréhension des concepts de sécurité informatique et de réponse aux incidents.
+Cette section est dédiée aux questions et réponses, vous offrant l'opportunité de clarifier les points abordés au cours de cette séance, de discuter des scénarios spécifiques, et d'approfondir votre compréhension des concepts de sécurité informatique et de réponse aux incidents.
 
 ### Questions Fréquentes :
 
@@ -22,8 +22,8 @@ Cette section est dédiée aux questions et réponses, offrant aux participants 
    - **Réponse :** Pour protéger vos sauvegardes contre les attaques, suivez les meilleures pratiques suivantes : maintenez des sauvegardes hors ligne ou en utilisant des solutions de stockage en cloud sécurisé, implémentez un chiffrement fort pour toutes les sauvegardes, testez régulièrement les processus de restauration pour vous assurer de leur efficacité, et limitez l'accès aux sauvegardes à des utilisateurs autorisés seulement.
 
 ### Discussion Ouverte :
-La session de questions-réponses est également une excellente occasion pour les participants de partager leurs expériences, d'échanger sur les meilleures pratiques, et de poser des questions spécifiques à leurs environnements ou à des scénarios particuliers.
+La session de questions-réponses est également une excellente occasion pour vous de partager vos expériences, d'échanger sur les meilleures pratiques, et de poser des questions spécifiques à vos environnements ou à des scénarios particuliers.
 
 ### Conclusion :
-Les questions et réponses sont une partie intégrante de l'apprentissage. N'hésitez pas à continuer à poser des questions même après la fin de cette formation. La cybersécurité est un domaine en évolution constante, et il est crucial de rester curieux, informé, et prêt à apprendre.
+Les questions et réponses sont une partie intégrante de l'apprentissage. N'hésitez pas à continuer à poser des questions même après la fin de cette séance. La cybersécurité est un domaine en évolution constante, et il est crucial de rester curieux, informé, et prêt à apprendre.
 
