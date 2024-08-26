@@ -43,6 +43,8 @@
 
 Il s'agit d'une activité qui se déroulera en classe (présentation du plan du cours). 
 
+[⬆️ Revenir en haut](#cours-1)
+
 <a name="définition-et-apercu"></a>
 # 2. **Comprendre les Types d'Attaques**
 
