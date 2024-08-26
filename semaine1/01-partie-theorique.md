@@ -1033,9 +1033,11 @@ L'analyse des journaux d'événements est un pilier fondamental de la sécurité
 
 
 
--------------
+---
+---
+---
 
-# Annexe 1 : Intégration des Concepts de DMZ, Honeypot, et Bastion Host dans la Stratégie de Priorisation des Ressources
+# Annexe 1 :  Concepts de DMZ, Honeypot, et Bastion Host 
 
 Lorsqu'il s'agit de protéger une organisation contre les cybermenaces, l'intégration stratégique de concepts comme la DMZ, le honeypot, et le bastion host peut jouer un rôle crucial dans la priorisation des ressources. Ces éléments sont essentiels pour créer des couches de sécurité qui protègent les systèmes critiques et détournent les attaques potentielles.
 
@@ -1071,8 +1073,10 @@ L'intégration de la DMZ, du honeypot, et du bastion host dans la stratégie de 
 
 
 ---
+---
+---
 
-# Annexe 2 : Intégration des Concepts de DMZ, Honeypot, et Bastion Host dans la Stratégie de Priorisation des Ressources
+# Annexe 2 :  Concepts de DMZ, Honeypot, et Bastion Host
 
 
 ```plaintext
