@@ -9,7 +9,7 @@ Supposons que vous souhaitiez surveiller toute création de processus sur votre 
    - Utilisez un fichier de configuration XML qui spécifie la capture des événements de création de processus (Event ID 1).
    - Appliquez cette configuration à Sysmon en utilisant la commande :
      ```bash
-     sysmon -c cheminers\sysmonconfig.xml
+     sysmon -c cheminvers\sysmonconfig.xml
      ```
 
 2. **Exécution d'un Processus :**
