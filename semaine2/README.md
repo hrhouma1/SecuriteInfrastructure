@@ -36,7 +36,7 @@
    - <a href="#conclusion-avant-la-démonstration-pratique">Conclusion avant la Démonstration Pratique</a>
 
 4. <a href="#partie-pratique-sysinternals">**Partie pratique de l'Examen de l'Activité avec les Outils Sysinternals**</a>
-   - <a href="#utilisation-process-explorer">Utilisation de Process Explorer</a>
+
    - <a href="#utilisation-autoruns">Utilisation d'Autoruns</a>
    - <a href="#cas-pratique-sysinternals">Cas Pratique : Analyse d'une Activité Suspecte</a>
 
