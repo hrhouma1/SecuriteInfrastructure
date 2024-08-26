@@ -181,7 +181,7 @@
 *Contenu du fichier `post_mortem_amelioration_continue.md`*
 
 
-## Atelier Pratique
+# Atelier Pratique
 
 ### Préambule : Choix du Système d'Exploitation
 *Contenu du fichier `preambule_choix_os.md`*
@@ -210,11 +210,11 @@
 
 Les exercices pratiques dans l'ensemble des fichiers sont les suivants :
 
-**Prérequis :** Installation de sysmon 
-   - **Fichier :** `09-telechargement_installation_sysmon.md`
-   - **Fichier :** `10-configuration_sysmon.md`
+1. **Prérequis :** Installation de sysmon
+      - **Fichier :** `09-telechargement_installation_sysmon.md` 
+      - **Fichier :** `10-configuration_sysmon.md`
 
-1. **Exercice 1 :** Configurer Sysmon sur une Machine Virtuelle et Détecter une Activité Anormale
+2. **Exercice 1 :** Configurer Sysmon sur une Machine Virtuelle et Détecter une Activité Anormale
    - **Fichier :** `37-exercice1_configurer_sysmon.md`
 
 3. **Exercice 2 :** Utiliser Process Monitor pour Suivre l'Activité d'un Processus Malveillant Simulé
