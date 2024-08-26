@@ -119,9 +119,7 @@
 - [Exercice 2 : Utiliser Process Monitor pour Suivre l'Activité d'un Processus Malveillant Simulé](#exercice-2--utiliser-process-monitor-pour-suivre-lactivité-dun-processus-malveillant-simulé)
 - [Exercice 3 : Analyser une Machine Infectée avec les Outils Sysinternals et Rédiger un Rapport d'Incident](#exercice-3--analyser-une-machine-infectée-avec-les-outils-sysinternals-et-rédiger-un-rapport-dincident)
 
-[Revenir en haut](
-
-#sécurité-et-réponse-aux-incidents)
+[Revenir en haut](#sécurité-et-réponse-aux-incidents)
 
 ---
 
@@ -132,6 +130,3 @@
 
 [Revenir en haut](#sécurité-et-réponse-aux-incidents)
 
----
-
-Ce plan de cours guide les participants à travers les concepts théoriques et pratiques essentiels pour comprendre et répondre aux incidents de sécurité. Il est structuré pour permettre un apprentissage progressif, avec des exemples pratiques et des ateliers qui renforcent les compétences acquises.
