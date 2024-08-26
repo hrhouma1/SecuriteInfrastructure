@@ -1,4 +1,3 @@
-# Déroulement de la séance 1 - Partie Théorique et Partie Pratique
 
 ### *Partie Théorique*
 
@@ -29,4 +28,3 @@
 | **7**       | Sécurisation | Configuration des GPO, gestion des utilisateurs, et mise en place de sauvegardes. | Renforcer la sécurité et la gestion du domaine. |
 | **8**       | Maintenance | Documentation des configurations et vérifications régulières. | Maintenir un environnement sécurisé et fonctionnel. |
 
-Ces tableaux résument de manière concise les principales étapes et objectifs de la séance 1, tant pour la partie théorique que pour la partie pratique.
