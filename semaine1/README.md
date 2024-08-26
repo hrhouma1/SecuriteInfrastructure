@@ -38,6 +38,11 @@
 ---
 ---
 
+<a name="présentation-du-cours"></a>
+# 1. **Présentation du cours**
+
+Il s'agit d'une activité qui se déroulera en classe (présentation du plan du cours). 
+
 <a name="définition-et-apercu"></a>
 # 2. **Comprendre les Types d'Attaques**
 
