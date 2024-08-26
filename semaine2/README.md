@@ -210,12 +210,16 @@
 
 Les exercices pratiques dans l'ensemble des fichiers sont les suivants :
 
+**Prérequis :** Installation de sysmon 
+- **Fichier :** `09-telechargement_installation_sysmon.md`
+- **Fichier :** `10-configuration_sysmon.md`
+
 1. **Exercice 1 :** Configurer Sysmon sur une Machine Virtuelle et Détecter une Activité Anormale
    - **Fichier :** `37-exercice1_configurer_sysmon.md`
 
-2. **Exercice 2 :** Utiliser Process Monitor pour Suivre l'Activité d'un Processus Malveillant Simulé
+3. **Exercice 2 :** Utiliser Process Monitor pour Suivre l'Activité d'un Processus Malveillant Simulé
    - **Fichier :** `38-exercice2_process_monitor.md`
 
-3. **Exercice 3 :** Analyser une Machine Infectée avec les Outils Sysinternals et Rédiger un Rapport d'Incident
+4. **Exercice 3 :** Analyser une Machine Infectée avec les Outils Sysinternals et Rédiger un Rapport d'Incident
    - **Fichier :** `39-exercice3_analyse_rapport.md`
 
