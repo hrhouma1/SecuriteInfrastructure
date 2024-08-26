@@ -24,6 +24,5 @@ Cette section est dédiée aux questions et réponses, vous offrant l'opportunit
 ### Discussion Ouverte :
 La session de questions-réponses est également une excellente occasion pour vous de partager vos expériences, d'échanger sur les meilleures pratiques, et de poser des questions spécifiques à vos environnements ou à des scénarios particuliers.
 
-### Conclusion :
-Les questions et réponses sont une partie intégrante de l'apprentissage. N'hésitez pas à continuer à poser des questions même après la fin de cette séance. La cybersécurité est un domaine en évolution constante, et il est crucial de rester curieux, informé, et prêt à apprendre.
+
 
