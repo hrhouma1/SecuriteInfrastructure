@@ -12,7 +12,7 @@
 2. **Application de la Configuration :**
    - Exécutez la commande suivante pour appliquer la configuration :
      ```bash
-     sysmon -c cheminers\sysmonconfig-export.xml
+     sysmon -c cheminVers\sysmonconfig-export.xml
      ```
    - **Explication :** Cette commande met à jour Sysmon avec la nouvelle configuration, sans nécessiter de réinstallation.
 
