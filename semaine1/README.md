@@ -61,7 +61,7 @@ Il existe de nombreux types d'attaques, chacune avec ses propres méthodes et ob
 
 **Malware :** Un malware est un logiciel malveillant conçu pour nuire à l'utilisateur. Cela peut être un virus qui endommage vos fichiers, un ransomware qui crypte vos données et demande une rançon pour les déverrouiller, ou un spyware qui espionne vos activités en ligne.
 
-- **Exemple académique :** Une université envoie un lien de téléchargement d'une nouvelle application à ses étudiants. Mais le lien a été compromis et mène à un logiciel malveillant qui s'installe sur les ordinateurs des étudiants, volant leurs informations personnelles.
+- **Exemple :** Une université envoie un lien de téléchargement d'une nouvelle application à ses étudiants. Mais le lien a été compromis et mène à un logiciel malveillant qui s'installe sur les ordinateurs des étudiants, volant leurs informations personnelles.
 
 **Injection SQL :** Une injection SQL est une attaque où un attaquant insère un code malveillant dans une requête SQL, permettant ainsi de contourner les mesures de sécurité et d'accéder à des données sensibles dans une base de données.
 
@@ -84,7 +84,7 @@ La stratégie "Assume Breach" repose sur l'idée que vous devez toujours suppose
 
 - **Dans la vie réelle :** C'est un peu comme si vous viviez dans une ville avec un taux de criminalité élevé. Plutôt que de simplement verrouiller votre porte, vous installez aussi des caméras, vous avez un chien de garde, et vous souscrivez une assurance en cas de vol. Même si vous espérez ne jamais être cambriolé, vous êtes prêt au cas où cela arriverait.
 
-- **Exemple académique :** Une entreprise technologique adopte la stratégie Assume Breach en instaurant des contrôles d'accès stricts, une surveillance continue de ses systèmes, et un plan d'intervention d'urgence. Même si leurs pare-feux et antivirus sont robustes, ils partent du principe qu'un attaquant pourrait déjà être à l'intérieur de leur réseau, et ils s'assurent que toute activité suspecte est immédiatement repérée et traitée.
+- **Exemple :** Une entreprise technologique adopte la stratégie Assume Breach en instaurant des contrôles d'accès stricts, une surveillance continue de ses systèmes, et un plan d'intervention d'urgence. Même si leurs pare-feux et antivirus sont robustes, ils partent du principe qu'un attaquant pourrait déjà être à l'intérieur de leur réseau, et ils s'assurent que toute activité suspecte est immédiatement repérée et traitée.
 
 #### **3.3. Comparaison avec la Sécurité Traditionnelle**
 
@@ -167,7 +167,7 @@ Le terme "malware" désigne tout logiciel malveillant conçu pour causer des dom
 - **Ransomware :** Ce type de malware chiffre les fichiers de la victime et demande une rançon pour les déchiffrer. Si la rançon n'est pas payée, les fichiers restent inaccessibles.
 - **Spyware :** Un logiciel espion conçu pour surveiller l'utilisateur à son insu, en capturant des informations telles que les frappes clavier, les captures d'écran, et les historiques de navigation.
 
-**Exemple académique :**
+**Exemple :**
 
 Une université envoie un lien de téléchargement d'une nouvelle application de gestion d'emploi du temps à ses étudiants. Malheureusement, ce lien a été compromis par un attaquant, et les étudiants qui téléchargent l'application installent sans le savoir un spyware. Ce malware capture des informations sensibles, telles que les identifiants de connexion des étudiants, et les envoie à l'attaquant.
 
@@ -258,7 +258,7 @@ Un attaquant peut passer du temps à analyser un site web pour comprendre sa str
 
 Après avoir collecté suffisamment d'informations pendant la reconnaissance, l'attaquant passe à l'intrusion. Cette étape consiste à exploiter les vulnérabilités identifiées pour pénétrer dans le système cible. L'intrusion marque le point où l'attaquant obtient un accès initial au réseau ou à l'ordinateur de la cible.
 
-**Exemple académique :**
+**Exemple :**
 
 Supposons qu'un attaquant découvre que le serveur web de l'entreprise cible utilise une ancienne version d'un logiciel avec une vulnérabilité connue. L'attaquant peut exploiter cette vulnérabilité pour accéder au serveur, en utilisant un exploit automatisé ou en envoyant une requête spécialement conçue pour contourner les mécanismes de sécurité.
 
@@ -312,7 +312,7 @@ Dans une entreprise, un attaquant qui parvient à accéder à l'ordinateur d'un 
 
 L'exfiltration est le processus par lequel l'attaquant extrait des données sensibles du système compromis et les transfère vers un emplacement sous son contrôle. C'est l'une des étapes finales de l'attaque, où l'attaquant collecte le fruit de son travail.
 
-**Exemple académique :**
+**Exemple :**
 
 Après avoir pénétré dans le réseau d'une université et accédé à sa base de données d'étudiants, un attaquant peut extraire des listes complètes d'étudiants, y compris leurs informations personnelles et leurs notes, pour les vendre ou les utiliser pour d'autres attaques.
 
@@ -350,7 +350,7 @@ C'est un peu comme un cambrioleur qui, après avoir volé des objets de valeur, 
 
 Après avoir réussi une attaque, certains attaquants cherchent à maintenir un accès permanent ou à long terme au système compromis. Cela leur permet de revenir ultérieurement pour exfiltrer davantage de données, causer plus de dégâts, ou vendre l'accès à d'autres cybercriminels.
 
-**Exemple académique :**
+**Exemple :**
 
 Un attaquant qui a compromis un système de gestion de contenu dans une entreprise peut installer une "porte dérobée" (backdoor) qui lui permet de se reconnecter plus tard, même si les mots de passe sont changés ou si des correctifs sont appliqués.
 
@@ -427,7 +427,7 @@ Un hôpital pourrait classer en priorité la protection des dossiers médicaux d
 
 L'allocation des ressources consiste à distribuer le budget, le personnel, et les outils disponibles en fonction des priorités définies. Il s'agit de maximiser l'efficacité de vos défenses en assurant que les ressources sont dirigées vers les zones les plus critiques.
 
-**Exemple académique :**
+**Exemple :**
 
 Dans une université, les ressources peuvent être allouées pour protéger les systèmes de gestion des inscriptions et des examens, car une attaque sur ces systèmes pourrait perturber gravement les opérations académiques. Des ressources supplémentaires pourraient être affectées à la formation des professeurs et du personnel sur la reconnaissance des e-mails de phishing, une menace courante dans les institutions éducatives.
 
@@ -553,7 +553,7 @@ Après avoir confiné une attaque par ransomware, l'équipe de réponse aux inci
 
 La récupération consiste à restaurer les systèmes et les opérations à leur état normal après l'incident. Cela peut impliquer la restauration des données à partir de sauvegardes, la réinstallation des systèmes compromis, et la vérification de la sécurité avant de remettre les systèmes en production.
 
-**Exemple académique :**
+**Exemple :**
 
 Après avoir subi une attaque par ransomware, une université pourrait utiliser des sauvegardes pour restaurer les données des étudiants et du personnel. L'équipe de réponse aux incidents vérifierait ensuite que le ransomware a été complètement éradiqué avant de reconnecter les systèmes au réseau universitaire.
 
@@ -638,7 +638,7 @@ Les régulations en matière de cybersécurité sont conçues pour protéger les
 
 Les politiques de conformité sont des directives internes qui assurent que l'organisation respecte les régulations en matière de cybersécurité. Elles servent de cadre pour la gestion des risques, la protection des données, et la formation des employés.
 
-**Exemple académique :**
+**Exemple :**
 
 Dans une université, une politique de conformité pourrait inclure des directives sur la manière dont les données des étudiants doivent être collectées, stockées, et partagées pour se conformer aux lois de protection des données locales et internationales.
 
@@ -756,7 +756,7 @@ Imaginez une entreprise qui surveille en temps réel l'accès à ses bases de do
 
 Lorsqu'un indicateur de compromission est détecté, il est crucial de réagir rapidement pour limiter les dommages. La réaction appropriée dépend du type d'IoC et de la nature de l'incident, mais elle suit généralement un processus standard de réponse aux incidents.
 
-**Exemple académique :**
+**Exemple :**
 
 Dans une université, une alerte sur un accès non autorisé aux dossiers des étudiants pourrait déclencher immédiatement la mise en quarantaine du système affecté, la réinitialisation des mots de passe des comptes compromis, et une enquête approfondie pour déterminer l'origine de l'intrusion.
 
@@ -858,7 +858,7 @@ Lorsqu'une entreprise détecte une activité suspecte sur un serveur critique, e
 
 La préservation des preuves est essentielle pour s'assurer qu'elles restent intactes et valides pour une utilisation dans des enquêtes internes, des actions en justice, ou des audits réglementaires. Cela implique non seulement de stocker les preuves de manière sécurisée, mais aussi de les protéger contre toute altération ou corruption.
 
-**Exemple académique :**
+**Exemple :**
 
 Dans une université, si un étudiant est soupçonné d'avoir piraté le système de gestion des notes, les administrateurs doivent préserver les journaux de connexion, les fichiers modifiés, et toute autre preuve numérique. Ces éléments doivent être stockés de manière sécurisée pour être utilisés lors d'une enquête disciplinaire ou d'une action en justice.
 
@@ -991,7 +991,7 @@ Un administrateur système pourrait utiliser un script PowerShell pour extraire 
 
 Pour maximiser l'efficacité de l'analyse des journaux, il est important de suivre certaines bonnes pratiques. Cela inclut la configuration des journaux pour capturer les événements critiques, l'automatisation de l'analyse pour détecter rapidement les anomalies, et la mise en place de processus de révision régulière des journaux.
 
-**Exemple académique :**
+**Exemple :**
 
 Dans un environnement universitaire, les administrateurs pourraient configurer les journaux pour capturer toutes les tentatives d'accès aux dossiers des étudiants. En utilisant PowerShell, ils pourraient automatiser la recherche quotidienne de tentatives d'accès non autorisées et générer des rapports pour les équipes de sécurité.
 
@@ -1141,7 +1141,6 @@ L'intégration de la DMZ, du honeypot, et du bastion host dans la stratégie de 
 
 
 [⬆️ Revenir en haut](#cours-1)
-
 
 
 
