@@ -3,7 +3,7 @@
 
 ## Objectif :
 
-L'objectif de cette section est de sensibiliser les participants aux différents types d'attaques courantes qui menacent les infrastructures informatiques modernes. Les attaques comme le phishing, les attaques par déni de service distribué (DDoS), et les ransomwares sont devenues de plus en plus sophistiquées et fréquentes. Comprendre ces attaques est essentiel pour mettre en place des stratégies efficaces de surveillance et de réponse.
+L'objectif de cette section est de vous sensibiliser aux différents types d'attaques courantes qui menacent les infrastructures informatiques modernes. Les attaques comme le phishing, les attaques par déni de service distribué (DDoS), et les ransomwares sont devenues de plus en plus sophistiquées et fréquentes. Comprendre ces attaques est essentiel pour mettre en place des stratégies efficaces de surveillance et de réponse.
 
 ## Contexte Actuel de la Sécurité Informatique :
 
