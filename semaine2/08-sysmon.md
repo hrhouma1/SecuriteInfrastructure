@@ -2,7 +2,7 @@
 ## 2.1 System Monitor (Sysmon)
 
 ### Description :
-Sysmon est un utilitaire de la suite Sysinternals (voir *Annexe 2.1*) qui permet de surveiller les événements système sur une machine Windows. Il enregistre les détails des activités critiques, telles que la création de processus, les connexions réseau et les modifications de fichiers, fournissant ainsi une vue approfondie de ce qui se passe sur le système.
+Sysmon est un utilitaire de la suite Sysinternals (voir ***Annexe 2.1***) qui permet de surveiller les événements système sur une machine Windows. Il enregistre les détails des activités critiques, telles que la création de processus, les connexions réseau et les modifications de fichiers, fournissant ainsi une vue approfondie de ce qui se passe sur le système.
 
 ### Utilité de Sysmon :
 Sysmon est particulièrement utile pour les professionnels de la sécurité qui doivent analyser les comportements suspects et identifier les activités malveillantes qui pourraient passer inaperçues avec les journaux système standard. En capturant des événements détaillés, Sysmon permet de retracer les actions d'un attaquant ou de comprendre comment un malware a compromis un système.
