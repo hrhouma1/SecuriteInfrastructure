@@ -211,8 +211,8 @@
 Les exercices pratiques dans l'ensemble des fichiers sont les suivants :
 
 **Prérequis :** Installation de sysmon 
-- **Fichier :** `09-telechargement_installation_sysmon.md`
-- **Fichier :** `10-configuration_sysmon.md`
+   - **Fichier :** `09-telechargement_installation_sysmon.md`
+   - **Fichier :** `10-configuration_sysmon.md`
 
 1. **Exercice 1 :** Configurer Sysmon sur une Machine Virtuelle et Détecter une Activité Anormale
    - **Fichier :** `37-exercice1_configurer_sysmon.md`
