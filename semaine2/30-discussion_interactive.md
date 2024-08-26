@@ -4,7 +4,7 @@
 ### Introduction :
 Dans cette section, vous allez participer à une discussion interactive pour explorer et proposer des stratégies de réponse à l'incident décrit dans le scénario précédent. L'objectif est de réfléchir collectivement aux meilleures pratiques et d'échanger des idées sur la manière de gérer efficacement un incident de sécurité.
 
-### Questions pour Animer la Discussion :
+### Questions :
 
 1. **Isolation des Systèmes Compromis :**
    - Quels sont les premiers systèmes que vous isoleriez pour empêcher la propagation de l'attaque ? Pourquoi ?
