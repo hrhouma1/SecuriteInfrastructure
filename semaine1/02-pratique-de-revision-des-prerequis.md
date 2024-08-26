@@ -1,4 +1,4 @@
-# Configuration du Laboratoire : Mise en Place d'un Contrôleur de Domaine et de Serveurs Membres
+# Pratique 01 : Mise en Place d'un Contrôleur de Domaine et de Serveurs Membres
 
 # Schéma 
 
