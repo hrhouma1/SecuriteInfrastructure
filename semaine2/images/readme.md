@@ -1,5 +1,5 @@
 ---
-# Clés de registre :
+# 1 - Clés de registre :
 ---
 
 | **Clé de registre**                                                             | **Description**                                                                                                          | **Application**                         |
@@ -10,7 +10,7 @@
 | **HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunOnce**        | Exécute une seule fois les programmes spécifiés au démarrage du système pour tous les utilisateurs, puis supprime la valeur du registre. | Tous les utilisateurs du système         |
 
 ---
-# Explications détaillées :
+# 2 - Explications détaillées :
 ---
 Les emplacements mentionnés dans la table ci-haut sont des clés de registre dans Windows utilisées pour configurer l'exécution automatique de programmes au démarrage du système ou lors de la connexion d'un utilisateur. Voici une définition technique pour chaque clé :
 
