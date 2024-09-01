@@ -56,6 +56,16 @@ En faisant des audits réguliers, vous pouvez :
 - **Repérer les anomalies** : Comme des tentatives de connexion à des heures inhabituelles, ou des erreurs fréquentes dans certaines applications.
 - **Prévenir les incidents** : En détectant les problèmes avant qu’ils ne deviennent graves, vous pouvez éviter des pannes ou des failles de sécurité.
 
+# RÉSUMÉ:
+
+Dans une infrastructure Microsoft, l’audit joue un rôle essentiel pour garantir la sécurité et la conformité. Les systèmes Windows offrent plusieurs fonctionnalités et outils qui facilitent la mise en place d’un processus d’audit rigoureux. 
+
+**Raisons spécifiques de l’audit dans un environnement Microsoft :**
+- **Contrôle des accès** : S’assurer que seuls les utilisateurs autorisés accèdent aux ressources critiques.
+- **Surveillance des actions** : Suivre les actions des utilisateurs et des administrateurs pour prévenir les abus et identifier les comportements suspects.
+- **Gestion des incidents** : Permet de reconstituer les événements en cas de problème pour comprendre la cause et améliorer les défenses.
+
+
 ## **1.4 Contenu**
 
 Dans cette section, nous allons explorer les bases de l’audit et les outils simples que vous pouvez utiliser dans Windows pour effectuer des audits.
@@ -94,47 +104,7 @@ Dans cette section, nous allons explorer les bases de l’audit et les outils si
 - **PowerShell** : C’est un outil puissant que vous pouvez utiliser pour automatiser des tâches, y compris les audits. Par exemple, vous pouvez écrire un petit programme qui vérifie chaque jour les nouvelles connexions au système.
 - **Microsoft Advanced Threat Analytics (ATA)** : Cet outil analyse les comportements sur le réseau pour détecter des menaces potentielles, comme si quelqu’un essaie de voler des données.
 
-[Retour en haut](#plan)
-
-
----
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
----
-
-
-
-
-### **1.3 Comprendre l’importance de l’audit dans une infrastructure Microsoft**
-
-Dans une infrastructure Microsoft, l’audit joue un rôle essentiel pour garantir la sécurité et la conformité. Les systèmes Windows offrent plusieurs fonctionnalités et outils qui facilitent la mise en place d’un processus d’audit rigoureux. 
-
-**Raisons spécifiques de l’audit dans un environnement Microsoft :**
-- **Contrôle des accès** : S’assurer que seuls les utilisateurs autorisés accèdent aux ressources critiques.
-- **Surveillance des actions** : Suivre les actions des utilisateurs et des administrateurs pour prévenir les abus et identifier les comportements suspects.
-- **Gestion des incidents** : Permet de reconstituer les événements en cas de problème pour comprendre la cause et améliorer les défenses.
-
-### **1.4 Contenu**
-
-Dans cette section, nous allons explorer en profondeur les bases de l’audit et les outils disponibles dans l’environnement Windows pour réaliser un audit efficace.
-
-#### **1.4.1 Les bases de l’audit**
-
-
-#### **1.4.2 Outils d’audit disponibles dans Windows**
+# RÉSUMÉ:
 
 Windows propose une variété d'outils pour réaliser des audits complets, parmi lesquels :
 
@@ -143,13 +113,12 @@ Windows propose une variété d'outils pour réaliser des audits complets, parmi
 - **PowerShell** : PowerShell permet d’automatiser la collecte de données d’audit et d’effectuer des audits avancés grâce à des scripts personnalisés.
 - **Microsoft Advanced Threat Analytics (ATA)** : Un outil pour détecter les menaces en analysant les activités réseau et les comportements des utilisateurs.
 
-### **1.5 Retour en haut**
+[Retour en haut](#plan)
 
-[Retour en haut](#plan-de-cours--analyse-des-activites-systemes-et-reseaux)
+
 
 ---
-
-Ce plan exhaustif donne une base solide pour comprendre les fondements de l’audit dans une infrastructure Microsoft. Chaque section est conçue pour apporter une compréhension complète des concepts et des outils nécessaires pour réaliser un audit efficace et pertinent.
+---
 ---
 
 ## **2. Audit avancé et PowerShell** <a id="audit-avance-et-powershell"></a>
@@ -166,6 +135,8 @@ Ce plan exhaustif donne une base solide pour comprendre les fondements de l’au
 
 
 ---
+---
+---
 
 ## **3. Analyse des journaux des événements** <a id="analyse-des-journaux-des-evenements"></a>
 
@@ -181,6 +152,8 @@ Ce plan exhaustif donne une base solide pour comprendre les fondements de l’au
 
 
 ---
+---
+---
 
 ## **4. Examen du trafic réseau avec Microsoft Message Analyzer** <a id="examen-du-trafic-reseau-avec-microsoft-message-analyzer"></a>
 
@@ -195,6 +168,8 @@ Ce plan exhaustif donne une base solide pour comprendre les fondements de l’au
 [Retour en haut](#plan)
 
 
+---
+---
 ---
 
 ## **5. Trafic SMB : Sécurisation et analyse** <a id="trafic-smb-securisation-et-analyse"></a>
