@@ -2,11 +2,13 @@
 
 # **Objectif :**
 - Dans ce TP, vous allez apprendre à simuler une infection sur une machine virtuelle Windows en utilisant un script Python. 
-- Vous allez également découvrir comment ajouter ce script dans le registre Windows pour qu'il s'exécute automatiquement au démarrage de la session utilisateur. Ensuite, vous utiliserez les outils Sysinternals pour analyser la machine et résoudre l'infection. Enfin, vous rédigerez un rapport d'incident pour documenter vos découvertes et les actions correctives.
+- Vous allez également découvrir comment ajouter ce script dans le registre Windows pour qu'il s'exécute automatiquement au démarrage de la session utilisateur.
+- Ensuite, vous utiliserez les outils Sysinternals pour analyser la machine et résoudre l'infection.
+- Enfin, vous rédigerez un rapport d'incident pour documenter vos découvertes et les actions correctives.
 
 ---
 
-# **# ÉTAPE 1 : Préparation de la Machine Virtuelle**
+# ÉTAPE 1 : Préparation de la Machine Virtuelle
 
 1. **Création d'une machine virtuelle Windows :**
    - **Logiciel requis :** Téléchargez et installez un logiciel de virtualisation comme [VirtualBox](https://www.virtualbox.org/) ou [VMware](https://www.vmware.com/).
@@ -19,7 +21,7 @@
 
 ---
 
-### **# ÉTAPE 2 : Installation de Python et des Outils Sysinternals**
+# ÉTAPE 2 : Installation de Python et des Outils Sysinternals
 
 1. **Installation de Python :**
    - **Téléchargement :** Accédez au site officiel de Python à l'adresse [python.org](https://www.python.org/downloads/).
@@ -40,7 +42,7 @@
 
 ---
 
-### **# ÉTAPE 3 : Création du Script Python Simulant une Infection**
+# ÉTAPE 3 : Création du Script Python Simulant une Infection
 
 1. **Ouvrir un éditeur de texte :**
    - **Suggestion :** Utilisez Notepad++, Visual Studio Code, ou tout autre éditeur de texte de votre choix.
@@ -80,7 +82,7 @@
 
 ---
 
-### **# ÉTAPE 4 : Exécution et Vérification du Comportement de Notepad**
+# ÉTAPE 4 : Exécution et Vérification du Comportement de Notepad
 
 1. **Exécution du script :**
    - **Ouvrir une invite de commande :** Allez dans le dossier où se trouve le script `GhostRider.py` à l'aide de la commande `cd`.
@@ -97,7 +99,7 @@
 
 ---
 
-### **# ÉTAPE 5 : Redémarrage de la Machine Virtuelle**
+# ÉTAPE 5 : Redémarrage de la Machine Virtuelle
 
 1. **Redémarrer la machine :**
    - Redémarrez la machine virtuelle via le menu *Démarrer* > *Redémarrer*.
@@ -107,7 +109,7 @@
 
 ---
 
-### **# ÉTAPE 6 : Analyse de la Machine avec les Outils Sysinternals**
+# ÉTAPE 6 : Analyse de la Machine avec les Outils Sysinternals
 
 1. **Utilisation de Process Explorer :**
    - **Lancer Process Explorer :** Allez dans le dossier où vous avez décompressé les outils Sysinternals, et double-cliquez sur `procexp.exe`.
@@ -123,7 +125,7 @@
 
 ---
 
-### **# ÉTAPE 7 : Nettoyage et Vérification Finale**
+# ÉTAPE 7 : Nettoyage et Vérification Finale
 
 1. **Suppression de l'entrée du registre :**
    - **Retourner dans l'éditeur de registre :** Allez de nouveau dans `HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run`.
@@ -137,7 +139,7 @@
 
 ---
 
-### **# ÉTAPE 8 : Rédaction du Rapport d'Incident**
+# ÉTAPE 8 : Rédaction du Rapport d'Incident
 
 1. **Résumé de l'incident :**
    - Décrivez le comportement observé (fermeture en boucle de Notepad et Chrome) et les outils utilisés pour identifier la cause.
@@ -145,9 +147,7 @@
 2. **Outils Sysinternals utilisés :**
    - Décrivez comment Process Explorer, Autoruns, et Process Monitor ont été utilisés pour analyser et résoudre le problème.
 
-3.
-
- **Résultats :**
+3.**Résultats :**
    - Détaillez les étapes que vous avez prises pour désactiver le script et restaurer le comportement normal du système.
 
 4. **Recommandations :**
@@ -155,5 +155,6 @@
 
 ---
 
-### **Conclusion :**
-Ce travail pratique vous a permis de manipuler le registre Windows via un script Python, d'analyser une machine infectée avec des outils spécialisés, et de rédiger un rapport d'incident. Grâce à ces exercices, vous avez acquis des compétences précieuses en matière de gestion et de sécurisation des systèmes Windows.
+# Conclusion :
+- Ce travail pratique vous a permis de manipuler le registre Windows via un script Python, d'analyser une machine infectée avec des outils spécialisés, et de rédiger un rapport d'incident. 
+- Grâce à ces exercices, vous avez acquis des compétences précieuses en matière de gestion et de sécurisation des systèmes Windows.
