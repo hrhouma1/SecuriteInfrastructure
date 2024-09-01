@@ -1,7 +1,3 @@
-Voici un exemple de plan de cours avec une table des matières incluant des liens vers les sections et des liens pour revenir en haut de la page. Ce modèle peut être adapté à vos besoins spécifiques :
-
----
-
 # **Plan de cours : Analyse des activités systèmes et réseaux**
 
 ## **Table des matières**
@@ -84,7 +80,3 @@ Voici un exemple de plan de cours avec une table des matières incluant des lien
 - Analyse des attaques courantes sur SMB
 
 [Retour en haut](#plan-de-cours--analyse-des-activites-systemes-et-reseaux)
-
----
-
-Ce plan de cours est conçu pour vous offrir une structure claire avec des liens interactifs qui facilitent la navigation dans le document. Vous pouvez l’adapter à vos besoins spécifiques en ajoutant ou en modifiant des sections selon les sujets que vous souhaitez couvrir.
