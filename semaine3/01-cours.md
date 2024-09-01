@@ -27,6 +27,8 @@ L'objectif de cette section est de vous introduire aux bases de l’audit dans l
 
 **Qu’est-ce qu’un audit ?**
 
+L’audit informatique est un processus systématique de collecte, d’évaluation et de vérification d'informations provenant d’un système informatique. L'objectif est de déterminer si les contrôles, les politiques et les procédures d'une entreprise sont respectés, efficaces et contribuent à la sécurité de l'environnement informatique.
+
 Imaginez que votre système informatique est une maison. Un audit, c’est un peu comme faire un tour complet de votre maison pour vérifier que toutes les portes et fenêtres sont bien fermées, que tout fonctionne correctement, et qu’il n’y a pas de problèmes cachés.
 
 Dans le monde informatique, auditer un système signifie vérifier et analyser ce qui se passe dans vos ordinateurs et réseaux. Par exemple, vous pouvez auditer pour voir qui s'est connecté, quelles modifications ont été faites, ou si quelqu'un a essayé d'accéder à des informations sensibles sans autorisation.
@@ -39,6 +41,8 @@ Faire un audit vous aide à :
 - **Protéger vos données** : En vous assurant que seules les bonnes personnes y ont accès.
 - **Respecter la loi** : Certaines lois exigent que vous gardiez une trace de ce qui se passe dans vos systèmes.
 - **Améliorer les performances** : En identifiant ce qui ne fonctionne pas bien et en le corrigeant.
+
+
 
 ## **1.3 Comprendre l’importance de l’audit dans une infrastructure Microsoft**
 
@@ -58,11 +62,20 @@ Dans cette section, nous allons explorer les bases de l’audit et les outils si
 
 ## **1.4.1 Les bases de l’audit**
 
+
+
 **Les types d’audit :**
 
 - **Audit de Sécurité** : C’est comme vérifier si toutes les portes et fenêtres de votre maison sont bien fermées. Vous regardez si les données de votre système sont bien protégées et si les personnes non autorisées ne peuvent pas y accéder.
 - **Audit de Conformité** : Imaginez que vous avez des règles strictes dans votre maison, comme ne jamais laisser de nourriture sur la table. Un audit de conformité vérifierait si ces règles sont bien respectées. Dans un système informatique, cela signifie vérifier que les politiques et les lois sont suivies.
 - **Audit Opérationnel** : Ici, on regarde si tout fonctionne correctement. C’est comme vérifier que tous les appareils de votre maison (comme le four ou la télé) fonctionnent bien. Dans un système informatique, cela revient à s'assurer que les processus sont efficaces et que le système fonctionne bien.
+
+**Pour résumé, les concepts clés à retenir pour les types d'audit sont :**
+- **Audit de Sécurité** : Processus visant à identifier les vulnérabilités et à évaluer la posture de sécurité d'un système informatique.
+- **Audit de Conformité** : Vérification de l'alignement des pratiques avec les lois, réglementations, normes et politiques internes.
+- **Audit Opérationnel** : Évaluation de l'efficacité et de l'efficience des processus opérationnels, souvent utilisé pour optimiser les performances du système.
+
+
 
 **Le processus d’audit :**
 
@@ -84,7 +97,59 @@ Dans cette section, nous allons explorer les bases de l’audit et les outils si
 [Retour en haut](#plan)
 
 
+---
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+
+
+
+
+### **1.3 Comprendre l’importance de l’audit dans une infrastructure Microsoft**
+
+Dans une infrastructure Microsoft, l’audit joue un rôle essentiel pour garantir la sécurité et la conformité. Les systèmes Windows offrent plusieurs fonctionnalités et outils qui facilitent la mise en place d’un processus d’audit rigoureux. 
+
+**Raisons spécifiques de l’audit dans un environnement Microsoft :**
+- **Contrôle des accès** : S’assurer que seuls les utilisateurs autorisés accèdent aux ressources critiques.
+- **Surveillance des actions** : Suivre les actions des utilisateurs et des administrateurs pour prévenir les abus et identifier les comportements suspects.
+- **Gestion des incidents** : Permet de reconstituer les événements en cas de problème pour comprendre la cause et améliorer les défenses.
+
+### **1.4 Contenu**
+
+Dans cette section, nous allons explorer en profondeur les bases de l’audit et les outils disponibles dans l’environnement Windows pour réaliser un audit efficace.
+
+#### **1.4.1 Les bases de l’audit**
+
+
+#### **1.4.2 Outils d’audit disponibles dans Windows**
+
+Windows propose une variété d'outils pour réaliser des audits complets, parmi lesquels :
+
+- **Event Viewer (Observateur d'événements)** : Un outil intégré qui permet de consulter et d’analyser les journaux des événements pour détecter des anomalies ou des tentatives d’intrusion.
+- **Group Policy Audit Settings** : Les paramètres de stratégie de groupe peuvent être configurés pour auditer divers types d’événements, tels que les tentatives de connexion, les accès aux fichiers, etc.
+- **PowerShell** : PowerShell permet d’automatiser la collecte de données d’audit et d’effectuer des audits avancés grâce à des scripts personnalisés.
+- **Microsoft Advanced Threat Analytics (ATA)** : Un outil pour détecter les menaces en analysant les activités réseau et les comportements des utilisateurs.
+
+### **1.5 Retour en haut**
+
+[Retour en haut](#plan-de-cours--analyse-des-activites-systemes-et-reseaux)
+
+---
+
+Ce plan exhaustif donne une base solide pour comprendre les fondements de l’audit dans une infrastructure Microsoft. Chaque section est conçue pour apporter une compréhension complète des concepts et des outils nécessaires pour réaliser un audit efficace et pertinent.
 ---
 
 ## **2. Audit avancé et PowerShell** <a id="audit-avance-et-powershell"></a>
