@@ -1,5 +1,5 @@
-# **Plan de cours : Analyse des activités systèmes et réseaux**
-
+# Plan
+# *Analyse des activités systèmes et réseaux*
 ## **Table des matières**
 
 1. [Présentation de l’audit](#presentation-de-laudit)
@@ -8,7 +8,7 @@
 4. [Examen du trafic réseau avec Microsoft Message Analyzer](#examen-du-trafic-reseau-avec-microsoft-message-analyzer)
 5. [Trafic SMB : Sécurisation et analyse](#trafic-smb-securisation-et-analyse)
 
-[Retour en haut](#plan-de-cours--analyse-des-activites-systemes-et-reseaux)
+
 
 ---
 
@@ -22,7 +22,7 @@
 - Les bases de l’audit
 - Outils d’audit disponibles dans Windows
 
-[Retour en haut](#plan-de-cours--analyse-des-activites-systemes-et-reseaux)
+[Retour en haut](#plan)
 
 ---
 
@@ -36,7 +36,8 @@
 - Scripts PowerShell pour l’audit
 - Exemples pratiques d’audit avancé
 
-[Retour en haut](#plan-de-cours--analyse-des-activites-systemes-et-reseaux)
+[Retour en haut](#plan)
+
 
 ---
 
@@ -50,7 +51,8 @@
 - Accès aux journaux des événements
 - Analyse et interprétation des données des journaux
 
-[Retour en haut](#plan-de-cours--analyse-des-activites-systemes-et-reseaux)
+[Retour en haut](#plan)
+
 
 ---
 
@@ -64,7 +66,8 @@
 - Introduction à Microsoft Message Analyzer
 - Études de cas d’analyse de trafic réseau
 
-[Retour en haut](#plan-de-cours--analyse-des-activites-systemes-et-reseaux)
+[Retour en haut](#plan)
+
 
 ---
 
@@ -79,4 +82,5 @@
 - Techniques de sécurisation du SMB
 - Analyse des attaques courantes sur SMB
 
-[Retour en haut](#plan-de-cours--analyse-des-activites-systemes-et-reseaux)
+[Retour en haut](#plan)
+
