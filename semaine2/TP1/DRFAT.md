@@ -1,4 +1,4 @@
-## **Travail Pratique : Analyse d'une Machine Infectée avec les Outils Sysinternals et Manipulation du Registre Windows**
+# Travail Pratique 1 : Analyse d'une Machine Infectée avec les Outils Sysinternals et Manipulation du Registre Windows
 
 # **Objectif :**
 - Dans ce TP, vous allez apprendre à simuler une infection sur une machine virtuelle Windows en utilisant un script Python. 
