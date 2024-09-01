@@ -1,4 +1,4 @@
-# **Cours : Introduction à SMB et Sécurisation du Trafic SMB**
+# SMB et Sécurisation du Trafic SMB
 
 ---
 
