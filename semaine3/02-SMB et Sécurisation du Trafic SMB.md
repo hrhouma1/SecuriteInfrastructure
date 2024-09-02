@@ -1,4 +1,4 @@
-# SMB et Sécurisation du Trafic SMB
+# SMB et Sécurisation du Trafic SMB en détails
 
 ---
 
