@@ -425,3 +425,4 @@ New-ADUser -Name "John Doe" -GivenName "John" -Surname "Doe" -SamAccountName "jd
 - https://www.youtube.com/watch?v=zdAglC3AmJo
 
 # https://www.youtube.com/watch?v=d-uZXg7jN8Y
+# https://www.youtube.com/watch?v=A4Epd6uuolk
