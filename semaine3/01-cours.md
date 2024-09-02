@@ -11,12 +11,12 @@
 
 
 ```
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ```
 
 
@@ -89,61 +89,55 @@ L’audit informatique est un outil stratégique indispensable pour assurer la s
 
 
 ```
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ```
-
-
-
-
 
 
 # **2. Audit avancé et PowerShell** <a id="audit-avance-et-powershell"></a>
 
 ## **Objectifs**
 
-Cette section approfondira les techniques d’audit en utilisant PowerShell, un outil puissant pour automatiser les tâches d’audit. Vous apprendrez à configurer des cmdlets spécifiques pour l’audit des systèmes et réseaux, à créer des scripts avancés pour automatiser ces tâches, et à intégrer l’audit dans un flux de travail DevOps pour garantir une surveillance continue.
+Cette section est dédiée à l’approfondissement des techniques d’audit en utilisant PowerShell, un outil essentiel pour automatiser et optimiser les processus d’audit des systèmes et réseaux. Vous apprendrez à configurer et utiliser des cmdlets spécifiques pour l’audit, à concevoir des scripts avancés visant à automatiser ces tâches, et à intégrer ces audits dans un flux de travail DevOps, garantissant ainsi une surveillance continue et proactive des systèmes informatiques.
 
 **Sous-objectifs :**
-- **Maîtriser PowerShell pour l’audit** : Apprendre à utiliser PowerShell pour configurer, automatiser, et exécuter des audits détaillés.
-- **Automatiser l’audit** : Développer des scripts pour automatiser la collecte, l'analyse des données d’audit, et la génération de rapports.
-- **Intégrer l’audit dans DevOps** : Savoir comment intégrer l’audit continu dans un flux de travail DevOps pour une surveillance proactive.
+- **Maîtriser l’utilisation de PowerShell pour l’audit** : Acquérir les compétences nécessaires pour configurer, automatiser, et exécuter des audits détaillés en utilisant PowerShell.
+- **Automatiser le processus d’audit** : Développer des scripts PowerShell qui automatisent la collecte et l’analyse des données d’audit, ainsi que la génération de rapports périodiques.
+- **Intégrer l’audit dans une démarche DevOps** : Comprendre comment intégrer un audit continu dans un flux de travail DevOps afin de garantir une surveillance proactive des systèmes.
 
 ## **Contenu**
 
 ### **1. Introduction à l’audit avec PowerShell**
 
-PowerShell est une interface en ligne de commande et un langage de script conçu pour faciliter l'administration des systèmes Windows. Il offre une flexibilité et une puissance accrues pour automatiser les tâches répétitives, y compris les audits. Vous découvrirez pourquoi PowerShell est un outil incontournable pour l'audit des systèmes et comment il peut être utilisé pour surveiller les événements de sécurité, collecter les journaux, et configurer les paramètres de sécurité sur l’ensemble de votre infrastructure.
+PowerShell est un outil d'administration en ligne de commande et un langage de script puissant, spécifiquement conçu pour faciliter la gestion des systèmes Windows. Sa flexibilité et sa capacité à automatiser des tâches répétitives en font un choix incontournable pour la réalisation d’audits détaillés. Cette section vous introduira aux raisons pour lesquelles PowerShell est essentiel dans le contexte de l’audit des systèmes, en montrant comment il peut être utilisé pour surveiller les événements de sécurité, collecter les journaux, et configurer les paramètres de sécurité au sein de votre infrastructure.
 
 **Points clés :**
-- **Automatisation** : PowerShell permet d'automatiser presque tous les aspects d'un système Windows, rendant les audits plus efficaces et moins sujets à l'erreur humaine.
-- **Flexibilité** : Avec PowerShell, vous pouvez personnaliser les audits pour répondre à des besoins spécifiques, comme la surveillance des connexions ou la vérification des modifications des fichiers critiques.
-- **Intégration native** : PowerShell est intégré à Windows, ce qui facilite son adoption pour les administrateurs système dans un environnement Microsoft.
+- **Automatisation** : PowerShell permet d'automatiser la majorité des aspects de la gestion d’un système Windows, rendant ainsi les audits plus précis et moins sujets à des erreurs humaines.
+- **Flexibilité** : Grâce à PowerShell, les audits peuvent être personnalisés pour répondre à des besoins spécifiques, tels que la surveillance des connexions ou le suivi des modifications apportées aux fichiers critiques.
+- **Intégration native** : En étant nativement intégré à l'écosystème Windows, PowerShell s'impose comme un outil de prédilection pour les administrateurs système souhaitant mettre en place des audits efficaces dans un environnement Microsoft.
 
 ### **2. Scripts PowerShell pour l’audit**
 
-PowerShell offre une variété de cmdlets (commandlets) qui simplifient l'audit des systèmes Windows. Voici quelques cmdlets de base et avancés que vous utiliserez pour auditer votre infrastructure :
+PowerShell offre une gamme étendue de cmdlets (commandlets) qui simplifient considérablement l’audit des systèmes Windows. Dans cette section, nous examinerons certaines des cmdlets de base et avancées que vous utiliserez pour auditer efficacement votre infrastructure.
 
 #### **Cmdlets de base pour l’audit :**
-- **Get-EventLog** : Cette cmdlet permet de récupérer les journaux d'événements à partir de systèmes locaux et distants.
-  - **Exemple :** `Get-EventLog -LogName Security -Newest 1000` récupère les 1000 derniers événements de sécurité du journal spécifié.
-- **Get-WinEvent** : Plus flexible et performant que `Get-EventLog`, cette cmdlet permet de récupérer les événements, y compris ceux des journaux personnalisés.
-  - **Exemple :
-
-** `Get-WinEvent -FilterHashtable @{LogName="Security"; Id=4624}` permet de récupérer les événements d’ouverture de session (ID 4624) à partir du journal de sécurité.
-- **Get-AuditPolicy** : Cette cmdlet permet de consulter les stratégies d’audit actuelles configurées sur un système.
-  - **Exemple :** `Get-AuditPolicy -Category *` liste toutes les catégories de stratégie d’audit et leurs sous-catégories.
-- **Set-AuditPolicy** : Cette cmdlet configure les stratégies d’audit pour qu’elles répondent aux exigences de sécurité de votre organisation.
-  - **Exemple :** `Set-AuditPolicy -Category Logon/Logoff -Success Enable -Failure Enable` permet d’auditer les succès et échecs de connexion.
+- **Get-EventLog** : Cette cmdlet permet de récupérer les journaux d'événements à partir de systèmes locaux ou distants. C’est une commande essentielle pour l’audit, car elle permet d’accéder rapidement aux événements enregistrés par le système.
+  - **Exemple :** `Get-EventLog -LogName Security -Newest 1000` récupère les 1000 derniers événements de sécurité du journal spécifié, fournissant ainsi un aperçu des activités récentes sur le système.
+- **Get-WinEvent** : Cette cmdlet est plus flexible et performante que `Get-EventLog`, offrant la possibilité de récupérer des événements à partir de journaux personnalisés. Elle est particulièrement utile pour des audits nécessitant une granularité accrue.
+  - **Exemple :** `Get-WinEvent -FilterHashtable @{LogName="Security"; Id=4624}` permet de récupérer les événements d’ouverture de session (ID 4624) à partir du journal de sécurité, facilitant ainsi le suivi des connexions utilisateur.
+- **Get-AuditPolicy** : Cette cmdlet permet de consulter les stratégies d’audit actuellement configurées sur un système, offrant une vue d’ensemble des paramètres de sécurité en place.
+  - **Exemple :** `Get-AuditPolicy -Category *` liste toutes les catégories de stratégie d’audit et leurs sous-catégories, aidant ainsi à identifier les domaines couverts par les politiques actuelles.
+- **Set-AuditPolicy** : Cette cmdlet configure les stratégies d’audit pour qu’elles répondent aux exigences de sécurité spécifiques de votre organisation.
+  - **Exemple :** `Set-AuditPolicy -Category Logon/Logoff -Success Enable -Failure Enable` configure l’audit pour capturer à la fois les succès et les échecs de connexion, fournissant des informations complètes sur les tentatives d’accès au système.
 
 #### **Scripts avancés d’audit :**
 
 - **Audit des modifications dans les groupes privilégiés** :
-  - **Objectif :** Surveiller les modifications apportées aux groupes d’utilisateurs privilégiés, comme les Administrateurs ou Domain Admins.
+  - **Objectif :** Surveiller et enregistrer les modifications apportées aux groupes d’utilisateurs privilégiés, tels que les groupes Administrateurs ou Domain Admins, pour détecter toute altération non autorisée.
   - **Script exemple :**
     ```powershell
     $events = Get-WinEvent -FilterHashtable @{LogName="Security"; Id=4728,4732,4756} 
@@ -153,31 +147,31 @@ PowerShell offre une variété de cmdlets (commandlets) qui simplifient l'audit 
         Write-Output "$timeCreated : $message"
     }
     ```
-    - **Explication :** Ce script récupère les événements où des utilisateurs ont été ajoutés à des groupes privilégiés et les affiche avec un horodatage. Cela permet de surveiller les modifications sensibles en temps réel.
+    - **Explication :** Ce script récupère les événements où des utilisateurs ont été ajoutés à des groupes privilégiés et les affiche avec un horodatage. Cela permet une surveillance en temps réel des modifications critiques, facilitant ainsi une réponse rapide en cas d’activité suspecte.
 
 - **Automatisation de la génération de rapports d’audit** :
-  - **Objectif :** Automatiser la création de rapports d’audit qui peuvent être examinés périodiquement pour assurer une surveillance continue.
+  - **Objectif :** Automatiser la création de rapports d’audit pour garantir une surveillance régulière et systématique des activités sur le système.
   - **Script exemple :**
     ```powershell
     $reportPath = "C:\AuditReports\AuditReport_$(Get-Date -Format 'yyyyMMdd').txt"
     $auditData = Get-WinEvent -FilterHashtable @{LogName="Security"; Id=4624,4634} | Select-Object TimeCreated, Id, Message
     $auditData | Out-File $reportPath
     ```
-    - **Explication :** Ce script génère un rapport des événements d’ouverture et de fermeture de session et le sauvegarde dans un fichier texte daté. Cela permet de centraliser les informations d’audit pour une analyse ultérieure.
+    - **Explication :** Ce script génère un rapport des événements d’ouverture et de fermeture de session, qu’il sauvegarde dans un fichier texte daté. En centralisant les informations d’audit, il facilite l’analyse rétrospective et permet de maintenir un historique détaillé des activités du système.
 
 ### **3. Exemples pratiques d’audit avancé**
 
 #### **Surveillance des tentatives d’accès non autorisées** :
-- **Objectif :** Détecter les tentatives de connexion échouées et les verrouillages de comptes pour prévenir les accès non autorisés.
+- **Objectif :** Détecter les tentatives de connexion échouées et les verrouillages de comptes, afin de prévenir les accès non autorisés au système.
 - **Script exemple :**
   ```powershell
   $failedLogons = Get-WinEvent -FilterHashtable @{LogName="Security"; Id=4625} | Select-Object TimeCreated, Message
   $failedLogons | Where-Object {$_.Message -match "Account Name:\s+(\S+)" } | Sort-Object TimeCreated | Format-Table -AutoSize
   ```
-  - **Explication :** Ce script identifie les tentatives de connexion échouées en analysant les journaux de sécurité, permettant ainsi de repérer les comptes ciblés par des tentatives d’intrusion.
+  - **Explication :** Ce script identifie et compile les tentatives de connexion échouées en analysant les journaux de sécurité. Cette surveillance permet de repérer rapidement les comptes ciblés par des tentatives d’intrusion, offrant ainsi une couche supplémentaire de protection.
 
 #### **Suivi des modifications sur des fichiers critiques** :
-- **Objectif :** Surveiller l’accès et les modifications des fichiers critiques du système pour prévenir les altérations non autorisées.
+- **Objectif :** Surveiller l’accès et les modifications apportées aux fichiers critiques du système afin de prévenir toute altération non autorisée.
 - **Script exemple :**
   ```powershell
   $path = "C:\CriticalFiles"
@@ -194,11 +188,26 @@ PowerShell offre une variété de cmdlets (commandlets) qui simplifient l'audit 
   }
   $watcher.EnableRaisingEvents = $true
   ```
-  - **Explication :** Ce script surveille un répertoire pour toute modification de fichier et enregistre les changements avec un horodatage. Il est particulièrement utile pour sécuriser les fichiers critiques contre les modifications non autorisées.
+  - **Explication :** Ce script surveille un répertoire pour détecter toute modification de fichier, enregistre les changements avec un horodatage, et fournit une traçabilité détaillée des accès aux fichiers critiques. Il est particulièrement utile pour protéger les données sensibles contre les modifications non autorisées, en assurant une surveillance continue et en temps réel.
 
 [Retour en haut](#plan)
 
----
+
+
+```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
+
+
+
+
+
+
 
 # **3. Analyse des journaux des événements** <a id="analyse-des-journaux-des-evenements"></a>
 
@@ -233,7 +242,20 @@ Les journaux des événements sous Windows sont une ressource précieuse pour su
 
 [Retour en haut](#plan)
 
----
+```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
+
+
+
+
+
+
 
 # **4. Examen du trafic réseau avec Microsoft Message Analyzer** <a id="examen-du-trafic-reseau-avec-microsoft-message-analyzer"></a>
 
@@ -313,7 +335,16 @@ Les études de cas suivantes vous montreront comment utiliser Microsoft Message 
 
 [Retour en haut](#plan)
 
----
+
+
+```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
 
 # **5. Trafic SMB : Sécurisation et analyse** <a id="trafic-smb-securisation-et-analyse"></a>
 
@@ -428,3 +459,12 @@ SMB est un protocole réseau essentiel pour le partage de fichiers et d’imprim
     - **Résultat :** Isolation rapide des systèmes infectés, déconnexion des partages SMB pour contenir l'infection, et analyse post-incident pour renforcer la sécurité.
 
 [Retour en haut](#plan)
+
+```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
