@@ -1,6 +1,52 @@
+
+---
+
 # 📝 Résumé de la Semaine #2 : Sécurité et Analyse avec Sysinternals
 
-## Table des Matières
+----------
+
+# ⚠️ **IMPORTANT - À LIRE** ⚠️
+
+--------
+
+Pour aller à l'essentiel, veuillez consulter le dossier `📂 resume`, qui contient les éléments théoriques et pratiques nécessaires à votre apprentissage.
+
+# Contenu du dossier `resume`
+
+---
+
+# 📚 **Théorie** 💡
+
+----
+
+Pour bien comprendre les concepts de la semaine 2, il est essentiel de lire les documents suivants dans l'ordre :
+
+1. **[🛡️ Introduction aux Attaques et à la Sécurité.md](./resume/Introduction%20aux%20Attaques%20et%20à%20la%20Sécurité.md)**  
+2. **[🔍 Détection des Violations de Sécurité.md](./resume/Détection%20des%20Violations%20de%20Sécurité.md)**  
+3. **[🛠️ Examen de l'Activité avec les Outils Sysinternals.md](./resume/Examen%20de%20l'Activité%20avec%20les%20Outils%20Sysinternals.md)**  
+4. **[🚨 Stratégies de Réponse aux Incidents.md](./resume/Stratégies%20de%20Réponse%20aux%20Incidents.md)**  
+
+---
+
+# 🧪 **Pratique** 🔧
+
+---
+
+Pour la partie pratique, suivez les étapes ci-dessous :
+
+1. **[⚙️ Ateliers-pratiques.md](./resume/Ateliers-pratiques.md)** (exercez-vous uniquement sur les exercices 1 et 2)  
+   - Ces exercices vous permettent de mettre en pratique les concepts théoriques appris dans les sections précédentes. Ignorez les autres exercices dans ce document.
+
+2. **[🎯 Exercice-pratique-3.md](./resume/Exercice-pratique-3.md)**  
+   - Passez ensuite directement à cet exercice, qui constitue la dernière étape de la semaine 2. Ce document complète votre apprentissage avec un exercice final important.
+
+---
+
+
+
+-------
+# Annexe - Table des Matières
+--------
 
 1. 📖 **[Introduction aux Attaques et à la Sécurité](1. Introduction aux Attaques et à la Sécurité.md)**
    - Aperçu des menaces courantes telles que le phishing, les attaques DDoS, et les ransomwares.
