@@ -284,9 +284,7 @@ Microsoft Message Analyzer est un outil de capture et d’analyse de trafic rés
 
 #### **Installation et configuration :**
 - **Installation** : Téléchargez Microsoft Message Analyzer depuis le Centre de téléchargement Microsoft et suivez les instructions d'installation.
-- **Configuration** : Configurez les adaptateurs réseau pour la capture, paramétrez les filtres pour cibler les types de trafic pertinents, et sauvegard
-
-ez les paramètres de capture pour une utilisation ultérieure.
+- **Configuration** : Configurez les adaptateurs réseau pour la capture, paramétrez les filtres pour cibler les types de trafic pertinents, et sauvegardez les paramètres de capture pour une utilisation ultérieure.
 
 ### **2. Études de cas d’analyse de trafic réseau**
 
