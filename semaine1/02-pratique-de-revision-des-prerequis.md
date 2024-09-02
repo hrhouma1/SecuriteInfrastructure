@@ -417,9 +417,9 @@ New-ADUser -Name "John Doe" -GivenName "John" -Surname "Doe" -SamAccountName "jd
 
 # pfSense Configuration Lab: Mastering Network Security and Management: 
 - https://medium.com/@piusppk/pfsense-configuration-lab-mastering-network-security-and-management-fa7aee675c8e
-- How to Install and Configure pfSense on VMware
-- https://www.youtube.com/watch?v=zdAglC3AmJo
+- https://www.youtube.com/watch?v=zdAglC3AmJo (How to Install and Configure pfSense on VMware)
 
 # Configurez AD DS
 - https://www.youtube.com/watch?v=A4Epd6uuolk
-
+# GPO lab
+- https://www.youtube.com/watch?v=zdAglC3AmJo
