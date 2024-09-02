@@ -37,7 +37,7 @@ Pour la partie pratique, suivez les étapes ci-dessous :
 1. **[⚙️ 5 - Ateliers-pratiques.md](https://github.com/hrhouma1/SecuriteInfrastructure/blob/main/semaine2/resume/5.%20ateliers-pratiques.md)** (exercez-vous uniquement sur les exercices 1 et 2)  
    - Ces exercices vous permettent de mettre en pratique les concepts théoriques appris dans les sections précédentes. Ignorez les autres exercices dans ce document.
 
-2. **[🎯 Exercice-pratique-3.md](./resume/Exercice-pratique-3.md)**  
+2. **[🎯 Exercice-pratique-3.md](https://github.com/hrhouma1/SecuriteInfrastructure/blob/main/semaine2/resume/5.%20exercice-pratique-3.md)**  
    - Passez ensuite directement à cet exercice, qui constitue la dernière étape de la semaine 2. Ce document complète votre apprentissage avec un exercice final important.
 
 ---
@@ -71,3 +71,7 @@ Pour la partie pratique, suivez les étapes ci-dessous :
 6. 🎯 **[Ateliers Pratiques](5. ateliers-pratiques.md)**
    - Exercices détaillés pour configurer Sysmon, utiliser Process Monitor, et rédiger des rapports d'incidents.
    - Approfondissement des compétences en gestion des menaces et en analyse de la sécurité.
+
+
+7. **[🎯 Exercice-pratique-3.md](https://github.com/hrhouma1/SecuriteInfrastructure/blob/main/semaine2/resume/5.%20exercice-pratique-3.md)**  
+   - Passez ensuite directement à cet exercice, qui constitue la dernière étape de la semaine 2. Ce document complète votre apprentissage avec un exercice final important.
