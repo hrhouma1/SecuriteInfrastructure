@@ -8,72 +8,99 @@
 4. [Examen du trafic réseau avec Microsoft Message Analyzer](#examen-du-trafic-reseau-avec-microsoft-message-analyzer)
 5. [Trafic SMB : Sécurisation et analyse](#trafic-smb-securisation-et-analyse)
 
----
+
+
+```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
+
+
+
+
 
 # **1. Présentation de l’audit** <a id="presentation-de-laudit"></a>
 
 ## **1.1 Objectifs**
 
-Cette section a pour but de vous initier aux principes fondamentaux de l’audit dans un environnement informatique, en particulier sous Windows. Vous comprendrez ce qu’est un audit, pourquoi il est indispensable pour la sécurité et la performance des systèmes, et découvrirez les outils natifs de Windows qui facilitent la réalisation d’audits.
+Cette section vise à introduire les principes fondamentaux de l’audit dans un environnement informatique, avec un accent particulier sur les systèmes Windows. L’objectif est de fournir une compréhension claire de la nature de l’audit, de son importance pour la sécurité et la performance des systèmes, ainsi que des outils intégrés dans Windows qui facilitent la mise en œuvre d’audits efficaces.
 
 **Sous-objectifs :**
-- **Définir l’audit informatique** : Vous comprendrez la signification du terme "audit" dans le contexte informatique et comment il s'applique aux systèmes et réseaux.
-- **Justifier la nécessité de l’audit** : Vous apprendrez à identifier les raisons pour lesquelles un audit régulier est crucial, notamment pour la sécurité des données et la conformité légale.
-- **Explorer les outils d’audit sous Windows** : Vous vous familiariserez avec les principaux outils intégrés à Windows pour effectuer un audit, comme l'Observateur d'événements, les Paramètres d’audit des stratégies de groupe, et PowerShell.
+- **Définir l’audit informatique** : Acquérir une compréhension précise du concept d’audit dans le contexte des systèmes d’information, en mettant l'accent sur son application pratique pour la sécurité et la gestion des réseaux.
+- **Justifier la nécessité de l’audit** : Identifier les raisons pour lesquelles un audit régulier est indispensable, notamment en matière de protection des données sensibles et de conformité aux régulations.
+- **Explorer les outils d’audit sous Windows** : Se familiariser avec les principaux outils intégrés à Windows, tels que l'Observateur d'événements, les Paramètres d’audit des stratégies de groupe, et PowerShell, pour effectuer des audits approfondis.
 
 ## **1.2 Introduction aux concepts de l’audit**
 
 ### **Qu’est-ce qu’un audit ?**
 
-Un audit informatique est un processus méthodique de collecte, d'évaluation, et de vérification des informations issues d'un système informatique. Il permet de s'assurer que les politiques, procédures, et contrôles en place dans une organisation sont efficaces, conformes aux normes, et assurent la sécurité du système.
+L’audit informatique est un processus systématique et rigoureux de collecte, d’évaluation, et de vérification des informations générées par un système informatique. Ce processus permet de s'assurer que les politiques, les procédures, et les contrôles en place au sein d’une organisation sont non seulement respectés, mais aussi efficaces pour garantir la sécurité et l'intégrité du système.
 
 #### **Analogie :**
-Imaginez que votre système informatique est une maison. Auditer le système, c’est comme effectuer une inspection complète de la maison pour vérifier que toutes les portes et fenêtres sont bien verrouillées, que les systèmes de sécurité fonctionnent correctement, et qu'il n'y a pas de fuites ou de points faibles susceptibles d'être exploités.
-
-Dans le cadre informatique, l'audit consiste à vérifier les activités sur vos systèmes et réseaux. Par exemple, cela inclut l’examen des connexions des utilisateurs, des modifications apportées aux fichiers, ou encore la détection d'éventuelles tentatives d'accès non autorisé à des données sensibles.
+Imaginons que votre système informatique soit comparable à une maison. Auditer ce système revient à inspecter minutieusement chaque aspect de la maison pour s'assurer que toutes les portes et fenêtres sont bien verrouillées, que les systèmes de sécurité fonctionnent correctement, et qu'il n'existe pas de failles pouvant être exploitées. Dans un contexte informatique, cela signifie vérifier et analyser les activités au sein des systèmes et des réseaux pour identifier les connexions des utilisateurs, les modifications apportées aux fichiers, ou encore déceler des tentatives d'accès non autorisé à des données sensibles.
 
 ### **Pourquoi est-ce important ?**
 
-Ne jamais vérifier votre maison reviendrait à ignorer les risques de laisser une porte ouverte ou de ne pas remarquer qu'un intrus a pénétré dans votre espace. De la même manière, ne pas auditer votre système informatique pourrait entraîner la découverte tardive de failles de sécurité ou de dysfonctionnements qui pourraient avoir des conséquences graves.
+Tout comme il serait imprudent de ne jamais vérifier la sécurité de sa maison, négliger l’audit de votre système informatique peut entraîner des conséquences graves. Sans audit, des failles de sécurité ou des dysfonctionnements peuvent passer inaperçus, mettant en péril la sécurité des données et l'intégrité du système.
 
-L'audit permet de :
-- **Protéger les données sensibles** : En s'assurant que seules les personnes autorisées ont accès aux informations critiques.
-- **Respecter les obligations légales** : De nombreuses régulations exigent que vous conserviez des traces des événements dans vos systèmes.
-- **Améliorer la performance du système** : En détectant les dysfonctionnements ou les anomalies pour les corriger avant qu’ils n’affectent la productivité ou la sécurité.
+L’audit permet de :
+- **Protéger les données sensibles** : En s’assurant que seules les personnes autorisées ont accès aux informations critiques, l’audit réduit le risque de violations de données.
+- **Respecter les obligations légales** : De nombreuses régulations, comme le Règlement Général sur la Protection des Données (RGPD) en Europe, exigent que les entreprises maintiennent des journaux précis de leurs activités pour garantir la traçabilité et la conformité.
+- **Améliorer la performance du système** : En identifiant et en corrigeant rapidement les anomalies ou les dysfonctionnements, l’audit contribue à maintenir une performance optimale du système et à éviter les pannes ou interruptions de service.
 
 ### **1.3 Importance de l’audit dans une infrastructure Microsoft**
 
-Microsoft est un fournisseur majeur de solutions informatiques pour les entreprises, avec une large adoption de systèmes Windows. Dans ce contexte, savoir comment auditer ces systèmes est essentiel pour assurer leur sécurité, leur conformité et leur performance.
+Microsoft étant l’un des principaux fournisseurs de solutions informatiques pour les entreprises, il est essentiel de comprendre comment auditer efficacement les systèmes Windows pour garantir leur sécurité, leur conformité, et leur performance.
 
 #### **Exemple concret :**
-Supposons que vous travaillez dans une entreprise où les employés se connectent quotidiennement à un réseau pour effectuer leur travail. Sans audit, vous pourriez ignorer qu'un employé utilise les informations de connexion d'un autre pour accéder à des fichiers auxquels il ne devrait pas avoir accès. De même, vous pourriez ne pas détecter l’installation d’un logiciel malveillant qui modifie des fichiers critiques.
+Dans une organisation où les employés se connectent quotidiennement à un réseau pour effectuer leurs tâches, l’absence d’audit pourrait empêcher la détection d’activités malveillantes, telles qu’un employé utilisant les informations d’identification d’un autre pour accéder à des fichiers confidentiels. De plus, un logiciel malveillant pourrait s’installer et modifier des fichiers critiques sans que cela ne soit détecté.
 
-L'audit régulier permet de :
-- **Surveiller les activités sur le système** : Vous saurez qui accède à quels fichiers, quelles modifications sont apportées, et si des tentatives d'accès non autorisé ont lieu.
-- **Repérer les anomalies** : Comme des tentatives de connexion en dehors des heures habituelles, des erreurs répétées, ou des comportements suspects.
-- **Prévenir les incidents graves** : En détectant les problèmes avant qu’ils ne se transforment en pannes ou en violations de sécurité, vous pouvez intervenir rapidement et limiter les dégâts.
+La mise en œuvre régulière d’audits permet de :
+- **Surveiller les activités sur le système** : Identifier qui accède à quels fichiers, quelles modifications sont effectuées, et détecter toute tentative d'accès non autorisé.
+- **Repérer les anomalies** : Identifier des activités inhabituelles, telles que des tentatives de connexion en dehors des heures de travail habituelles, des erreurs fréquentes, ou des comportements suspects.
+- **Prévenir les incidents graves** : En détectant les problèmes avant qu’ils ne deviennent critiques, l’audit permet de prendre des mesures correctives rapides pour minimiser les risques de pannes ou de violations de sécurité.
 
 ### **1.4 Types d'audit et résumé**
 
 #### **Les types d’audit :**
-- **Audit de Sécurité** : Évalue les vulnérabilités d'un système et son niveau de protection contre les menaces externes et internes.
-  - **Exemple :** Vérification des accès aux fichiers sensibles pour s'assurer que seules les personnes autorisées peuvent y accéder.
-- **Audit de Conformité** : Vérifie que les pratiques de l'organisation sont en adéquation avec les lois, régulations, et politiques internes.
-  - **Exemple :** Contrôle des configurations pour s'assurer qu'elles respectent les normes ISO 27001 ou les réglementations GDPR.
-- **Audit Opérationnel** : Évalue l'efficacité des processus internes pour optimiser les performances du système.
-  - **Exemple :** Analyse des performances des serveurs pour identifier les goulets d'étranglement et améliorer la réactivité.
+- **Audit de Sécurité** : Évalue les vulnérabilités d'un système et le niveau de protection contre les menaces externes et internes.
+  - **Exemple :** Vérifier l’accès aux fichiers sensibles pour s'assurer que seules les personnes autorisées peuvent les consulter et les modifier.
+- **Audit de Conformité** : Vérifie que les pratiques de l'organisation sont conformes aux lois, régulations, et politiques internes.
+  - **Exemple :** Contrôler les configurations des systèmes pour s'assurer qu'elles respectent les normes ISO 27001 ou les réglementations telles que le GDPR.
+- **Audit Opérationnel** : Évalue l'efficacité des processus internes pour optimiser la performance du système.
+  - **Exemple :** Analyser les performances des serveurs pour identifier les goulets d'étranglement et améliorer la réactivité des services.
 
 #### **Résumé :**
-L'audit informatique est un outil stratégique pour la sécurité, la conformité et l'efficacité opérationnelle. Windows propose plusieurs outils intégrés pour réaliser ces audits, chacun ayant des fonctions spécifiques pour collecter, analyser, et sécuriser les informations critiques.
+L’audit informatique est un outil stratégique indispensable pour assurer la sécurité, la conformité, et l'efficacité opérationnelle d’une organisation. Les systèmes Windows proposent plusieurs outils intégrés pour réaliser ces audits, chacun offrant des fonctionnalités spécifiques pour collecter, analyser, et sécuriser les informations critiques.
 
 **Outils d’audit disponibles sous Windows :**
-- **Event Viewer (Observateur d'événements)** : Permet de consulter et d'analyser les journaux des événements pour détecter des anomalies ou des tentatives d’intrusion.
-- **Group Policy Audit Settings (Paramètres d’audit des stratégies de groupe)** : Configurable pour auditer divers types d’événements, tels que les tentatives de connexion, les accès aux fichiers, etc.
-- **PowerShell** : Permet d’automatiser la collecte de données d’audit et d’effectuer des audits avancés grâce à des scripts personnalisés.
+- **Event Viewer (Observateur d'événements)** : Un outil essentiel pour consulter et analyser les journaux des événements afin de détecter des anomalies ou des tentatives d’intrusion.
+- **Group Policy Audit Settings (Paramètres d’audit des stratégies de groupe)** : Configurable pour auditer divers types d’événements, tels que les tentatives de connexion ou les accès aux fichiers sensibles.
+- **PowerShell** : Un outil puissant permettant d’automatiser la collecte de données d’audit et de réaliser des audits avancés à l'aide de scripts personnalisés.
 
 [Retour en haut](#plan)
 
----
+
+
+
+
+```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
+
+
+
+
+
 
 # **2. Audit avancé et PowerShell** <a id="audit-avance-et-powershell"></a>
 
