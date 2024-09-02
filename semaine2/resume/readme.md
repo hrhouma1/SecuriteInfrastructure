@@ -23,7 +23,7 @@ Pour bien comprendre les concepts de la semaine 2, il est essentiel de lire les 
 
 1. **[🛡️ Introduction aux Attaques et à la Sécurité.md](https://github.com/hrhouma1/SecuriteInfrastructure/blob/main/semaine2/resume/1.%20Introduction%20aux%20Attaques%20et%20%C3%A0%20la%20S%C3%A9curite.md)**  
 2. **[🔍 Détection des Violations de Sécurité.md](https://github.com/hrhouma1/SecuriteInfrastructure/blob/main/semaine2/resume/2.%20D%C3%A9tection%20des%20Violations%20de%20S%C3%A9curit%C3%A9.md)**  
-3. **[🛠️ Examen de l'Activité avec les Outils Sysinternals.md](./resume/Examen%20de%20l'Activité%20avec%20les%20Outils%20Sysinternals.md)**  
+3. **[🛠️ Examen de l'Activité avec les Outils Sysinternals.md](https://github.com/hrhouma1/SecuriteInfrastructure/blob/main/semaine2/resume/3.%20Examen%20de%20l'Activit%C3%A9%20avec%20les%20Outils%20Sysinternals.md)**  
 4. **[🚨 Stratégies de Réponse aux Incidents.md](./resume/Stratégies%20de%20Réponse%20aux%20Incidents.md)**  
 
 ---
