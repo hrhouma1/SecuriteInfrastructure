@@ -416,9 +416,7 @@ SMB est un protocole réseau essentiel pour le partage de fichiers et d’imprim
   - **Exemple de configuration** :
     ```powershell
     $Acl = Get-Acl "C:\CriticalData"
-    $Ar = New-Object System
-
-.Security.AccessControl.FileSystemAccessRule("Domain\Admins","Read","Allow")
+    $Ar = New-Object System.Security.AccessControl.FileSystemAccessRule("Domain\Admins","Read","Allow")
     $Acl.SetAccessRule($Ar)
     Set-Acl "C:\CriticalData" $Acl
     ```
