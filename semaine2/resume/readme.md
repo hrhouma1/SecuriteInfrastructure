@@ -34,7 +34,7 @@ Pour bien comprendre les concepts de la semaine 2, il est essentiel de lire les 
 
 Pour la partie pratique, suivez les étapes ci-dessous :
 
-1. **[⚙️ Ateliers-pratiques.md](./resume/Ateliers-pratiques.md)** (exercez-vous uniquement sur les exercices 1 et 2)  
+1. **[⚙️ 5 - Ateliers-pratiques.md](https://github.com/hrhouma1/SecuriteInfrastructure/blob/main/semaine2/resume/5.%20ateliers-pratiques.md)** (exercez-vous uniquement sur les exercices 1 et 2)  
    - Ces exercices vous permettent de mettre en pratique les concepts théoriques appris dans les sections précédentes. Ignorez les autres exercices dans ce document.
 
 2. **[🎯 Exercice-pratique-3.md](./resume/Exercice-pratique-3.md)**  
