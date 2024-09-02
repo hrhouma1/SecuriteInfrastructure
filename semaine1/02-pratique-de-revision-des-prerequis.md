@@ -410,3 +410,13 @@ New-ADUser -Name "John Doe" -GivenName "John" -Surname "Doe" -SamAccountName "jd
 - En suivant ce guide, vous avez automatisé la configuration d'un contrôleur de domaine et de deux serveurs membres en utilisant PowerShell.
 - Cette approche vous permet de gérer efficacement un environnement de laboratoire tout en gagnant du temps avec des configurations répétitives.
 
+
+----------
+# Références :
+----------
+
+# pfSense Configuration Lab: Mastering Network Security and Management: 
+- https://medium.com/@piusppk/pfsense-configuration-lab-mastering-network-security-and-management-fa7aee675c8e
+- How to Install and Configure pfSense on VMware
+- https://www.youtube.com/watch?v=zdAglC3AmJo
+
