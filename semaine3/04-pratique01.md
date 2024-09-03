@@ -175,3 +175,115 @@ Nous allons maintenant analyser le trafic capturé pour vérifier que les donné
 
 Cette démonstration a couvert l'ensemble des étapes nécessaires pour sécuriser un environnement réseau en utilisant SMB 3.x. Nous avons désactivé des versions obsolètes du protocole SMB, configuré un partage chiffré, et utilisé des outils d'analyse pour vérifier la sécurité des données en transit. En suivant ces étapes, vous aurez acquis une bonne compréhension de la manière de protéger efficacement les partages de fichiers dans un réseau d'entreprise.
 
+
+--------
+# Annexe 1 - Comment créer le partage ?
+-------
+
+Pour créer le partage réseau `\\SVR1\Chapitre2`, vous pouvez suivre les étapes détaillées ci-dessous. Ces instructions couvrent à la fois la création du dossier physique sur le serveur et la configuration du partage avec les permissions appropriées. Vous pouvez effectuer ces opérations via **PowerShell** ou via l'**Interface Graphique (GUI)** de Windows Server.
+
+## Méthode 1 : Utiliser PowerShell
+
+### Étape 1 : Créer le dossier physique
+
+1. **Ouvrir PowerShell en tant qu'administrateur :**
+   - Connectez-vous à votre serveur **SVR1**.
+   - Cliquez sur le **menu Démarrer**, tapez **PowerShell**, faites un clic droit sur **Windows PowerShell** et sélectionnez **Exécuter en tant qu'administrateur**.
+
+2. **Créer les dossiers nécessaires :**
+   - Exécutez les commandes suivantes pour créer le dossier `Labo` et le sous-dossier `Chapitre2` :
+     ```powershell
+     New-Item -Path "D:\Labo" -ItemType Directory -Force
+     New-Item -Path "D:\Labo\Chapitre2" -ItemType Directory -Force
+     ```
+
+### Étape 2 : Créer le partage SMB avec chiffrement
+
+1. **Créer le partage SMB :**
+   - Exécutez la commande suivante pour créer le partage nommé **Chapitre2** avec le chiffrement activé :
+     ```powershell
+     New-SmbShare -Name "Chapitre2" -Path "D:\Labo\Chapitre2" -EncryptData $true
+     ```
+   - **Paramètres expliqués :**
+     - `-Name "Chapitre2"` : Nom du partage réseau.
+     - `-Path "D:\Labo\Chapitre2"` : Chemin du dossier physique à partager.
+     - `-EncryptData $true` : Active le chiffrement des données en transit.
+
+2. **Définir les autorisations d'accès :**
+   - Pour accorder un accès complet au groupe **Everyone**, exécutez :
+     ```powershell
+     Grant-SmbShareAccess -Name "Chapitre2" -AccountName "Everyone" -AccessRight Full -Force
+     ```
+   - **Paramètres expliqués :**
+     - `-AccountName "Everyone"` : Spécifie que tous les utilisateurs auront accès.
+     - `-AccessRight Full` : Accès complet (lecture, écriture, modification).
+
+### Étape 3 : Vérifier le partage
+
+1. **Lister les partages SMB :**
+   - Pour vérifier que le partage a été créé correctement, exécutez :
+     ```powershell
+     Get-SmbShare -Name "Chapitre2"
+     ```
+   - Vous devriez voir les détails du partage **Chapitre2**.
+
+2. **Tester l'accès au partage :**
+   - Depuis une machine cliente (par exemple **CL1**), ouvrez l'Explorateur de fichiers.
+   - Dans la barre d'adresse, tapez `\\SVR1\Chapitre2` et appuyez sur **Entrée**.
+   - Vous devriez accéder au dossier partagé et pouvoir y lire ou écrire des fichiers en fonction des permissions définies.
+
+## Méthode 2 : Utiliser l'Interface Graphique (GUI)
+
+### Étape 1 : Créer le dossier physique
+
+1. **Ouvrir l'Explorateur de fichiers :**
+   - Connectez-vous à votre serveur **SVR1**.
+   - Ouvrez **Explorateur de fichiers** (Windows + E).
+
+2. **Créer les dossiers nécessaires :**
+   - Naviguez jusqu'au lecteur **D:\\**.
+   - Cliquez droit dans l'espace vide, sélectionnez **Nouveau > Dossier** et nommez-le **Labo**.
+   - Ouvrez le dossier **Labo**, cliquez droit à nouveau et créez un sous-dossier nommé **Chapitre2**.
+
+### Étape 2 : Créer le partage SMB avec chiffrement
+
+1. **Accéder aux propriétés du dossier :**
+   - Faites un clic droit sur le dossier **Chapitre2** et sélectionnez **Propriétés**.
+
+2. **Configurer le partage :**
+   - Allez dans l'onglet **Partage**.
+   - Cliquez sur **Partage avancé...**.
+   - Cochez la case **Partager ce dossier**.
+   - Dans le champ **Nom du partage**, entrez **Chapitre2**.
+
+3. **Configurer le chiffrement :**
+   - Cliquez sur le bouton **Permissions**.
+   - Dans la fenêtre des permissions, cliquez sur **Ajouter...** pour ajouter le groupe **Everyone**.
+   - Sélectionnez **Everyone**, puis cochez la case **Contrôle total** sous **Autorisations**.
+   - Cliquez sur **OK** pour fermer les fenêtres des permissions.
+
+4. **Activer le chiffrement :**
+   - Toujours dans les **Propriétés** du dossier, allez dans l'onglet **Partage** puis cliquez sur **Partage avancé...**.
+   - Cliquez sur **Permissions**, puis sur **OK**.
+   - Pour activer le chiffrement, il est recommandé d'utiliser PowerShell comme décrit dans la **Méthode 1** car l'interface graphique ne permet pas de configurer directement le chiffrement lors de la création du partage.
+
+### Étape 3 : Définir les autorisations NTFS (facultatif mais recommandé)
+
+1. **Configurer les autorisations NTFS :**
+   - Dans les **Propriétés** du dossier **Chapitre2**, allez dans l'onglet **Sécurité**.
+   - Cliquez sur **Modifier...** pour ajuster les autorisations.
+   - Ajoutez le groupe **Everyone** si ce n'est pas déjà fait et accordez les permissions nécessaires (lecture, écriture, modification).
+   - Cliquez sur **OK** pour appliquer les changements.
+
+### Étape 4 : Vérifier le partage
+
+1. **Tester l'accès au partage :**
+   - Depuis une machine cliente (par exemple **CL1**), ouvrez l'Explorateur de fichiers.
+   - Dans la barre d'adresse, tapez `\\SVR1\Chapitre2` et appuyez sur **Entrée**.
+   - Vous devriez accéder au dossier partagé et pouvoir y lire ou écrire des fichiers en fonction des permissions définies.
+
+## Conclusion
+
+En suivant ces étapes, vous aurez créé un partage réseau sécurisé `\\SVR1\Chapitre2` avec le chiffrement SMB activé. Utiliser PowerShell offre une méthode rapide et reproductible pour configurer des partages avec des paramètres spécifiques comme le chiffrement. Cependant, l'interface graphique peut être utilisée si vous préférez une approche visuelle. Assurez-vous toujours de définir les permissions appropriées pour protéger les données sensibles et limiter l'accès aux utilisateurs autorisés.
+
+N'hésitez pas à me contacter si vous avez besoin de plus d'assistance ou si vous rencontrez des problèmes lors de la création du partage.
