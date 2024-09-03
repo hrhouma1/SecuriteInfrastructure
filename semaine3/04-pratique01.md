@@ -2,7 +2,11 @@
 # Pratique : Désactivation de SMB 1.0 et Configuration du Chiffrement SMB sur des Partages
 ----------
 
+## Références utiles pour partage de fichiers : 
+- https://medium.com/@2004.vimald/setup-share-folder-and-permission-in-windows-server-2022-a5215060dcb7
+
 ## Objectifs de la démonstration
+
 
 Dans cette démonstration, vous allez apprendre à :
 
