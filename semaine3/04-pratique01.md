@@ -145,9 +145,7 @@ Le chiffrement SMB est essentiel pour protéger les données en transit sur le r
 
 # 8. Capturer le Trafic SMB Chiffré
 
-Pour vérifier que le chiffrement SMB fonctionne correctement, nous allons capt
-
-urer et analyser le trafic réseau.
+Pour vérifier que le chiffrement SMB fonctionne correctement, nous allons capturer et analyser le trafic réseau.
 
 1. **Démarrer la Capture sur SVR1 :**
    - Sur **SVR1**, ouvrez **Microsoft Message Analyzer** (ou un autre outil de capture réseau).
