@@ -8,9 +8,10 @@ Dans cette partie de la démonstration, vous allez capturer le trafic SMB 1.0 no
 - **Montrer** comment SMB 1.0 transfère les fichiers sans chiffrement.
 - **Démontrer** la facilité avec laquelle un attaquant peut intercepter et lire les données.
 
----
 
+---
 # **Étape 1 : Préparation des machines et réactivation de SMB 1.0**
+---
 
 1. **Activer SMB 1.0 sur le serveur Windows** :
 
@@ -23,8 +24,8 @@ Dans cette partie de la démonstration, vous allez capturer le trafic SMB 1.0 no
    **Note** : SMB 1.0 est vulnérable et doit être réactivé uniquement pour la démonstration.
 
 ---
-
 # **Étape 2 : Installation de Wireshark sur Kali Linux (si nécessaire)**
+---
 
 Wireshark est généralement préinstallé sur Kali Linux. Si ce n'est pas le cas, installez-le en suivant ces étapes :
 
@@ -43,8 +44,8 @@ Wireshark est généralement préinstallé sur Kali Linux. Si ce n'est pas le ca
    Lors de l'installation, acceptez les permissions supplémentaires pour que Wireshark puisse capturer le trafic réseau en tant qu'utilisateur.
 
 ---
-
 # **Étape 3 : Démarrer la capture du trafic SMB avec Wireshark**
+---
 
 1. **Ouvrir Wireshark** sur Kali Linux :
    - Tapez `wireshark` dans le terminal de Kali pour lancer l'interface graphique de Wireshark.
@@ -53,11 +54,10 @@ Wireshark est généralement préinstallé sur Kali Linux. Si ce n'est pas le ca
    - Dans Wireshark, sélectionnez l'interface réseau que vous utilisez pour la connexion au réseau (souvent `eth0` pour Ethernet ou `wlan0` pour Wi-Fi).
    - Cliquez sur le bouton vert **"Start capturing packets"** pour commencer à capturer les paquets sur l'interface sélectionnée.
 
-   ![Start Capturing in Wireshark](https://www.wireshark.org/docs/wsug_html_chunked/wsug_graphics/ws-start-capturing.png)
 
 ---
-
 # **Étape 4 : Effectuer un transfert de fichier avec SMB 1.0**
+---
 
 1. **Depuis votre machine Windows 10 (client)** :
    - Ouvrez l'**Explorateur de fichiers**.
@@ -72,8 +72,8 @@ Wireshark est généralement préinstallé sur Kali Linux. Si ce n'est pas le ca
 4. **Attendez que le fichier soit copié** sur le serveur.
 
 ---
-
 # **Étape 5 : Analyser le trafic SMB capturé dans Wireshark**
+---
 
 1. **Revenir à Wireshark** :
    - Pendant que vous copiez le fichier depuis Windows 10 vers le serveur, Wireshark devrait capturer une grande quantité de paquets réseau.
@@ -81,7 +81,7 @@ Wireshark est généralement préinstallé sur Kali Linux. Si ce n'est pas le ca
 2. **Filtrer le trafic SMB uniquement** :
    - Dans la barre de filtre de Wireshark en haut de la fenêtre, tapez **`smb`** puis appuyez sur **Entrée**. Cela va filtrer tous les paquets capturés et n'afficher que ceux relatifs au protocole SMB.
    
-   ![Filter SMB packets in Wireshark](https://www.wireshark.org/docs/wsug_html_chunked/wsug_graphics/ws-filter-smb.png)
+   
 
 3. **Identifier les paquets liés au transfert de fichier** :
    - Cherchez des paquets **SMB Write AndX Request/Response**. Ces paquets contiennent les données du fichier que vous venez de transférer.
@@ -90,14 +90,14 @@ Wireshark est généralement préinstallé sur Kali Linux. Si ce n'est pas le ca
    - Sélectionnez un paquet **SMB Write AndX Request**. Dans le panneau de détail des paquets, vous verrez une section **"Data"** ou **"Payload"** qui contient les données transférées.
    - Si vous avez utilisé un fichier texte comme `test_smb.txt`, vous verrez le contenu du fichier (par exemple, `Ceci est un test pour SMB 1.0`) en clair dans cette section.
 
-   ![View data in Wireshark](https://osqa-ask.wireshark.org/upfiles/file%20data%20hex%20view.png)
+  
 
 5. **Expliquer aux étudiants** :
    - Montrez comment les données du fichier sont lisibles en clair. Expliquez que SMB 1.0 ne chiffre pas les données en transit, ce qui rend l'interception très facile pour un attaquant.
 
 ---
-
 # **Étape 6 : Sauvegarder la capture (facultatif)**
+---
 
 1. **Sauvegarder la capture** pour analyse ultérieure :
    - Cliquez sur **File > Save As** dans le menu de Wireshark.
