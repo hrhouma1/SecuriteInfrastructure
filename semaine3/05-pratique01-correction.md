@@ -193,3 +193,128 @@ En suivant ce tutoriel, vous avez :
 
 Vous pouvez ainsi garantir un environnement sécurisé avec un contrôle des accès via l'audit et la désactivation des versions obsolètes de SMB.
 
+# Annexe 01
+
+
+
+
+
+```powershell
+# Installation d'AD DS
+Install-WindowsFeature -Name AD-Domain-Services -IncludeManagementTools
+
+# Promotion du serveur en tant que contrôleur de domaine
+Install-ADDSForest -DomainName "cafe.local" -DomainNetBiosName "CAFE" -InstallDNS
+
+# Vérification du domaine et du DNS
+Get-ADDomain
+Get-DnsServerZone
+
+# Désactivation de SMB 1.0
+Set-SmbServerConfiguration –EnableSMB1Protocol $false
+Remove-WindowsFeature FS-SMB1
+
+# Activer l’audit SMB 1.0
+Set-SmbServerConfiguration –AuditSmb1Access $true
+Get-WinEvent -LogName Microsoft-Windows-SMBServer/Audit
+
+# Création du dossier partagé avec chiffrement SMB
+New-Item -ItemType Directory -Path "C:\SecureFolder"
+New-SmbShare -Name "SecureShare" -Path "C:\SecureFolder" -EncryptData $true
+Grant-SmbShareAccess -Name "SecureShare" -AccountName "Everyone" -AccessRight Full -Force
+$acl = Get-Acl "C:\SecureFolder"
+$permission = New-Object System.Security.AccessControl.FileSystemAccessRule("Everyone", "FullControl", "ContainerInherit,ObjectInherit", "None", "Allow")
+$acl.SetAccessRule($permission)
+Set-Acl -Path "C:\SecureFolder" -AclObject $acl
+
+# Activer le chiffrement SMB sur tous les partages
+Set-SmbServerConfiguration –EncryptData $true
+
+# Activer l'audit des accès aux objets
+auditpol /set /category:"Object Access" /success:enable /failure:enable
+$AuditRule = New-Object System.Security.AccessControl.FileSystemAuditRule("Everyone", "Read, Write", "ContainerInherit,ObjectInherit", "None", "Success, Failure")
+$acl = Get-Acl "C:\SecureFolder"
+$acl.AddAuditRule($AuditRule)
+Set-Acl -Path "C:\SecureFolder" -AclObject $acl
+
+# Récupérer les événements d’audit et exporter vers un fichier CSV
+$events = Get-WinEvent -LogName Security | Where-Object { $_.Id -eq 4663 -and $_.Properties[5].Value -like "*C:\SecureFolder*" }
+$events | Select-Object TimeCreated, @{Name="User"; Expression={$_.Properties[1].Value}}, @{Name="File Accessed"; Expression={$_.Properties[5].Value}}, @{Name="Access Mask"; Expression={$_.Properties[8].Value}} | Export-Csv -Path "C:\SecureFolderAudit.csv" -NoTypeInformation
+
+# Configuration du client pour rejoindre le domaine
+Set-DnsClientServerAddress -InterfaceAlias "Ethernet" -ServerAddresses "192.168.1.10"
+Add-Computer -DomainName "cafe.local" -Credential cafe\Administrator -Restart
+
+# Vérification de la connexion du client au domaine
+(Get-WmiObject Win32_ComputerSystem).Domain
+
+# Vérification de la version SMB sur le serveur
+Get-SmbServerConfiguration | Select-Object EnableSMB1Protocol, EnableSMB2Protocol
+
+# Vérification de la version SMB utilisée par une connexion
+Get-SmbConnection
+
+# Vérification supplémentaire si nécessaire pour les paramètres SMB globaux
+Get-SmbServerConfiguration
+
+# Désactiver SMB 2.0 (si requis pour une compatibilité stricte SMB 3.x uniquement)
+Set-SmbServerConfiguration –EnableSMB2Protocol $false
+
+# Activer uniquement les connexions chiffrées pour SMB
+Set-SmbServerConfiguration -RejectUnencryptedAccess $true
+
+# Liste des partages SMB actifs avec leur état de chiffrement
+Get-SmbShare | Select-Object Name, Path, EncryptData
+
+# Visualiser l'état des règles d'audit du partage SMB
+Get-Acl -Path "C:\SecureFolder" | Format-List
+
+# Activer le journal d’audit avancé pour les connexions SMB
+auditpol /set /subcategory:"Logon" /success:enable /failure:enable
+
+# Filtrer les événements d'audit relatifs aux connexions SMB sur le serveur
+$logEvents = Get-WinEvent -LogName "Security" | Where-Object { $_.Id -eq 5140 }
+$logEvents | Export-Csv -Path "C:\SMBConnectionAudit.csv" -NoTypeInformation
+```
+
+
+# Annexe 2
+
+```powershell
+Install-WindowsFeature -Name AD-Domain-Services -IncludeManagementTools
+Install-ADDSForest -DomainName "cafe.local" -DomainNetBiosName "CAFE" -InstallDNS
+Get-ADDomain
+Get-DnsServerZone
+Set-SmbServerConfiguration –EnableSMB1Protocol $false
+Remove-WindowsFeature FS-SMB1
+Set-SmbServerConfiguration –AuditSmb1Access $true
+Get-WinEvent -LogName Microsoft-Windows-SMBServer/Audit
+New-Item -ItemType Directory -Path "C:\SecureFolder"
+New-SmbShare -Name "SecureShare" -Path "C:\SecureFolder" -EncryptData $true
+Grant-SmbShareAccess -Name "SecureShare" -AccountName "Everyone" -AccessRight Full -Force
+$acl = Get-Acl "C:\SecureFolder"
+$permission = New-Object System.Security.AccessControl.FileSystemAccessRule("Everyone", "FullControl", "ContainerInherit,ObjectInherit", "None", "Allow")
+$acl.SetAccessRule($permission)
+Set-Acl -Path "C:\SecureFolder" -AclObject $acl
+Set-SmbServerConfiguration –EncryptData $true
+auditpol /set /category:"Object Access" /success:enable /failure:enable
+$AuditRule = New-Object System.Security.AccessControl.FileSystemAuditRule("Everyone", "Read, Write", "ContainerInherit,ObjectInherit", "None", "Success, Failure")
+$acl = Get-Acl "C:\SecureFolder"
+$acl.AddAuditRule($AuditRule)
+Set-Acl -Path "C:\SecureFolder" -AclObject $acl
+$events = Get-WinEvent -LogName Security | Where-Object { $_.Id -eq 4663 -and $_.Properties[5].Value -like "*C:\SecureFolder*" }
+$events | Select-Object TimeCreated, @{Name="User"; Expression={$_.Properties[1].Value}}, @{Name="File Accessed"; Expression={$_.Properties[5].Value}}, @{Name="Access Mask"; Expression={$_.Properties[8].Value}} | Export-Csv -Path "C:\SecureFolderAudit.csv" -NoTypeInformation
+Set-DnsClientServerAddress -InterfaceAlias "Ethernet" -ServerAddresses "192.168.1.10"
+Add-Computer -DomainName "cafe.local" -Credential cafe\Administrator -Restart
+(Get-WmiObject Win32_ComputerSystem).Domain
+Get-SmbServerConfiguration | Select-Object EnableSMB1Protocol, EnableSMB2Protocol
+Get-SmbConnection
+Get-SmbServerConfiguration
+Set-SmbServerConfiguration –EnableSMB2Protocol $false
+Set-SmbServerConfiguration -RejectUnencryptedAccess $true
+Get-SmbShare | Select-Object Name, Path, EncryptData
+Get-Acl -Path "C:\SecureFolder" | Format-List
+auditpol /set /subcategory:"Logon" /success:enable /failure:enable
+$logEvents = Get-WinEvent -LogName "Security" | Where-Object { $_.Id -eq 5140 }
+$logEvents | Export-Csv -Path "C:\SMBConnectionAudit.csv" -NoTypeInformation
+```
