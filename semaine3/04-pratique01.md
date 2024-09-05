@@ -290,4 +290,4 @@ Pour créer le partage réseau `\\SVR1\Chapitre2`, vous pouvez suivre les étape
 
 En suivant ces étapes, vous aurez créé un partage réseau sécurisé `\\SVR1\Chapitre2` avec le chiffrement SMB activé. Utiliser PowerShell offre une méthode rapide et reproductible pour configurer des partages avec des paramètres spécifiques comme le chiffrement. Cependant, l'interface graphique peut être utilisée si vous préférez une approche visuelle. Assurez-vous toujours de définir les permissions appropriées pour protéger les données sensibles et limiter l'accès aux utilisateurs autorisés.
 
-N'hésitez pas à me contacter si vous avez besoin de plus d'assistance ou si vous rencontrez des problèmes lors de la création du partage.
+N'hésitez pas à me contacter si vous avez besoin de plus d'assistance ou si vous rencontrez des problèmes lors de la création du partage (rhoumahaythem@gmail.com).
