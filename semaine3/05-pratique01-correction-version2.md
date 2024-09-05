@@ -1,4 +1,4 @@
-# **README : Automatisation de la configuration d'Active Directory, du domaine et du chiffrement SMB**
+# ** MÉTHODE 2: Automatisation de la configuration d'Active Directory, du domaine et du chiffrement SMB**
 
 ## **Objectif du projet**
 Ce projet a pour but de configurer automatiquement un environnement de domaine Active Directory sur Windows Server, d'ajouter des partages sécurisés avec chiffrement SMB 3.1.1, et de permettre à des machines clientes Windows 10 de rejoindre le domaine. Le script PowerShell vous permet de déployer cette configuration de bout en bout sans intervention manuelle majeure.
