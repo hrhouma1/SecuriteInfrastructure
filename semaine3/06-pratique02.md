@@ -4,7 +4,7 @@
 
 # **1. Objectifs pédagogiques**
 
-Dans cette démonstration, vos étudiants vont :
+Dans cette démonstration, vous allez :
 
 - Comprendre les failles de sécurité associées à SMB 1.0.
 - Simuler une attaque en exploitant la vulnérabilité EternalBlue (CVE-2017-0144) avec Metasploit.
