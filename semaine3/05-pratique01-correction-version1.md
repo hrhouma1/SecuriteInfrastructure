@@ -1,10 +1,10 @@
 # **1. Configuration d'Active Directory et Création du Domaine "cafe.local"**
 
-## **Étape 0 : Configuration Réseau et Attribution d'Adresses IP**
+# **Étape 0 : Configuration Réseau et Attribution d'Adresses IP**
 
 Avant de procéder à l'installation d'Active Directory, il est essentiel de configurer correctement le réseau et de s'assurer que le serveur dispose d'une adresse IP statique et d'un DNS fonctionnel.
 
-### **Étape 0.1 : Attribution d'une IP Statique au Serveur**
+# **Étape 0.1 : Attribution d'une IP Statique au Serveur**
 
 1. **Attribuer une adresse IP statique :**
 
@@ -27,7 +27,7 @@ Avant de procéder à l'installation d'Active Directory, il est essentiel de con
    Get-DnsClientServerAddress -InterfaceAlias "Ethernet"
    ```
 
-### **Étape 0.2 : Vérification de la Connectivité Réseau**
+# **Étape 0.2 : Vérification de la Connectivité Réseau**
 
 1. **Tester la connectivité réseau avec d'autres machines :**
 
@@ -39,7 +39,7 @@ Avant de procéder à l'installation d'Active Directory, il est essentiel de con
 
 ---
 
-## **Étape 1 : Installation du rôle Active Directory Domain Services (AD DS)**
+# **Étape 1 : Installation du rôle Active Directory Domain Services (AD DS)**
 
 Commencez par installer le rôle AD DS sur votre serveur Windows Server 2016 ou ultérieur.
 
@@ -50,7 +50,7 @@ Install-WindowsFeature -Name AD-Domain-Services -IncludeManagementTools
 
 ---
 
-## **Étape 2 : Promotion du Serveur en tant que Contrôleur de Domaine pour "cafe.local"**
+# **Étape 2 : Promotion du Serveur en tant que Contrôleur de Domaine pour "cafe.local"**
 
 Promouvez votre serveur en tant que contrôleur de domaine en créant une nouvelle forêt **cafe.local**.
 
@@ -63,7 +63,7 @@ Le serveur redémarrera automatiquement pour finaliser la promotion.
 
 ---
 
-## **Étape 3 : Vérification de l'Installation**
+# **Étape 3 : Vérification de l'Installation**
 
 Après le redémarrage du serveur, vérifiez que le domaine et le serveur DNS ont été correctement configurés.
 
@@ -79,7 +79,7 @@ Get-DnsServerZone
 
 ## **2. Désactivation de SMB 1.0 et Activation du Chiffrement SMB 3.1.1**
 
-### **Étape 4 : Désactivation de SMB 1.0**
+# **Étape 4 : Désactivation de SMB 1.0**
 
 Pour renforcer la sécurité de votre serveur, désactivez SMB 1.0, un protocole obsolète.
 
@@ -95,7 +95,7 @@ Si vous souhaitez désinstaller SMB 1.0 :
 Remove-WindowsFeature FS-SMB1
 ```
 
-### **Étape 5 : Activer l'Audit de SMB 1.0 (facultatif)**
+# **Étape 5 : Activer l'Audit de SMB 1.0 (facultatif)**
 
 Pour surveiller toute tentative d'utilisation de SMB 1.0, activez l'audit.
 
@@ -111,7 +111,7 @@ Get-WinEvent -LogName Microsoft-Windows-SMBServer/Audit
 
 ## **3. Création et Chiffrement d'un Dossier Partagé avec SMB 3.1.1**
 
-### **Étape 6 : Création d'un Dossier Partagé avec Chiffrement SMB**
+# **Étape 6 : Création d'un Dossier Partagé avec Chiffrement SMB**
 
 Créez un dossier sur votre serveur et configurez un partage avec chiffrement activé.
 
@@ -132,7 +132,7 @@ $acl.SetAccessRule($permission)
 Set-Acl -Path "C:\SecureFolder" -AclObject $acl
 ```
 
-### **Étape 7 : Configurer le Chiffrement SMB sur Tous les Partages**
+# **Étape 7 : Configurer le Chiffrement SMB sur Tous les Partages**
 
 Si vous avez d'autres partages sur le serveur, vous pouvez activer le chiffrement SMB globalement.
 
@@ -145,7 +145,7 @@ Set-SmbServerConfiguration –EncryptData $true
 
 ## **4. Configuration de l'Audit des Accès sur le Partage SMB**
 
-### **Étape 8 : Activer l'Audit des Accès sur le Dossier Partagé**
+# **Étape 8 : Activer l'Audit des Accès sur le Dossier Partagé**
 
 Configurez l'audit des accès pour surveiller les activités sur le partage.
 
@@ -160,7 +160,7 @@ $acl.AddAuditRule($AuditRule)
 Set-Acl -Path "C:\SecureFolder" -AclObject $acl
 ```
 
-### **Étape 9 : Récupérer les Événements d'Audit et les Exporter en CSV**
+# **Étape 9 : Récupérer les Événements d'Audit et les Exporter en CSV**
 
 Collectez et exportez les événements d'audit pour analyse.
 
@@ -176,7 +176,7 @@ $events | Select-Object TimeCreated, @{Name="User"; Expression={$_.Properties[1]
 
 ## **5. Connexion d'un Autre Ordinateur au Domaine "cafe.local"**
 
-### **Étape 10 : Configurer le Client pour Rejoindre le Domaine**
+# **Étape 10 : Configurer le Client pour Rejoindre le Domaine**
 
 Sur l'ordinateur client (Windows 10), configurez le DNS pour pointer vers le serveur Active Directory.
 
@@ -185,7 +185,7 @@ Sur l'ordinateur client (Windows 10), configurez le DNS pour pointer vers le ser
 Set-DnsClientServerAddress -InterfaceAlias "Ethernet" -ServerAddresses "192.168.1.10"
 ```
 
-### **Étape 11 : Joindre l'Ordinateur Client au Domaine**
+# **Étape 11 : Joindre l'Ordinateur Client au Domaine**
 
 Ajoutez le client au domaine **cafe.local**.
 
@@ -194,7 +194,7 @@ Ajoutez le client au domaine **cafe.local**.
 Add-Computer -DomainName "cafe.local" -Credential cafe\Administrator -Restart
 ```
 
-### **Étape 12 : Vérifier la Connexion au Domaine**
+# **Étape 12 : Vérifier la Connexion au Domaine**
 
 Après le redémarrage, vérifiez que l'ordinateur a rejoint le domaine.
 
@@ -207,7 +207,7 @@ Après le redémarrage, vérifiez que l'ordinateur a rejoint le domaine.
 
 ## **6. Vérification de la Version de SMB Utilisée**
 
-### **Étape 13 : Vérification de la Version SMB sur le Serveur**
+# **Étape 13 : Vérification de la Version SMB sur le Serveur**
 
 Vérifiez les versions SMB activées sur le serveur.
 
@@ -215,7 +215,7 @@ Vérifiez les versions SMB activées sur le serveur.
 Get-SmbServerConfiguration | Select-Object EnableSMB1Protocol, EnableSMB2Protocol
 ```
 
-### **Étape 14 : Vérification de la Version SMB Utilisée par une Connexion**
+# **Étape 14 : Vérification de la Version SMB Utilisée par une Connexion**
 
 Vérifiez la version de SMB utilisée par une connexion active.
 
