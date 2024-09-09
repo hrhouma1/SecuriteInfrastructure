@@ -1,4 +1,4 @@
-# Scanning a Local Vulnerable Website with Nmap
+# Scanner un site web local avec nmap
 
 #### Étape 1 : Scanner la Cible
 Commencez par exécuter un scan de base pour identifier les ports ouverts sur votre site web vulnérable.
