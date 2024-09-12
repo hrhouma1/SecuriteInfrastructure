@@ -102,6 +102,47 @@ netsh ipsec static show filteraction all
 
 ```
 
+
+
+# Annuler 
+- Pour annuler ou supprimer les configurations IPsec que vous avez ajoutées avec `netsh`, vous pouvez utiliser les commandes suivantes pour supprimer les éléments un par un.
+
+```powershell
+netsh ipsec static delete filteraction name="Chiffrer_et_Authentifier"
+netsh ipsec static delete policy name="Trafic_Web_Sécurisé"
+netsh ipsec static delete filterlist name="Trafic_HTTP"
+netsh ipsec static delete rule name="Sécuriser_HTTP" policy="Trafic_Web_Sécurisé"
+netsh ipsec static show policy all
+netsh ipsec static show filteraction all
+```
+
+### 1. Supprimer les **Filteractions** (actions de filtrage) :
+```bash
+netsh ipsec static delete filteraction name="Chiffrer_et_Authentifier"
+```
+
+### 2. Supprimer les **Policies** (politiques) :
+```bash
+netsh ipsec static delete policy name="Trafic_Web_Sécurisé"
+```
+
+### 3. Supprimer les **Filterlists** (listes de filtres) :
+```bash
+netsh ipsec static delete filterlist name="Trafic_HTTP"
+```
+
+### 4. Supprimer les **Rules** (règles) :
+```bash
+netsh ipsec static delete rule name="Sécuriser_HTTP" policy="Trafic_Web_Sécurisé"
+```
+
+Ces commandes vont permettre de nettoyer la configuration que vous avez créée. Une fois ces éléments supprimés, vous pouvez vérifier l'état avec :
+```bash
+netsh ipsec static show policy all
+netsh ipsec static show filteraction all
+```
+
+
 # Annexe 2 - illustration ce que chaque commande fait dans le processus de configuration IPSec avec `netsh` :
 
 ```
