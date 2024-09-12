@@ -234,3 +234,71 @@ netsh ipsec static show filteraction all
 - **Filtre** : Définit quel type de trafic est concerné (ici, le trafic HTTP sur le port 80).
 
 Chaque étape construit progressivement une configuration IPSec pour sécuriser le trafic HTTP en appliquant une politique spécifique.
+
+
+# Annexe 3 - **"negotiate"** et **"action de filtre"** ? 
+
+### 1. C'est quoi **"negotiate"** ?
+
+Dans le contexte d'IPSec, **"negotiate"** signifie que les deux appareils qui communiquent vont **négocier** une connexion sécurisée. Ils vont essayer de s'entendre sur comment sécuriser les données qu'ils vont échanger. Cette négociation inclut :
+- **Le chiffrement** (comment protéger les données en les rendant illisibles aux autres).
+- **L'authentification** (comment s'assurer que les appareils sont bien ceux qu'ils prétendent être).
+
+Quand on configure IPSec avec l'action "negotiate", on dit au système de **négocier la sécurité** avec l'autre appareil avant d'accepter de transmettre des données. Cela garantit que les deux côtés acceptent les mêmes méthodes de sécurité.
+
+### 2. C'est quoi une **action de filtre** ?
+
+Une **action de filtre** dans IPSec est une règle qui définit **ce que le système doit faire** avec les paquets de données qui passent par le réseau.
+
+Les actions possibles peuvent être :
+- **Autoriser** : Permettre aux données de passer sans les modifier (non sécurisé).
+- **Bloquer** : Empêcher les données de passer (protéger en bloquant).
+- **Négocier (negotiate)** : Exiger que les données soient sécurisées (via chiffrement et authentification).
+
+### 3. Exemple simple
+
+Imagine que tu envoies un message à un ami, mais avant de l'envoyer, tu veux t'assurer que **le message est sécurisé** et **qu'il est bien envoyé à la bonne personne**. 
+
+- **"Negotiate"** = Tu décides de discuter avec ton ami pour convenir d'une manière de chiffrer le message pour que personne d'autre ne puisse le lire. Vous vous mettez d'accord sur un **code secret**.
+  
+- **Action de filtre** = C'est la règle que tu donnes à ton système : "Ne laisse passer ce message **qu'une fois que la sécurité est négociée** avec l'ami". Si ton ami n'accepte pas d'utiliser le code secret, le message ne sera pas envoyé.
+
+### Résumé simplifié
+
+- **"Negotiate"** : Exige que la sécurité (chiffrement et authentification) soit négociée avant de transmettre les données.
+- **Action de filtre** : La règle qui dit comment gérer les paquets réseau (autoriser, bloquer ou sécuriser via négociation).
+
+
+
+# Annexe 4 - Explication de la commande :
+
+```
+netsh ipsec static add filteraction name="Chiffrer_et_Authentifier" action=requireinrequireout qmsecmethods=esp:3des-sha1
+```
+
+- **filteraction** : C'est l'**action de filtre** que tu crées. Dans ce cas, tu lui donnes le nom **"Chiffrer_et_Authentifier"**, ce qui indique qu'il va chiffrer et authentifier les données.
+  
+- **action=requireinrequireout** : Cela signifie que tu exiges la **négociation de la sécurité** à la fois pour **les données entrantes (in)** et **les données sortantes (out)**. Autrement dit, **tout le trafic** (entrées et sorties) doit être sécurisé.
+
+- **qmsecmethods=esp:3des-sha1** : 
+  - **ESP** (Encapsulating Security Payload) est un protocole d'IPSec qui assure la **confidentialité, l'intégrité, et l'authenticité** des paquets IP.
+  - **3DES** est l'algorithme de chiffrement utilisé ici. C'est une méthode de chiffrement pour rendre les données illisibles aux tiers.
+  - **SHA1** est l'algorithme d'authentification utilisé pour vérifier l'intégrité des données, c'est-à-dire s'assurer qu'elles n'ont pas été modifiées en cours de route.
+
+### Ce que tu es en train de dire :
+
+Tu dis au système que **tout le trafic (entrées et sorties)** doit être **chiffré et authentifié** en utilisant le protocole ESP avec :
+- Le chiffrement **3DES** pour protéger les données.
+- L'authentification **SHA1** pour vérifier l'intégrité des données.
+
+### Différence entre `action=negotiate` et `requireinrequireout`
+
+- **action=negotiate** : Cela signifie que tu veux négocier la sécurité, mais cela peut être uniquement pour l'entrée ou la sortie, pas forcément pour les deux.
+  
+- **action=requireinrequireout** : Cela signifie que **tu exiges** la négociation de la sécurité **à la fois pour le trafic entrant et sortant**. Les deux côtés doivent être sécurisés.
+
+### Résumé :
+
+- **action=requireinrequireout** assure que tout le trafic, que ce soit en entrée ou en sortie, sera chiffré et authentifié.
+- Tu spécifies que tu veux utiliser **ESP**, avec **3DES** pour chiffrer et **SHA1** pour authentifier.
+
