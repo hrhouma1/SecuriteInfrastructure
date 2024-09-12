@@ -91,12 +91,13 @@ Grâce à cet exercice, vous avez appris à créer une politique IPSec qui sécu
 ```powershell
 netsh ipsec static show policy all
 netsh ipsec static show filteraction all
-netsh ipsec static add filteraction name="requireinrequireout" action=negotiate
-netsh ipsec static add rule name="Regle_HTTP" policy="Politique_IPSec_Basique" filterlist="Tout_HTTP" filteraction="negotiate"
-netsh ipsec static add rule name="Regle_HTTP" policy="Politique_IPSec_Basique" filterlist="Tout_HTTP" filteraction="requireinrequireout"
+netsh ipsec static add filteraction name="Chiffrer_et_Authentifier" action=negotiate
+netsh ipsec static add policy name="Trafic_Web_Sécurisé"
+netsh ipsec static add filterlist name="Trafic_HTTP"
+netsh ipsec static add filter filterlist="Trafic_HTTP" srcaddr=any dstaddr=any protocol=TCP dstport=80
+netsh ipsec static add rule name="Sécuriser_HTTP" policy="Trafic_Web_Sécurisé" filterlist="Trafic_HTTP" filteraction="Chiffrer_et_Authentifier"
+netsh ipsec static set policy name="Trafic_Web_Sécurisé" assign=y
 netsh ipsec static show policy all
 netsh ipsec static show filteraction all
-netsh ipsec static add rule name="Regle_HTTP" policy="Politique_IPSec_Basique" filterlist="Tout_HTTP" filteraction="requireinrequireout"
-netsh ipsec static add rule name="Regle_HTTP" policy="Politique_IPSec_Basique" filterlist="Tout_HTTP" filteraction="negotiate"
-netsh ipsec static show filteraction all
+
 ```
