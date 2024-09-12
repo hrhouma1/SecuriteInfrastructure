@@ -151,6 +151,7 @@ Configurez l'audit des accès pour surveiller les activités sur le partage.
 
 ```powershell
 # Activer l'audit des accès aux objets
+auditpol /list /category
 auditpol /set /category:"Object Access" /subcategory:"File System" /success:enable /failure:enable
 
 
