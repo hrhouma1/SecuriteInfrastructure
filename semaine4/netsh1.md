@@ -35,7 +35,7 @@ Nous allons créer une action de filtre nommée **Chiffrer_et_Authentifier**, qu
 
 ```bash
 # Créer une nouvelle action de filtre avec chiffrement 3DES et SHA1 pour l'authentification
-netsh ipsec static add filteraction name="Chiffrer_et_Authentifier" action=requireinrequireout qmsecmethods=esp:3des-sha1
+netsh ipsec static add filteraction name="Chiffrer_et_Authentifier" action=negotiate
 ```
 
 # 3. Créer une politique IPSec pour sécuriser le trafic HTTP
