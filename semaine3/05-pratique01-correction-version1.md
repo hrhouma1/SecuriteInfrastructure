@@ -228,11 +228,29 @@ Get-SmbConnection
 
 ---
 
-
 # Annexe :  les corrections et améliorations 
 
-### Problème avec la règle d'accès ACL
-Le problème  rencontrez est lié à l'utilisation de "Everyone" dans un système non anglophone. Il est recommandé d'utiliser soit :
+### Problème avec la règle d'accès ACL et l'utilisation de la commande suivante : 
+
+
+```powershell
+# Problème : utilisation de "Everyone" dans un système non anglophone
+New-SmbShare -Name "Chapitre2" -Path "C:\SRV" -FullAccess "Everyone"
+```
+
+- Cette commande posait problème car le groupe "Everyone" n'existe pas dans les systèmes où l'interface est localisée dans une autre langue, comme le français, où il faut utiliser "Tout le monde". 
+- La correction consistait à remplacer "Everyone" par une version localisée ou un groupe plus spécifique, comme :
+
+```powershell
+# Correction : utilisation de "Tout le monde" ou d'un groupe plus spécifique
+New-SmbShare -Name "Chapitre2" -Path "C:\SRV" -FullAccess "Tout le monde"
+```
+
+Ou bien utiliser des groupes spécifiques tels que `"NT AUTHORITY\Authenticated Users"` ou `"BUILTIN\Administrators"`.
+
+
+
+Pour résumer, le problème  rencontrez est lié à l'utilisation de "Everyone" dans un système non anglophone. Il est recommandé d'utiliser soit :
 - La version localisée comme `"Tout le monde"` pour un système français, ou
 - Des groupes plus spécifiques comme `"NT AUTHORITY\Authenticated Users"` ou `"BUILTIN\Administrators"`, qui fonctionnent dans la plupart des environnements.
 
@@ -291,9 +309,7 @@ Get-SmbShareAccess -Name "Chapitre2"
 ### Explications :
 
 1. **Identités universelles** : J'ai remplacé `"Everyone"` par `"NT AUTHORITY\Authenticated Users"` car cela fonctionne de manière plus universelle, quel que soit la langue du système d'exploitation.
-   
 2. **Suppression des accès de "Everyone"** : La commande `Revoke-SmbShareAccess` révoque les accès précédents pour "Everyone" (ou son équivalent local).
-
 3. **Création de règles ACL** : Nous utilisons une règle d'accès pour un groupe qui devrait être reconnu dans tous les environnements.
 
 ### Testez le script en exécutant ces commandes une par une pour vous assurer que tout fonctionne comme prévu. 
