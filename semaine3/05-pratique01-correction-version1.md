@@ -238,7 +238,7 @@ Le problème  rencontrez est lié à l'utilisation de "Everyone" dans un systèm
 
 ### Correction du Script Complet
 
-Voici le script complet corrigé :
+## script complet corrigé :
 
 ```powershell
 # Attente de 60 secondes
