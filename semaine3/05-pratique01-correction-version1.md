@@ -153,7 +153,8 @@ Configurez l'audit des accès pour surveiller les activités sur le partage.
 # Activer l'audit des accès aux objets
 auditpol /list /category
 auditpol /set /category:"Object Access" /subcategory:"File System" /success:enable /failure:enable
-auditpol /set /subcategory:"File System" /success:enable /failure:enable
+# Cette commande permet d'auditer les accès aux objets du système de fichiers avec un rapport sur les succès et les échecs. Vous pouvez la tester pour vous assurer que tout fonctionne correctement.
+
 
 # Activer l'audit sur le dossier partagé
 $AuditRule = New-Object System.Security.AccessControl.FileSystemAuditRule("Everyone", "Read, Write", "ContainerInherit,ObjectInherit", "None", "Success, Failure")
