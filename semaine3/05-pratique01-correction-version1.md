@@ -313,3 +313,65 @@ Get-SmbShareAccess -Name "Chapitre2"
 3. **Création de règles ACL** : Nous utilisons une règle d'accès pour un groupe qui devrait être reconnu dans tous les environnements.
 
 ### Testez le script en exécutant ces commandes une par une pour vous assurer que tout fonctionne comme prévu. 
+
+
+
+
+# Annexe  2
+
+
+
+Il est essentiel de vérifier les catégories d'audit disponibles sur votre système avant de configurer l'audit, car les noms peuvent varier selon la langue du système d'exploitation (anglais vs. français).
+
+1. **Vérification des catégories d'audit disponibles** :
+   Utilisez la commande suivante pour lister toutes les catégories d'audit disponibles sur le système. Cela permet de vérifier si les noms de catégories et sous-catégories comme "Object Access" ou "File System" sont traduits dans votre langue.
+
+   ```powershell
+   auditpol /list /category
+   ```
+
+2. **Vérification du groupe "Everyone"** :
+   Dans certains systèmes non anglophones, le groupe `"Everyone"` peut être localisé sous le nom `"Tout le monde"`. Pour éviter les erreurs lors de l'application des permissions, il est recommandé de vérifier si `"Everyone"` est traduit sur votre système avec la commande suivante :
+
+   ```powershell
+   Get-LocalGroup
+   ```
+
+   Cette commande listera tous les groupes locaux présents sur le système, y compris leur nom exact dans la langue du système d'exploitation.
+
+En effectuant ces vérifications, vous éviterez des erreurs liées à la localisation et vous assurerez que les bonnes catégories d'audit et groupes sont utilisés dans les configurations.
+
+
+----
+# Annexe 3 : 
+----
+
+### Il faut faire attention aux commandes PowerShell où des conflits potentiels peuvent survenir en raison des différences linguistiques entre les systèmes en anglais et en français :
+
+1. **Nom du groupe "Everyone"**
+   - Dans un environnement en anglais, "Everyone" est utilisé pour accorder l'accès à tous les utilisateurs. Cependant, dans un système en français, ce groupe est souvent traduit par "Tout le monde". Il est donc préférable d'utiliser des identités universelles comme `"NT AUTHORITY\Authenticated Users"`.
+
+   Commandes affectées :
+   ```powershell
+   Grant-SmbShareAccess -Name "SecureShare" -AccountName "Everyone" -AccessRight Full -Force
+   $permission = New-Object System.Security.AccessControl.FileSystemAccessRule("Everyone", "FullControl", "ContainerInherit,ObjectInherit", "None", "Allow")
+   $AuditRule = New-Object System.Security.AccessControl.FileSystemAuditRule("Everyone", "Read, Write", "ContainerInherit,ObjectInherit", "None", "Success, Failure")
+   Revoke-SmbShareAccess -Name "Chapitre2" -AccountName "Everyone" -Force
+   ```
+
+2. **Commandes de configuration du partage SMB**
+   - Utilisation de noms de groupes dans les commandes `Grant-SmbShareAccess` et `Revoke-SmbShareAccess`, qui peuvent causer des problèmes dans un système en français si les noms de groupes ne sont pas adaptés (e.g., "Everyone" vs "Tout le monde").
+
+3. **Audit d'accès aux objets**
+   - La commande `auditpol` pour activer l'audit des accès aux objets utilise des noms de catégories et sous-catégories qui doivent correspondre à la langue du système d'exploitation. Par exemple, "Object Access" pourrait être traduit en "Accès aux objets" dans un système en français.
+
+   Commande affectée :
+   ```powershell
+   auditpol /set /category:"Object Access" /subcategory:"File System" /success:enable /failure:enable
+   ```
+
+### Recommandations :
+- **Utiliser des identités universelles** : Dans les commandes qui utilisent "Everyone", il est préférable de remplacer ce groupe par `"NT AUTHORITY\Authenticated Users"` ou `"BUILTIN\Administrators"`, qui sont reconnus indépendamment de la langue du système.
+- **Vérifier les noms de catégories et sous-catégories dans `auditpol`** : Pour un système en français, il est conseillé de vérifier les traductions des catégories et sous-catégories utilisées pour l'audit.
+
+Cela devrait prévenir les conflits liés à la localisation du système d'exploitation.
