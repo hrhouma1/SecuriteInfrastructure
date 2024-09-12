@@ -225,3 +225,72 @@ Get-SmbConnection
 
 ---
 
+
+# Annexe :  les corrections et améliorations 
+
+### Problème avec la règle d'accès ACL
+Le problème  rencontrez est lié à l'utilisation de "Everyone" dans un système non anglophone. Il est recommandé d'utiliser soit :
+- La version localisée comme `"Tout le monde"` pour un système français, ou
+- Des groupes plus spécifiques comme `"NT AUTHORITY\Authenticated Users"` ou `"BUILTIN\Administrators"`, qui fonctionnent dans la plupart des environnements.
+
+### Correction du Script Complet
+
+Voici le script complet corrigé :
+
+```powershell
+# Attente de 60 secondes
+Start-Sleep -Seconds 60
+
+# Obtenir des informations sur le domaine
+Get-ADDomain
+
+# Obtenir la zone DNS
+Get-DnsServerZone
+
+# Désactiver le protocole SMB 1.0
+Set-SmbServerConfiguration –EnableSMB1Protocol $false
+
+# Supprimer la fonctionnalité SMB 1.0 si installée
+Remove-WindowsFeature FS-SMB1
+
+# Activer l'audit de l'accès à SMB 1.0
+Set-SmbServerConfiguration –AuditSmb1Access $true
+
+# Visualiser les événements d'audit SMB
+Get-WinEvent -LogName Microsoft-Windows-SMBServer/Audit
+
+# Créer un nouveau dossier dans C:\SRV
+New-Item -ItemType Directory -Path "C:\SRV"
+
+# Créer un partage SMB avec chiffrement activé
+New-SmbShare -Name "Chapitre2" -Path "C:\SRV" -EncryptData $true
+
+# Révoquer les accès pour "Everyone" (ou "Tout le monde")
+Revoke-SmbShareAccess -Name "Chapitre2" -AccountName "Everyone" -Force
+
+# Récupérer les ACL du dossier
+$acl = Get-Acl "C:\SRV"
+
+# Créer une règle d'accès avec un compte universel comme "NT AUTHORITY\Authenticated Users"
+$permission = New-Object System.Security.AccessControl.FileSystemAccessRule("NT AUTHORITY\Authenticated Users", "FullControl", "ContainerInherit,ObjectInherit", "None", "Allow")
+
+# Appliquer la règle d'accès au dossier
+$acl.SetAccessRule($permission)
+Set-Acl -Path "C:\SRV" -AclObject $acl
+
+# Vérifier les partages SMB
+Get-SmbShare
+
+# Vérifier les accès au partage
+Get-SmbShareAccess -Name "Chapitre2"
+```
+
+### Explications :
+
+1. **Identités universelles** : J'ai remplacé `"Everyone"` par `"NT AUTHORITY\Authenticated Users"` car cela fonctionne de manière plus universelle, quel que soit la langue du système d'exploitation.
+   
+2. **Suppression des accès de "Everyone"** : La commande `Revoke-SmbShareAccess` révoque les accès précédents pour "Everyone" (ou son équivalent local).
+
+3. **Création de règles ACL** : Nous utilisons une règle d'accès pour un groupe qui devrait être reconnu dans tous les environnements.
+
+### Testez le script en exécutant ces commandes une par une pour vous assurer que tout fonctionne comme prévu. 
