@@ -1,6 +1,8 @@
 # Configuration et Suppression de Politiques IPsec
 
+---
 ## Exercice 1 : Sécurisation du Trafic Web
+---
 
 ### Objectif
 Configurer une politique IPsec pour sécuriser le trafic web en chiffrant et authentifiant le trafic HTTPS.
@@ -35,8 +37,8 @@ Configurer une politique IPsec pour sécuriser le trafic web en chiffrant et aut
    - Balises : `Verify_Security_Policies` et `Verify_Filter_Actions`
 
 ---
-
 ## Exercice 2 : Sécurisation du Trafic Interne
+---
 
 ### Objectif
 Configurer une politique IPsec pour sécuriser le trafic interne en utilisant uniquement l'authentification.
@@ -65,8 +67,9 @@ Configurer une politique IPsec pour sécuriser le trafic interne en utilisant un
    - Balises : `Verify_Security_Policies` et `Verify_Filter_Actions`
 
 ---
+## Exercice 3 : Suppression des Politiques et Actions IPsec
+---
 
-## Pratique : Suppression des Politiques et Actions IPsec
 
 Une fois les politiques créées et testées, pratiquez en supprimant chaque élément un par un dans l'ordre inverse de la création.
 
