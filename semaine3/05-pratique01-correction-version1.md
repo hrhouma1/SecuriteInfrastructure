@@ -151,7 +151,8 @@ Configurez l'audit des accès pour surveiller les activités sur le partage.
 
 ```powershell
 # Activer l'audit des accès aux objets
-auditpol /set /category:"Object Access" /success:enable /failure:enable
+auditpol /set /category:"Object Access" /subcategory:"File System" /success:enable /failure:enable
+
 
 # Activer l'audit sur le dossier partagé
 $AuditRule = New-Object System.Security.AccessControl.FileSystemAuditRule("Everyone", "Read, Write", "ContainerInherit,ObjectInherit", "None", "Success, Failure")
