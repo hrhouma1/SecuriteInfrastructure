@@ -107,7 +107,7 @@
 
 
 
-Voici une partie théorique exhaustive pour expliquer à vos étudiants ce qu’ils sont en train de faire dans la troisième partie du laboratoire, en couvrant les concepts clés associés au **transfert des journaux d’événements**, à **WinRM**, et à la **gestion des journaux dans Windows Server**.
+- Explications reliées à la troisième partie du laboratoire, en couvrant les concepts clés associés au **transfert des journaux d’événements**, à **WinRM**, et à la **gestion des journaux dans Windows Server**.
 
 ### Contexte théorique : Transfert des journaux d’événements
 
