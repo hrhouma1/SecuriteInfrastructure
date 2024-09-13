@@ -104,7 +104,7 @@ netsh ipsec static show filteraction all
 
 
 
-# Annuler 
+# Pour annuler ou supprimer ! 
 - Pour annuler ou supprimer les configurations IPsec que vous avez ajoutées avec `netsh`, vous pouvez utiliser les commandes suivantes pour supprimer les éléments un par un.
 
 ```powershell
