@@ -547,3 +547,57 @@ Cette section fournit les étapes détaillées pour la configuration des sources
 Ces étapes permettent d'établir une base solide pour la gestion des journaux d'événements dans un environnement contrôlé, offrant des insights précieux sur les activités système pour la sécurité et le dépannage.
 
 
+
+# Annexe : 
+
+
+```
+    Internet
+       |
+       |
+    [Router] ----------- 10.11.12.17
+    /       \
+   /         \
+10.11.12.18   10.11.12.1
+ /             \
+/               \
+[SRV]          [DC] ----------- 10.11.12.2
+10.11.12.18             \
+                          \
+                           [CLI] ----- 10.11.12.3
+```
+
+### Explication du Schéma
+
+- **Router**:
+  - Connecté à l'Internet (adresse non spécifiée, représentée par la connexion vers le haut).
+  - Connecté au DC et au SRV sur deux interfaces distinctes dans les réseaux A et B respectivement.
+  
+- **DC (Domain Controller)**:
+  - Connecté au Router via le réseau A.
+  - Sert aussi de point de liaison pour le CLI.
+  
+- **SRV (Serveur)**:
+  - Connecté directement au Router via le réseau B.
+  
+- **CLI (Client)**:
+  - Connecté directement au DC, utilisant le même sous-réseau A.
+
+### Détails des Sous-réseaux
+
+- **Réseau A** (entre Router, DC et CLI):
+  - **NetID**: `10.11.12.0`
+  - **Masque de sous-réseau**: `/28` ou `255.255.255.240`
+  - **Plage d'adresses utilisables**: `10.11.12.1` à `10.11.12.14`
+  
+- **Réseau B** (entre Router et SRV):
+  - **NetID**: `10.11.12.16`
+  - **Masque de sous-réseau**: `/28` ou `255.255.255.240`
+  - **Plage d'adresses utilisables**: `10.11.12.17` à `10.11.12.30`
+
+### Conseils d'Utilisation et Bonnes Pratiques
+
+- **Clarté**: Maintenez la clarté dans votre documentation et vos schémas pour faciliter la compréhension et le dépannage.
+- **Sécurité**: Appliquez des pratiques de sécurité rigoureuses pour isoler les trafics critiques et sensibles, en utilisant des VLANs ou des sous-réseaux distincts.
+- **Révision régulière**: Revisitez et testez régulièrement la configuration du réseau pour vous assurer que tout fonctionne comme prévu et qu'il n'y a pas de failles de sécurité ou de performances.
+
