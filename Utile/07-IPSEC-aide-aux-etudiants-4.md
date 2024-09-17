@@ -57,3 +57,49 @@ ou des outils de configuration réseau traditionnels tels que `netsh`.
    - Assurez-vous que la journalisation est activée pour IPsec pour aider au dépannage. Utilisez l'Observateur d'événements Windows pour voir les logs liés à IPsec.
 
 En utilisant ces méthodes, vous pouvez configurer et gérer IPsec sans PowerShell, tout en bénéficiant d'une interface utilisateur graphique ou de commandes classiques pour une intégration transparente dans vos processus de gestion de la sécurité réseau.
+
+
+
+
+# Annexe 1 
+
+
+# comparaison complète des options possibles avec la commande `netsh ipsec static add filteraction` 
+
+| Commande                                                   | Action                        | Comportement                                                                                                                                                     |
+|------------------------------------------------------------|-------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `netsh ipsec static add filteraction name="Request Security" action=request` | Demander la sécurité (request) | Demande la sécurité pour le trafic correspondant au filtre. Si la sécurité (IPsec) n'est pas disponible, la connexion non sécurisée est permise.               |
+| `netsh ipsec static add filteraction name="Request Security" action=permit`  | Permettre (permit)             | Autorise tout le trafic correspondant au filtre sans exiger d'authentification ou de chiffrement IPsec.                                                           |
+| `netsh ipsec static add filteraction name="Request Security" action=require` | Exiger la sécurité (require)   | Exige que tout le trafic correspondant au filtre soit sécurisé par IPsec. Si la sécurité n'est pas disponible, la connexion est bloquée.                         |
+| `netsh ipsec static add filteraction name="Request Security" action=block`   | Bloquer (block)                | Bloque tout le trafic qui correspond au filtre. Aucun trafic, sécurisé ou non, n'est autorisé à passer.                                                          |
+| `netsh ipsec static add filteraction name="Request Security"`                 | Par défaut (block)             | Si aucune option `action` n'est spécifiée, l'action par défaut est `block`, ce qui signifie que le trafic correspondant au filtre est bloqué.                    |
+
+### Explication des actions :
+- **request** : Tente d'utiliser la sécurité IPsec, mais permet au trafic de passer non sécurisé si IPsec n'est pas disponible.
+- **permit** : Autorise le trafic sans nécessiter de sécurité IPsec.
+- **require** : Exige l'utilisation de la sécurité IPsec. Si IPsec n'est pas disponible, le trafic est bloqué.
+- **block** : Bloque tout le trafic correspondant au filtre, qu'il soit sécurisé ou non.
+
+
+
+# Annexe 2 - supprimer-tous.bat 
+
+```cmd
+@echo off
+echo Suppression des règles IPsec...
+netsh ipsec static delete rule all
+
+echo Suppression des filtres IPsec...
+netsh ipsec static delete filter all
+
+echo Suppression des filtres d’action IPsec...
+netsh ipsec static delete filteraction all
+
+echo Suppression des politiques IPsec...
+netsh ipsec static delete policy all
+
+echo Suppression terminée !
+pause
+```
+
+
