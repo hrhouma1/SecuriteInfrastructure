@@ -36,7 +36,7 @@ ou des outils de configuration réseau traditionnels tels que `netsh`.
    netsh ipsec static add policy name="SMB Security Policy" description="Encrypt SMB Traffic"
    netsh ipsec static add filterlist name="SMB Filter List"
    netsh ipsec static add filter filterlist="SMB Filter List" srcaddr=any dstaddr=me dstport=445 protocol=TCP
-   netsh ipsec static add filteraction name="Request Security" action=request
+   netsh ipsec static add filteraction name="Request Security" 
    netsh ipsec static add rule name="Encrypt SMB Traffic" policy="SMB Security Policy" filterlist="SMB Filter List" filteraction="Request Security"
    ```
 
