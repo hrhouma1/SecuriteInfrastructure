@@ -254,11 +254,11 @@ Ces étapes vous permettront de configurer efficacement le transfert des journau
 
 
 -------------------------------------------------------
-# Annexe - étape 2
+# Annexe - étape 2 (ÉTAPES INTERMÉDIAIRES ET TROUBLESHOOTING)
 -------------------------------------------------------
 
 
-Pour corriger et compléter l'analyse du trafic SMB dans votre laboratoire, suivez ces étapes intermédiaires :
+- Pour corriger et compléter l'analyse du trafic SMB dans votre laboratoire, suivez ces étapes intermédiaires :
 
 ## Vérification et Configuration de SMB
 
@@ -302,3 +302,43 @@ Pour corriger et compléter l'analyse du trafic SMB dans votre laboratoire, suiv
 - **Vérifiez les erreurs SMB** : Consultez les journaux d'événements pour toute erreur liée à SMB.
 
 En suivant ces étapes, vous pourrez configurer et analyser efficacement le trafic SMB dans votre environnement tout en vérifiant le chiffrement et en résolvant les problèmes potentiels.
+
+
+
+-------------------------------------------------------
+# Annexe - étape 2 - suite (ÉTAPES INTERMÉDIAIRES ET TROUBLESHOOTING)
+-------------------------------------------------------
+
+
+- Pour vérifier l'état actuel de SMB sur le partage "Labo1" et s'assurer que le chiffrement est activé, vous pouvez suivre ces étapes :
+
+## Vérification de l'État de SMB
+
+1. **Vérifier les Protocoles SMB Actifs** :
+   - Exécutez la commande suivante pour voir si SMB2/SMB3 est activé sur le serveur :
+     ```powershell
+     Get-SmbServerConfiguration | Select EnableSMB2Protocol, EnableSMB3Protocol
+     ```
+
+2. **Vérifier le Chiffrement sur le Partage "Labo1"** :
+   - Pour vérifier si le chiffrement est activé spécifiquement sur le partage "Labo1", utilisez :
+     ```powershell
+     Get-SmbShare -Name "Labo1" | Select Name, EncryptData
+     ```
+
+## Configuration du Chiffrement SMB
+
+- **Activer le Chiffrement sur "Labo1"** (si ce n'est pas déjà fait) :
+  ```powershell
+  Set-SmbShare -Name "Labo1" -EncryptData $true
+  ```
+
+## Test et Analyse avec Wireshark
+
+- **Démarrer une Capture Wireshark** : 
+  - Filtrez les paquets SMB pour vérifier le trafic chiffré.
+  - Utilisez un filtre comme `smb2` et cherchez les paquets marqués "Encrypted".
+
+Ces étapes vous permettront de vérifier et de configurer correctement le chiffrement SMB sur votre partage spécifique sans affecter les autres services ou partages SMB.
+
+
