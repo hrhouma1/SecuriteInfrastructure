@@ -253,3 +253,52 @@ Ces étapes vous permettront de configurer efficacement le transfert des journau
 
 
 
+-------------------------------------------------------
+# Annexe - étape 2
+-------------------------------------------------------
+
+
+Pour corriger et compléter l'analyse du trafic SMB dans votre laboratoire, suivez ces étapes intermédiaires :
+
+## Vérification et Configuration de SMB
+
+### 1) Vérifier l'État de SMB
+
+- **Vérifiez les versions SMB activées** sur le serveur SRV pour vous assurer que SMB3 est actif :
+  ```powershell
+  Get-SmbServerConfiguration | Select EnableSMB2Protocol, EnableSMB3Protocol
+  ```
+
+### 2) Désactiver temporairement SMB3 (si nécessaire)
+
+- **Désactivation de SMB3** pour tester le trafic non chiffré :
+  ```powershell
+  Set-SmbServerConfiguration -EnableSMB3Protocol $false -Force
+  ```
+- **Réactivation de SMB3** après les tests :
+  ```powershell
+  Set-SmbServerConfiguration -EnableSMB3Protocol $true -Force
+  ```
+
+## Analyse du Trafic avec Wireshark
+
+### 3) Capture du Trafic Non Chiffré
+
+- **Démarrez Wireshark** sur le serveur SRV.
+- **Appliquez un filtre** pour capturer les paquets SMB/SMB2 :
+  ```
+  smb2.filename contains ".txt"
+  ```
+
+### 4) Vérification du Chiffrement
+
+- **Vérifiez si le trafic est chiffré** en cherchant des paquets indiquant "Encrypted" dans la colonne d'information de Wireshark.
+
+## Résolution des Problèmes
+
+### 5) Dépannage
+
+- **Problèmes TCP/IP** : Assurez-vous qu'il n'y a pas de blocage par un pare-feu ou de problèmes de connexion TCP.
+- **Vérifiez les erreurs SMB** : Consultez les journaux d'événements pour toute erreur liée à SMB.
+
+En suivant ces étapes, vous pourrez configurer et analyser efficacement le trafic SMB dans votre environnement tout en vérifiant le chiffrement et en résolvant les problèmes potentiels.
