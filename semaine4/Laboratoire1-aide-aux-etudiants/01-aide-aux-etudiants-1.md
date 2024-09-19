@@ -117,18 +117,20 @@ New-SmbShare -Name "Labo1" -Path "C:\Labo1" -FullAccess "Everyone"
 
 #### a) Création et Copie d'un Fichier sur CLI
 
+Vous pouvez rélaiser cette étape manuellement ou exécuter ces commandes : 
+
 ```cmd
 echo "This is a secret file." > MonSecret.txt
 copy MonSecret.txt \\SRV\Labo1\
 copy C:\Windows\System32\WindowsCodecsRaw.txt \\SRV\Labo1\
 ```
 
-#### b) Capture avec Wireshark sur SRV
+#### b) Capture avec Wireshark sur SRV (VOIR l'ANNEXE2 pour de l'aide supplémentaire)
 
 - Démarrez Wireshark et commencez une capture sur l'interface réseau appropriée.
 - Filtrez le trafic pour afficher uniquement les paquets SMB/SMB2 impliquant CLI.
 
-#### c) Analyse du Trafic
+#### c) Analyse du Trafic (VOIR l'ANNEXE2 pour de l'aide supplémentaire)
 
 - Appliquez un filtre pour afficher uniquement le trafic SMB/SMB2.
 - Utilisez les fonctionnalités de couleur pour mettre en évidence les paquets contenant la chaîne "TXT".
