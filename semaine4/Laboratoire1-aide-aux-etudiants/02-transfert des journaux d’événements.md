@@ -1,13 +1,11 @@
 
 -----
-# Annexe : Théorie
+# Théorie et explications reliées à la troisième partie du laboratoire, en couvrant les concepts clés associés au **transfert des journaux d’événements**, à **WinRM**, et à la **gestion des journaux dans Windows Server**.
 -----
 
 
 
-- Explications reliées à la troisième partie du laboratoire, en couvrant les concepts clés associés au **transfert des journaux d’événements**, à **WinRM**, et à la **gestion des journaux dans Windows Server**.
-
-### Contexte théorique : Transfert des journaux d’événements
+# Contexte théorique : Transfert des journaux d’événements
 
 #### Qu’est-ce qu’un journal d’événements ?
 Un journal d’événements est un registre des activités d'un système ou d'une application. Chaque fois qu’une action importante se produit (comme un démarrage, une connexion utilisateur, ou une erreur système), une entrée est ajoutée au journal d'événements. Les journaux d’événements permettent aux administrateurs de surveiller, diagnostiquer et corriger les problèmes dans un environnement réseau.
@@ -49,7 +47,7 @@ L’**audit** est un mécanisme qui permet d’enregistrer des événements spé
    - L’audit des accès à un fichier ou un dossier enregistre chaque fois qu’un utilisateur accède à une ressource surveillée, comme un dossier ou un fichier.
    - Ici, en activant l'audit pour le répertoire **c:\rep1** sur **CLI**, chaque fois qu'un utilisateur accède à ce répertoire ou y crée un fichier (comme **fich.txt**), cet événement est enregistré.
 
-#### Étapes concrètes en action
+# Étapes concrètes en action
 
 1. **Configurer les machines sources** : 
    - **DC** et **CLI** sont configurées pour être des sources d'événements, c'est-à-dire qu'elles vont envoyer leurs journaux vers **SRV**.
@@ -69,13 +67,13 @@ L’**audit** est un mécanisme qui permet d’enregistrer des événements spé
 6. **Vérification des événements collectés** :
    - Enfin, vous vérifiez que les événements d'accès au répertoire et de création d'utilisateur sont bien transférés à **SRV** et apparaissent dans le journal **Forwarded Events**.
 
-### Pourquoi cette approche est importante ?
+# Pourquoi cette approche est importante ?
 Cette approche vous permet de :
 - **Centraliser la surveillance** : Les administrateurs peuvent surveiller les événements de plusieurs machines à partir d'un seul endroit (le collecteur SRV), ce qui simplifie énormément la gestion.
 - **Renforcer la sécurité** : La capture d'événements clés comme la création d'utilisateurs ou l'accès à des fichiers sensibles permet de détecter rapidement des actions non autorisées ou des violations de sécurité.
 - **Automatiser la gestion** : Avec WinRM et les abonnements d'événements, les journaux d’événements sont collectés et analysés automatiquement, sans intervention humaine continue.
 
-### Conclusion
+# Conclusion
 
 - Vous devez comprendre que ce laboratoire met en œuvre des concepts essentiels d’administration réseau et de sécurité. 
 - En activant des audits sur des événements clés, en centralisant les journaux et en automatisant leur collecte à l’aide de WinRM, vous construisez un système robuste de gestion des événements qui peut être utilisé dans des environnements professionnels pour surveiller l’activité du réseau et détecter des incidents de sécurité.
