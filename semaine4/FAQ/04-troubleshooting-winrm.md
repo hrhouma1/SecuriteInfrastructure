@@ -4,37 +4,53 @@
 # solution 01
 
 
-1. **Vérifier que le service WinRM est en cours d'exécution :**
-   - Ouvrez une fenêtre PowerShell en tant qu'administrateur sur la machine cible.
-   - Exécutez la commande suivante pour démarrer et configurer WinRM :
+### Configuration de base
+
+1. **Vérifier que WinRM est activé :**
+   - Ouvrez PowerShell en tant qu'administrateur.
+   - Exécutez la commande suivante pour configurer et démarrer WinRM :
      ```bash
      winrm quickconfig
      ```
-   - Cela configurera WinRM pour accepter les requêtes et démarrera le service si nécessaire[6][7].
 
-2. **Vérifier les règles du pare-feu :**
-   - Assurez-vous que le pare-feu autorise les connexions sur le port 5985 (HTTP) ou 5986 (HTTPS) pour WinRM.
-   - Vous pouvez ajouter une règle de pare-feu avec la commande suivante :
+2. **Configurer le pare-feu pour HTTP (port 5985) :**
+   - Ajoutez une règle pour autoriser les connexions entrantes sur le port 5985 :
      ```bash
-     netsh advfirewall firewall add rule name="WinRM-HTTP" dir=in localport=5985 protocol=TCP action=allow
+     netsh advfirewall firewall add rule name="WinRM-HTTP" dir=in action=allow protocol=TCP localport=5985
      ```
-   - Pour HTTPS, utilisez le port 5986[12].
 
-3. **Vérifier les paramètres réseau :**
+3. **Configurer le pare-feu pour HTTPS (port 5986) :**
+   - Ajoutez une règle pour autoriser les connexions entrantes sur le port 5986 :
+     ```bash
+     netsh advfirewall firewall add rule name="WinRM-HTTPS" dir=in action=allow protocol=TCP localport=5986
+     ```
+
+### Configuration HTTPS
+
+4. **Configurer WinRM pour HTTPS :**
+   - Assurez-vous d'avoir un certificat SSL valide installé.
+   - Exécutez la commande suivante en remplaçant `<NomDeVotreMachine>` et `<EmpreinteDuCertificat>` par les valeurs appropriées :
+     ```bash
+     winrm create winrm/config/Listener?Address=*+Transport=HTTPS '@{Hostname="<NomDeVotreMachine>";CertificateThumbprint="<EmpreinteDuCertificat>"}'
+     ```
+
+### Vérifications supplémentaires
+
+5. **Vérifier l'accessibilité réseau :**
    - Assurez-vous que la machine cible est accessible sur le réseau et que le nom d'hôte est correct.
-   - Si l'authentification Kerberos est utilisée, assurez-vous que les machines sont dans le même domaine ou configurez les hôtes de confiance si vous utilisez des adresses IP[8][10].
 
-4. **Configurer les paramètres de sécurité :**
-   - Vérifiez que les configurations de sécurité pour l'authentification sont correctement définies. Vous pouvez activer l'authentification basique si nécessaire pour des tests, mais cela n'est pas recommandé en production :
+6. **Vérifier les paramètres de sécurité :**
+   - Assurez-vous que les configurations de sécurité pour l'authentification sont correctement définies.
+   - Activez l'authentification basique si nécessaire pour des tests (non recommandé en production) :
      ```bash
      winrm set winrm/config/service/auth '@{Basic="true"}'
      ```
 
-5. **Vérifier la configuration du collecteur d'événements :**
-   - Assurez-vous que le collecteur d'événements est correctement configuré pour recevoir des événements des machines sources.
-   - Utilisez `wecutil gr <NomAbonnement>` pour vérifier l'état des abonnements et des ordinateurs sources[4][5].
+En suivant ces étapes, vous devriez pouvoir résoudre le problème de connexion avec le service WinRM. Assurez-vous également que toutes les machines impliquées sont correctement configurées pour accepter les connexions à distance.
 
-En suivant ces étapes, vous devriez être en mesure de résoudre l'erreur et d'établir une connexion correcte avec le service WinRM.
+
+
+
 
 # solution 02
 
