@@ -203,7 +203,7 @@ Ces étapes vous permettront de configurer et d'analyser efficacement le trafic 
 
 # 2) Activer WinRM via un GPO
 
-- Sur **SRV**, ouvrez la **Gestion des stratégies de groupe** (`gpmc.msc`).
+- Sur **DC**, ouvrez la **Gestion des stratégies de groupe** (`gpmc.msc`).
 - Créez une **nouvelle GPO** pour activer WinRM, puis éditez-la :
   - Allez à **Configuration de l’ordinateur > Stratégies > Modèles d'administration > Composants Windows > Windows Remote Management (WinRM) > Service WinRM**.
   - Activez **Autoriser la gestion à distance du serveur via WinRM**.
