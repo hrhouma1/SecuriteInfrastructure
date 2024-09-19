@@ -80,7 +80,7 @@ Les **GPOs** sont un outil puissant pour gérer les paramètres des serveurs de 
 # Aide pour celles et ceux qui ont des difficultés:
 ----------------------------------------------------------------------------------------
 
-- Pour vulgariser l'idée des **GPOs** (Group Policy Objects) et des **Contrôleurs de Domaine** dans un langage très simple pour un débutant, imaginez ceci :
+- Pour vulgariser l'idée des **GPOs** (Group Policy Objects) et des **Contrôleurs de Domaine** dans un langage très simple, imaginez ceci :
 
 ### Comparaison à une école
 
