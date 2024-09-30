@@ -30,7 +30,7 @@ Imagine le processus comme ceci :
 
 6. Le NAS t'ouvre la porte et te laisse entrer dans le réseau.
 
-# 4 -  Pourquoi c'est cool ?
+# 4 -  Pourquoi c'est intéressant ?
 
 1. **Centralisation** : Au lieu d'avoir des mots de passe partout, tout est géré à un seul endroit. C'est plus simple et plus sûr.
 
