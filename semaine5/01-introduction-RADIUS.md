@@ -58,3 +58,5 @@ Imaginons que tu travailles dans une grande entreprise :
 
 RADIUS, c'est comme avoir un super agent de sécurité pour ton réseau. Il vérifie l'identité de tout le monde, décide qui a le droit de faire quoi, et garde un œil sur tout ce qui se passe. C'est un outil essentiel pour garder les grands réseaux sûrs et bien organisés.
 
+# Vidéos à regarder :
+- https://www.youtube.com/watch?v=_rj7Oe9j5YE&ab_channel=ZarigaTongy
