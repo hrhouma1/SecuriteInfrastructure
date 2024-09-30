@@ -104,3 +104,30 @@ By taking proactive steps—such as securing code, network configurations, and p
 - [OWASP Application Security](https://owasp.org/)
 - [NIST Cybersecurity Framework](https://www.nist.gov/cyberframework)
 - [Social Engineering Techniques & Prevention](https://www.csoonline.com/article/2124681/what-is-social-engineering.html)
+
+
+# Annexe : Est-ce qu'il existe un lien entre l'analyse de la surface d'attaque et le protocole RADIUS dans la sécurisation des accès réseau ?
+
+Oui, il y a un lien direct entre **l'analyse de la surface d'attaque** et l'utilisation de **RADIUS** (Remote Authentication Dial-In User Service), en particulier lorsqu'il s'agit de sécuriser la **surface d'attaque réseau** et la **surface d'attaque utilisateur**.
+
+### Rôle de RADIUS dans la réduction de la surface d'attaque
+
+**RADIUS** est un protocole d'authentification centralisé qui permet de gérer les accès réseau de manière sécurisée en vérifiant l'identité des utilisateurs qui tentent de se connecter à un réseau, généralement via des équipements comme les serveurs, les routeurs, ou les points d'accès Wi-Fi.
+
+#### 1. Surface d'attaque réseau
+
+- **Authentification centralisée** : Avec RADIUS, tous les points d'entrée réseau (routeurs, points d'accès Wi-Fi, etc.) sont protégés par une authentification centralisée. Cela permet de contrôler qui peut accéder au réseau, en réduisant les risques d'accès non autorisé via des équipements vulnérables.
+- **Contrôle d'accès** : RADIUS renforce la sécurité en n'accordant l'accès au réseau qu'aux utilisateurs légitimes, ce qui réduit la surface d'attaque liée à un réseau ouvert ou mal sécurisé.
+
+#### 2. Surface d'attaque utilisateur
+
+- **Réduction du risque d'erreur humaine** : En utilisant RADIUS, l'authentification est centralisée et peut être gérée par des politiques de sécurité strictes, comme l'utilisation de mots de passe complexes, l'authentification à plusieurs facteurs (MFA), ou des certificats. Cela diminue le risque que les utilisateurs commettent des erreurs comme l'utilisation de mots de passe faibles ou leur partage accidentel.
+- **Protection contre les accès non autorisés** : RADIUS permet de suivre et de contrôler chaque tentative d'authentification, ce qui aide à prévenir les attaques basées sur des accès malveillants ou des tentatives d'ingénierie sociale visant les utilisateurs.
+
+#### 3. Liens avec l'analyse de la surface d'attaque
+
+L'intégration de **RADIUS** dans la stratégie de sécurité d'une entreprise est cruciale pour réduire les **surfaces d'attaque réseau** et **utilisateur**. En mettant en place un serveur RADIUS, vous centralisez et renforcez le contrôle des accès, ce qui permet de :
+
+- **Contrôler efficacement les accès réseau** (réduction de la surface d'attaque réseau).
+- **Protéger les utilisateurs** en leur imposant des règles strictes d'authentification et en surveillant les tentatives de connexion (réduction de la surface d'attaque utilisateur).
+
