@@ -20,3 +20,18 @@
 | **Semaine 15** | **2 - 6 Décembre**          | 📝 **EXAMEN FINAL**                   |
 | **Semaine 15** | 9 - 13 Décembre             | Clôture du cours et projets          |
 
+
+
+
+
+| **Évaluation**          | **Individuel / nb. de coéquipiers maximal autorisé**                     | **Pondération** | **Semaine** |
+|-------------------------|--------------------------------------------------------------------------|-----------------|-------------|
+| **TP1**                 | Individuel                                                               | 5%              | (Semaine 4) |
+| **TP2**                 | Individuel                                                               | 5%              | (Semaine 11) |
+| **Laboratoire 1**        | En équipe de 2 max. (évaluation individuelle)                            | 15%             | (Semaine 5) |
+| **Laboratoire 2**        | En équipe de 2 max. (évaluation individuelle)                            | 15%             | (Semaine 10) |
+| **Examen de mi-session** | Individuel                                                               | 30%             | (Semaine 9) |
+| **Épreuve finale**       | Individuel (40% pour le volet pratique et 60% pour le volet théorique)   | 30%             | (Semaine 15) |
+
+| **Total**               | **100%**                                                                  |                 |             |
+
