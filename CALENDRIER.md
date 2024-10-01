@@ -32,6 +32,5 @@
 | **Laboratoire 2**        | En équipe de 2 max. (évaluation individuelle)                            | 15%             | (Semaine 10) |
 | **Examen de mi-session** | Individuel                                                               | 30%             | (Semaine 9) |
 | **Épreuve finale**       | Individuel (40% pour le volet pratique et 60% pour le volet théorique)   | 30%             | (Semaine 15) |
-
 | **Total**               | **100%**                                                                  |                 |             |
 
