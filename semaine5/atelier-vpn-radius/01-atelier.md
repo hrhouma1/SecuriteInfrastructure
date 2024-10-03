@@ -360,3 +360,5 @@ Cela devrait permettre à votre client **OpenVPN** de se connecter correctement 
 - Si vous avez des erreurs de connexion lors de l'importation du fichier `.ovpn`, vérifiez les paramètres de serveur et l'adresse IP configurée dans le fichier.
 
 Cela devrait résoudre notre problème d'exportation de configuration depuis pfSense.
+# Référence :
+- https://docs.netgate.com/pfsense/en/latest/packages/openvpn-client-export.html
