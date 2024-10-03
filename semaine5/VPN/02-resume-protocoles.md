@@ -101,9 +101,15 @@ Le choix du protocole VPN dépend de vos besoins spécifiques[2][5] :
 Il est important de noter que la plupart des fournisseurs VPN modernes proposent plusieurs protocoles, vous permettant de choisir celui qui convient le mieux à votre situation.
 
 Citations:
+
 [1] https://nordvpn.com/fr/blog/protocoles-vpn/
+
 [2] https://www.expressvpn.com/fr/what-is-vpn/protocols
+
 [3] https://www.fortinet.com/fr/resources/cyberglossary/what-is-a-vpn
+
 [4] https://vpnoverview.com/fr/infos-vpn/comparaison-des-protocoles-vpn/
+
 [5] https://www.avast.com/fr-fr/c-vpn-protocols
+
 [6] https://nordvpn.com/blog/protocols/
