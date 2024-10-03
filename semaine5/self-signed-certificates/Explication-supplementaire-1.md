@@ -36,3 +36,48 @@
 - **Serveur HTTPS** : Le serveur utilise son certificat pour prouver son identité au client. Le client utilise le certificat pour chiffrer ses communications.
 - **Mutual TLS (mTLS)** : Le client et le serveur s’authentifient tous deux mutuellement en utilisant des certificats.
 
+---------------------
+
+- Schéma représentant la procédure de création et d'utilisation de certificats auto-signés et de clés avec OpenSSL, en incluant la CA, le serveur et le client.
+
+```plaintext
+                         +---------------------------+
+                         |    Autorité de            |
+                         |  Certification (CA)       |
+                         |                           |
+                         |  ca-key.pem (Clé privée)  |
+                         |  ca-cert.pem (Certificat) |
+                         +---------------------------+
+                                  |
+                                  | (Utilisée pour signer)
+                                  v
+              +-----------------------------------------+
+              | Serveur                                 |
+              |                                         |
+              |  server-key.pem (Clé privée du serveur) |
+              |  server-req.pem (Requête de signature)  |
+              |  server-cert.pem (Certificat signé par  |
+              |   la CA)                                |
+              +-----------------------------------------+
+                         ^                       |
+                         |                       | (Vérifie le certificat du serveur)
+                         |                       v
+              +-----------------------------------------+
+              | Client                                  |
+              |                                         |
+              |  client-key.pem (Clé privée du client)  |
+              |  client-req.pem (Requête de signature)  |
+              |  client-cert.pem (Certificat signé par  |
+              |   la CA)                                |
+              +-----------------------------------------+
+
+Étapes principales :
+1. CA génère sa clé privée (ca-key.pem) et son certificat (ca-cert.pem).
+2. Serveur génère une clé privée (server-key.pem) et une requête de certificat (server-req.pem).
+3. La CA signe la requête du serveur pour générer le certificat du serveur (server-cert.pem).
+4. Le client génère une clé privée (client-key.pem) et une requête de certificat (client-req.pem).
+5. La CA signe la requête du client pour générer le certificat du client (client-cert.pem).
+6. Le serveur et le client utilisent leurs certificats et leurs clés privées pour établir une communication sécurisée (mutual TLS si nécessaire).
+```
+
+Ce schéma montre les différentes interactions entre les fichiers (clés privées et certificats) générés pour l’autorité de certification (CA), le serveur et le client. Chaque entité utilise sa clé privée pour chiffrer et déchiffrer les informations, et les certificats pour prouver leur identité.
