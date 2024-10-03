@@ -255,3 +255,70 @@ Je vous propose un exemple de configuration d'adresses IP pour les différentes 
 - **pfSense et Windows Server** travaillent ensemble pour gérer la sécurité des connexions VPN. pfSense vérifie l’identité des utilisateurs avec l’aide du serveur RADIUS sur Windows Server.
 - **Le tunnel VPN sécurisé** permet à un utilisateur d’accéder aux ressources internes comme s’il était sur le réseau local, même s’il est à distance.
 
+
+
+
+-----------------------
+# Résumé des interfaces dont vous aurez besoin pour mettre en place votre infrastructure VPN avec **pfSense** et **Windows Server** :
+-----------------------
+
+### 1. **Interfaces pour pfSense** :
+pfSense jouera le rôle de routeur/pare-feu, et vous aurez besoin d'au moins **deux interfaces réseau** :
+
+- **Interface WAN (Wide Area Network)** :
+  - Connectée à Internet.
+  - Adresse IP publique fournie par votre fournisseur d'accès Internet (ex. `198.51.100.10`).
+  - Permet à pfSense de recevoir les connexions VPN des utilisateurs distants.
+
+- **Interface LAN (Local Area Network)** :
+  - Connectée au réseau interne local.
+  - Adresse IP privée (ex. `192.168.1.1`).
+  - Permet à pfSense de gérer le trafic réseau local et de communiquer avec le serveur Windows (RADIUS) et d'autres appareils locaux.
+
+### 2. **Interfaces pour Windows Server** :
+Le serveur Windows doit être connecté au réseau local pour communiquer avec pfSense et fournir l’authentification RADIUS :
+
+- **Interface LAN** :
+  - Connectée au même réseau local que pfSense.
+  - Adresse IP privée (ex. `192.168.1.10`).
+  - Utilisée pour que pfSense envoie les requêtes d'authentification RADIUS.
+
+### 3. **Client VPN (Windows 10)** :
+Pour tester la connexion, le **client VPN** aura besoin d'une connexion réseau :
+
+- **Interface réseau du client** :
+  - **Si local (test)** : Adresse IP sur le même réseau local que pfSense et Windows Server (ex. `192.168.1.20`).
+  - **Si à distance (Internet)** : Une adresse IP dynamique ou fixe attribuée par le fournisseur d’accès (utilisera le VPN pour se connecter au réseau interne via pfSense).
+
+### Résumé des interfaces nécessaires :
+- **pfSense** :
+  - **Interface WAN** (Internet).
+  - **Interface LAN** (réseau local).
+
+- **Windows Server** :
+  - **Interface LAN** (même réseau local que pfSense).
+
+- **Client VPN** :
+  - Une seule interface (local ou distant) selon le scénario de test.
+
+En résumé, pour **pfSense**, vous aurez besoin d'au moins **deux interfaces réseau** (une pour WAN et une pour LAN), et **Windows Server** n’aura besoin que d’une seule interface réseau **LAN** pour communiquer avec pfSense.
+
+- Ce tableau résume les interfaces et les adresses IP nécessaires pour chaque composant de votre infrastructure VPN.
+
+| **Composant**        | **Nom de l'interface** | **Rôle de l'interface**         | **Adresse IP (exemple)**  | **Remarque**                                       |
+|----------------------|------------------------|---------------------------------|---------------------------|----------------------------------------------------|
+| **pfSense**          | WAN                    | Connexion à Internet            | `198.51.100.10`           | Adresse IP publique attribuée par le FAI            |
+| **pfSense**          | LAN                    | Connexion au réseau local       | `192.168.1.1`             | Adresse IP privée pour gérer le trafic local        |
+| **Windows Server**    | LAN                    | Authentification RADIUS et AD   | `192.168.1.10`            | Connecté au réseau local, communique avec pfSense   |
+| **Client VPN (Local)**| LAN                    | Test de connexion VPN local     | `192.168.1.20`            | Adresse IP privée pour les tests dans le réseau local|
+| **Client VPN (Distant)**| WAN                   | Connexion VPN via Internet      | Adresse IP dynamique (FAI) | Adresse IP fournie par le FAI pour les connexions distantes |
+
+### Explications :
+- **pfSense** aura deux interfaces :
+  - **WAN** : connectée à Internet avec une adresse IP publique attribuée par votre fournisseur d'accès Internet (FAI).
+  - **LAN** : connectée au réseau interne avec une adresse IP privée (par exemple, `192.168.1.1`).
+  
+- **Windows Server** n'a besoin que d'une **interface LAN** avec une adresse IP privée (exemple : `192.168.1.10`) pour communiquer avec pfSense et gérer les authentifications via RADIUS.
+
+- Le **client VPN** peut être soit sur le réseau local pour tester (ex. : `192.168.1.20`), soit connecté depuis Internet avec une adresse IP dynamique ou fixe fournie par le FAI.
+
