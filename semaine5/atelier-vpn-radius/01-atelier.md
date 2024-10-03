@@ -103,3 +103,55 @@ Si quelque chose ne fonctionne pas, vous pouvez vérifier les journaux pour comp
 # Conclusion
 
 En suivant ces étapes détaillées, vous aurez configuré un VPN avec authentification RADIUS sur **Windows Server** et **pfSense**, et vous aurez testé la connexion avec une machine **Windows 10**. Cela permet de sécuriser les connexions à distance tout en vérifiant l’identité des utilisateurs via **Active Directory**.
+
+--------------------------------------------------
+# Annexe 1 - proposition d'adressage 
+--------------------------------------------------
+
+Je vous propose un exemple de configuration d'adresses IP pour les différentes machines et équipements dans ce réseau, qui pourrait être utilisé pour votre mise en place de VPN avec authentification RADIUS via **Windows Server** et **pfSense**.
+
+### Configuration des adresses IP
+
+1. **Windows Server** (Serveur Active Directory + Serveur RADIUS NPS) :
+   - Adresse IP : `192.168.1.10`
+   - Masque de sous-réseau : `255.255.255.0`
+   - Passerelle par défaut : `192.168.1.1` (adresse IP de pfSense)
+   - DNS : `192.168.1.10` (lui-même, car il sert également de contrôleur de domaine et DNS)
+
+2. **pfSense** (Routeur et VPN) :
+   - **Interface LAN** (vers le réseau local) :
+     - Adresse IP : `192.168.1.1`
+     - Masque de sous-réseau : `255.255.255.0`
+   - **Interface WAN** (vers l'extérieur, par exemple Internet) :
+     - Adresse IP : obtenue dynamiquement via DHCP ou configurée en IP statique par votre fournisseur d'accès à Internet (ex. `198.51.100.10`)
+     - DNS : Utilisez des serveurs DNS publics (ex. `8.8.8.8` pour Google DNS)
+
+3. **Client VPN** (Windows 10) :
+   - Si le client se trouve sur le **réseau local** (même réseau que Windows Server et pfSense), par exemple pour les tests :
+     - Adresse IP locale : `192.168.1.20`
+     - Masque de sous-réseau : `255.255.255.0`
+     - Passerelle par défaut : `192.168.1.1` (pfSense)
+   - Si le client se connecte depuis l'extérieur (réseau public) :
+     - Adresse IP dynamique ou fixe attribuée par le FAI du client.
+     - IP VPN attribuée par pfSense lorsqu'il se connecte via le tunnel VPN (ex. `10.8.0.2` si vous configurez une plage IP pour les clients VPN).
+
+4. **Plage d'adresses pour les clients VPN** :
+   - pfSense va attribuer une adresse IP aux clients qui se connectent au VPN.
+   - Exemple de plage d'adresses pour les clients VPN : `10.8.0.0/24`
+     - Adresse du serveur VPN (pfSense) : `10.8.0.1`
+     - Plage attribuable aux clients VPN : `10.8.0.2` à `10.8.0.254`
+
+# Résumé des adresses IP
+
+| Composant              | Adresse IP         | Masque             | Remarque                               |
+|------------------------|--------------------|--------------------|----------------------------------------|
+| **Windows Server**      | `192.168.1.10`     | `255.255.255.0`    | Contrôleur de domaine, DNS, RADIUS     |
+| **pfSense (LAN)**       | `192.168.1.1`      | `255.255.255.0`    | Passerelle par défaut du réseau local  |
+| **pfSense (WAN)**       | `198.51.100.10`    | `255.255.255.0`    | Adresse publique du FAI (exemple)     |
+| **Client Windows 10**   | `192.168.1.20`     | `255.255.255.0`    | Test local ou IP VPN si à distance    |
+| **Plage VPN Clients**   | `10.8.0.0/24`      | `255.255.255.0`    | IP attribuées aux clients via VPN     |
+
+### Note :
+- **Serveur DNS** : Si votre **Windows Server** joue également le rôle de serveur DNS, configurez les clients pour utiliser l'adresse IP de Windows Server (`192.168.1.10`) comme serveur DNS.
+- **Plage d’adresses VPN** : Assurez-vous que la plage d'adresses que vous attribuez aux clients VPN ne chevauche pas le réseau local interne (`192.168.1.0/24`), afin d’éviter des conflits d’adresses IP.
+
