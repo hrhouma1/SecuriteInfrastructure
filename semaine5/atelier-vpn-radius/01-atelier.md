@@ -155,3 +155,103 @@ Je vous propose un exemple de configuration d'adresses IP pour les différentes 
 - **Serveur DNS** : Si votre **Windows Server** joue également le rôle de serveur DNS, configurez les clients pour utiliser l'adresse IP de Windows Server (`192.168.1.10`) comme serveur DNS.
 - **Plage d’adresses VPN** : Assurez-vous que la plage d'adresses que vous attribuez aux clients VPN ne chevauche pas le réseau local interne (`192.168.1.0/24`), afin d’éviter des conflits d’adresses IP.
 
+--------------------------------------------
+# Annexe 2  - flux de communication
+--------------------------------------------
+
+
+```plaintext
+                          INTERNET
+                              |
+                              |
+                +------------------------------+
+                |      Interface WAN (pfSense)  |  
+                |      Adresse IP : 198.51.100.10|
+                +------------------------------+
+                              |
+                              |
+             ------------------------------------------
+             |         Routeur/Pare-feu pfSense        |
+             |      (gère le trafic réseau et VPN)     |
+             |  -------------------------------------- |
+             |  |  Interface LAN : 192.168.1.1        |   
+             |  -------------------------------------- |
+             |               |                        |
+             ------------------------------------------
+                              |
+                              |
+            +-----------------+---------------------+
+            |                                   |    
+            |                                   |
++-----------------------+           +-----------------------+  
+|    Windows Server      |           |   Client VPN (Win10)   |
+|  (Active Directory +   |           |   (sur le même réseau) |
+|    RADIUS NPS)         |           |  Adresse IP locale     |
+|-----------------------|           |      192.168.1.20      |
+| Adresse IP : 192.168.1.10|           +-----------------------+
+|-----------------------|                        |
+|  Demandes d'authentification                   |
+|     pour le VPN                               |  
+|                                               |
+| RADIUS vérifie si l'utilisateur               |  
+|  peut accéder au VPN                          |
++-----------------------+                       |
+                                                |
+                                        Connexion VPN validée
+                                       (si authentification réussie)
+                                                |
+                                  ----------------------------------
+                                  |   Tunnel VPN sécurisé établi   |
+                                  | (via OpenVPN ou IPSec sur pfSense)
+                                  ----------------------------------
+
++------------------------------------------------------------+
+|            PLAGE D'ADRESSES IP POUR LES CLIENTS VPN         |
+|              (Attribuées automatiquement par pfSense)       |
+|         Exemple : 10.8.0.0/24 (pour connexions VPN)         |
+|         IP serveur VPN : 10.8.0.1                           |
+|         IP client VPN : 10.8.0.2 (par exemple)              |
++------------------------------------------------------------+
+```
+
+# Détails supplémentaires :
+
+1. **Internet** : Représente le réseau extérieur auquel le client VPN peut se connecter pour accéder au réseau interne via pfSense.
+   
+2. **pfSense (Routeur/Pare-feu)** :  
+   - **Interface WAN** : Cette interface est connectée à Internet et a une adresse IP publique (exemple : `198.51.100.10`). Cette adresse peut être assignée par votre fournisseur d'accès Internet (FAI).
+   - **Interface LAN** : Connectée au réseau interne, elle gère les connexions locales avec une adresse IP privée (`192.168.1.1`).
+   - **Rôle** : pfSense fait office de routeur et de pare-feu, gère le VPN et filtre les connexions.
+
+3. **Windows Server (RADIUS et Active Directory)** :  
+   - Ce serveur vérifie l’identité des utilisateurs qui se connectent au VPN à travers RADIUS.
+   - **Adresse IP** : `192.168.1.10`.
+   - Il héberge **Active Directory** pour gérer les utilisateurs et **RADIUS** pour vérifier que les utilisateurs sont autorisés à se connecter au VPN.
+
+4. **Client VPN (Windows 10)** :  
+   - C’est l’ordinateur d’un utilisateur qui veut se connecter au réseau à distance via le VPN.
+   - Si le client est dans le même réseau que pfSense (pour les tests), il peut avoir l'adresse **192.168.1.20**.
+   - S'il se connecte depuis un réseau extérieur (ex. depuis chez lui), une adresse VPN lui sera attribuée automatiquement par pfSense (par exemple, **10.8.0.2**).
+
+5. **Plage d'adresses pour les clients VPN** :
+   - Les adresses VPN commencent par **10.8.0.X** (par exemple, **10.8.0.2** pour un utilisateur connecté).
+   - pfSense attribue automatiquement une IP VPN lorsque l'utilisateur se connecte via le VPN.
+
+---
+
+# Explication des flux :
+1. **Connexion VPN** : L’utilisateur sur le **client Windows 10** essaie de se connecter via le VPN à **pfSense**. Il envoie ses identifiants (nom d’utilisateur et mot de passe).
+   
+2. **Vérification des identifiants (RADIUS)** : pfSense envoie les identifiants au **serveur RADIUS** sur **Windows Server** (IP : `192.168.1.10`).
+   
+3. **Validation (RADIUS)** : Le serveur RADIUS vérifie ces informations dans **Active Directory** (base d’utilisateurs), et si l’utilisateur est autorisé, il informe pfSense que la connexion VPN peut être autorisée.
+
+4. **Connexion VPN établie** : Si l'authentification est réussie, pfSense établit un **tunnel VPN sécurisé** entre le client VPN (Windows 10) et le réseau interne.
+
+---
+
+# Ce que vous devez comprendre :
+- **Chaque composant a une adresse IP spécifique** pour fonctionner correctement. pfSense a une adresse IP publique (WAN) pour se connecter à Internet et une adresse IP privée (LAN) pour gérer les connexions locales.
+- **pfSense et Windows Server** travaillent ensemble pour gérer la sécurité des connexions VPN. pfSense vérifie l’identité des utilisateurs avec l’aide du serveur RADIUS sur Windows Server.
+- **Le tunnel VPN sécurisé** permet à un utilisateur d’accéder aux ressources internes comme s’il était sur le réseau local, même s’il est à distance.
+
