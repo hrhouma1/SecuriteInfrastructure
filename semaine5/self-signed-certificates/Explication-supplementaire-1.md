@@ -70,14 +70,16 @@
               |  client-cert.pem (Certificat signé par  |
               |   la CA)                                |
               +-----------------------------------------+
+```
 
-Étapes principales :
+Ce schéma montre les différentes interactions entre les fichiers (clés privées et certificats) générés pour l’autorité de certification (CA), le serveur et le client. Chaque entité utilise sa clé privée pour chiffrer et déchiffrer les informations, et les certificats pour prouver leur identité.
+
+# Étapes principales :
 1. CA génère sa clé privée (ca-key.pem) et son certificat (ca-cert.pem).
 2. Serveur génère une clé privée (server-key.pem) et une requête de certificat (server-req.pem).
 3. La CA signe la requête du serveur pour générer le certificat du serveur (server-cert.pem).
 4. Le client génère une clé privée (client-key.pem) et une requête de certificat (client-req.pem).
 5. La CA signe la requête du client pour générer le certificat du client (client-cert.pem).
 6. Le serveur et le client utilisent leurs certificats et leurs clés privées pour établir une communication sécurisée (mutual TLS si nécessaire).
-```
 
-Ce schéma montre les différentes interactions entre les fichiers (clés privées et certificats) générés pour l’autorité de certification (CA), le serveur et le client. Chaque entité utilise sa clé privée pour chiffrer et déchiffrer les informations, et les certificats pour prouver leur identité.
+
