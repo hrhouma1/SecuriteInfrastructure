@@ -76,7 +76,7 @@ Pour que la machine Windows 10 puisse se connecter au VPN, vous devez installer 
 
 1. Téléchargez et installez le client **OpenVPN** pour Windows 10 depuis le site officiel d'OpenVPN (gratuit et open source).
 
-#### 3.2. Exporter la configuration VPN depuis pfSense
+#### 3.2. Exporter la configuration VPN depuis pfSense (voir annexe 3 en cas de problèmes)
 pfSense peut créer un fichier de configuration VPN que vous utiliserez sur le client Windows 10.
 
 1. Dans pfSense, allez dans **VPN** -> **OpenVPN** -> **Client Export**.
@@ -322,3 +322,41 @@ En résumé, pour **pfSense**, vous aurez besoin d'au moins **deux interfaces r�
 
 - Le **client VPN** peut être soit sur le réseau local pour tester (ex. : `192.168.1.20`), soit connecté depuis Internet avec une adresse IP dynamique ou fixe fournie par le FAI.
 
+-----------------
+# Annexe 3 - problème d'exportation
+----------------
+
+
+- Si vous ne trouvez pas l'option d'exportation dans **pfSense**, il est probable que le **package d'exportation OpenVPN Client Export Utility** ne soit pas installé par défaut. 
+- Je vous propose les étapes pour installer ce package et exporter la configuration `.ovpn` :
+
+### Étape 1 : Installation du package `OpenVPN Client Export Utility`
+1. Connectez-vous à l'interface web de votre **pfSense**.
+2. Allez dans le menu **System** -> **Package Manager**.
+3. Dans **Package Manager**, cliquez sur l’onglet **Available Packages**.
+4. Recherchez `OpenVPN Client Export`.
+5. Cliquez sur **Install** à côté du package `OpenVPN Client Export Utility`.
+6. Confirmez l'installation en cliquant sur **Confirm**.
+
+### Étape 2 : Exporter le fichier de configuration VPN `.ovpn`
+1. Une fois le package installé, allez dans **VPN** -> **OpenVPN**.
+2. Cliquez sur l’onglet **Client Export** (qui est apparu après l'installation du package).
+3. Sélectionnez le **Serveur OpenVPN** que vous avez configuré.
+4. Faites défiler la page jusqu'à la section **Client Install Packages**.
+5. Trouvez l’option **Current Windows Installer** ou **Inline Configurations** et cliquez sur **Download** à côté de l’option qui correspond à votre système d'exploitation (par exemple, `.ovpn` pour Windows).
+6. Téléchargez et enregistrez le fichier de configuration `.ovpn`.
+
+### Étape 3 : Transférer et importer le fichier `.ovpn` sur votre client Windows 10
+1. Copiez le fichier `.ovpn` sur la machine **Windows 10** où vous souhaitez tester la connexion.
+2. Ouvrez le client **OpenVPN** sur Windows 10.
+3. Cliquez sur **Importer un profil** et sélectionnez le fichier `.ovpn` que vous venez de transférer.
+4. Connectez-vous en utilisant vos identifiants (nom d'utilisateur et mot de passe).
+
+Cela devrait permettre à votre client **OpenVPN** de se connecter correctement à votre serveur **pfSense** avec la configuration adéquate.
+
+### Problèmes courants :
+- Si le package `OpenVPN Client Export Utility` n'apparaît pas dans la liste, assurez-vous que vous utilisez la version de pfSense la plus récente.
+- Vérifiez que le service **OpenVPN** sur pfSense est bien démarré et configuré pour l’authentification RADIUS.
+- Si vous avez des erreurs de connexion lors de l'importation du fichier `.ovpn`, vérifiez les paramètres de serveur et l'adresse IP configurée dans le fichier.
+
+Cela devrait résoudre notre problème d'exportation de configuration depuis pfSense.
