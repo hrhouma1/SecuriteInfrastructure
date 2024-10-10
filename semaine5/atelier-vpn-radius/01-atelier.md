@@ -1,5 +1,10 @@
 # Mise en place d’un VPN avec authentification RADIUS via Windows Server et pfSense
 
+# Référence : 
+- https://www.youtube.com/watch?v=zQh7MnJUvc8&ab_channel=MDF-IT%E2%80%9CMDFBelgium_Vlogs%E2%80%9DChannel
+- https://www.securew2.com/blog/how-to-set-up-a-microsoft-radius-server
+- https://learn.microsoft.com/en-us/azure/vpn-gateway/point-to-site-how-to-radius-ps (optionnel - powershell)
+  
 # Contexte général
 Un **VPN (Virtual Private Network)** est comme un tunnel sécurisé qui relie un utilisateur, même à distance, au réseau local d’une entreprise ou d’une école. Cela permet à l’utilisateur d’accéder aux fichiers, applications et ressources de ce réseau en toute sécurité, même s’il est à l'extérieur du bureau. 
 
