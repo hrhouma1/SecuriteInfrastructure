@@ -2,6 +2,7 @@
 
 # Référence : 
 - https://www.youtube.com/watch?v=zQh7MnJUvc8&ab_channel=MDF-IT%E2%80%9CMDFBelgium_Vlogs%E2%80%9DChannel
+- https://www.youtube.com/watch?app=desktop&v=9x91nZcveIE&ab_channel=DOIT%2Fmostafaahmed
 - https://www.securew2.com/blog/how-to-set-up-a-microsoft-radius-server
 - https://learn.microsoft.com/en-us/azure/vpn-gateway/point-to-site-how-to-radius-ps (optionnel - powershell)
   
