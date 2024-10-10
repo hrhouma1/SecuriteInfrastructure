@@ -60,3 +60,52 @@ Quels sont les risques potentiels de permettre l'authentification sans RADIUS, e
 3. Il n'y a pas de contrôle automatisé sur les utilisateurs qui accèdent aux ressources de l'entreprise.
 4. Toutes les réponses ci-dessus.
 
+
+#### Situation 6: Connexion depuis un autre pays
+**Contexte:**  
+David travaille pour une entreprise canadienne, mais il décide de partir en vacances à l'étranger. Il tente de se connecter aux ressources de l'entreprise depuis un pays non autorisé.
+
+**Question:**  
+Comment l'entreprise peut-elle empêcher David de se connecter à distance depuis un pays étranger, et pourquoi est-il risqué de permettre des connexions à partir de n'importe quelle localisation géographique ?
+
+1. En bloquant les adresses IP provenant de pays hors du Canada via des règles de pare-feu.
+2. En configurant des politiques d’accès basées sur la géolocalisation dans le serveur RADIUS.
+3. En autorisant uniquement des connexions VPN depuis des adresses IP situées au Canada.
+4. Toutes les réponses ci-dessus.
+
+#### Situation 7: Connexion via un café Tim Hortons
+**Contexte:**  
+Sarah se rend dans un café Tim Hortons pour travailler à distance. Elle utilise le Wi-Fi public du café pour accéder aux serveurs de l'entreprise via le VPN, sans se rendre compte des risques de sécurité que cela implique.
+
+**Question:**  
+Quels sont les risques de sécurité associés à l'utilisation d'un réseau Wi-Fi public pour se connecter à l'entreprise, et comment l'entreprise peut-elle limiter ou interdire de telles connexions ?
+
+1. Les réseaux Wi-Fi publics sont souvent moins sécurisés, ce qui expose les données de l'entreprise à des interceptions.
+2. L'entreprise peut configurer RADIUS et VPN pour accepter uniquement des connexions depuis des machines spécifiques fournies par l'entreprise.
+3. En appliquant des règles strictes de contrôle des accès réseau (NAC) pour limiter l'accès aux machines non autorisées.
+4. Toutes les réponses ci-dessus.
+
+#### Situation 8: Utilisation d'une machine non approuvée par l'entreprise
+**Contexte:**  
+Marc tente de se connecter aux ressources de l'entreprise à l'aide de son ordinateur personnel depuis chez lui. Bien qu'il utilise un VPN, l'ordinateur qu'il utilise n'est pas approuvé par l'entreprise.
+
+**Question:**  
+Quels mécanismes de sécurité peuvent être mis en place pour empêcher Marc de se connecter à l'entreprise en utilisant une machine non approuvée ?
+
+1. Configurer le VPN pour ne permettre l'accès qu'aux ordinateurs fournis et gérés par l'entreprise via des certificats numériques.
+2. Utiliser des politiques de gestion des identités (IAM) pour vérifier que l'appareil est approuvé avant d'accorder l'accès.
+3. Mettre en place des outils de gestion des périphériques (MDM) pour contrôler les appareils autorisés à se connecter au réseau.
+4. Toutes les réponses ci-dessus.
+
+#### Situation 9: Tentative de contournement des règles d'authentification
+**Contexte:**  
+Emma, en déplacement à l'étranger, essaie de contourner les règles de connexion de l'entreprise en utilisant un VPN public qui masque sa véritable localisation pour simuler une connexion depuis le Canada.
+
+**Question:**  
+Comment l'entreprise peut-elle détecter et empêcher l'utilisation de VPNs publics ou non approuvés qui masquent la localisation réelle de l'utilisateur ?
+
+1. En appliquant une surveillance des adresses IP pour détecter les VPN publics et en les bloquant via des pare-feu ou des règles RADIUS.
+2. En intégrant un service de vérification des VPN et des proxys pour identifier les connexions suspectes.
+3. En mettant en place des outils de surveillance du réseau capables de détecter des comportements anormaux, comme des connexions fréquentes depuis des adresses IP différentes.
+4. Toutes les réponses ci-dessus.
+
