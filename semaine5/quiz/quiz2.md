@@ -80,7 +80,6 @@ D) Accès illimité aux ressources + Anonymat total
 
 
 
-Bien sûr, je vais ajouter d'autres scénarios pour illustrer des situations plus complexes et les mesures de sécurité correspondantes. Voici quelques scénarios supplémentaires :
 
 ### Scénario 6 : Connexion depuis l'étranger
 Un employé en voyage d'affaires en Europe tente de se connecter au VPN de l'entreprise.
