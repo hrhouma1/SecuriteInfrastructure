@@ -1,5 +1,5 @@
-### **Quiz : Sécurisation du trafic réseau**
-----
+# Sécurisation du trafic réseau
+
 
 1. **Quel est l'objectif principal de la sécurisation du trafic réseau ?**
    - A) Augmenter la bande passante du réseau
