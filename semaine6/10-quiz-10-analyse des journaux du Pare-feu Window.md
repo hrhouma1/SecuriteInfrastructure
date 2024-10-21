@@ -1,4 +1,4 @@
-# Quiz - analyse des journaux du Pare-feu Window
+# Analyse des journaux du Pare-feu Window
 
 1. **Quelle commande permet d'accéder rapidement à la Console de gestion du Pare-feu Windows avec fonctions avancées de sécurité ?**
    - a) cmd.msc
