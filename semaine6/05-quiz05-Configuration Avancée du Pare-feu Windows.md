@@ -1,4 +1,4 @@
-# Configuration Avancée du Pare-feu Windows
+# Pare-feu Windows - AVANCÉ
 
 1. **Quelle fonctionnalité est spécifique au Pare-feu Windows avec fonctions avancées de sécurité ?**
    - A. Gestion des périphériques connectés
