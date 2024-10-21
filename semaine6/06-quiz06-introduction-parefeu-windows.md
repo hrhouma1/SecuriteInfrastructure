@@ -1,4 +1,4 @@
-# **Études de cas : Sécurité des Réseaux et Configuration de Pare-feu**
+# **Configuration de Pare-feu - Études-de-cas**
 
 ---
 
