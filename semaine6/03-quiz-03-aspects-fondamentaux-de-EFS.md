@@ -1,4 +1,4 @@
-### **Quiz : Encrypting File System (EFS)**
+# EFS - Encrypting File System**
 
 1. **Quelle version de Windows inclut nativement EFS ?**
    - A) Windows XP Home
