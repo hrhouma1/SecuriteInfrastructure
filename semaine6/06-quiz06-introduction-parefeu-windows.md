@@ -1,4 +1,4 @@
-# **Configuration de Pare-feu - Études-de-cas**
+# **Pare-feu - Études-de-cas**
 
 ---
 
