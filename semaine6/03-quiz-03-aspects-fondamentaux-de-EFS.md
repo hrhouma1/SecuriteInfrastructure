@@ -119,3 +119,52 @@
    - B) Le fichier est déchiffré automatiquement lors de la copie
    - C) Le fichier génère une erreur et ne peut pas être copié
    - D) Le fichier est compressé pour pouvoir être copié
+
+
+
+# Annexe - question 8
+
+
+Lorsqu'un fichier EFS est déplacé vers un système de fichiers non compatible avec EFS, comme FAT ou FAT32, la réponse correcte est :
+
+B) Il est déchiffré automatiquement
+
+Cependant, pour prévenir ce déchiffrement automatique et protéger les données sensibles, voici les mesures à mettre en place :
+
+## Mesures préventives
+
+1. Utiliser exclusivement des volumes NTFS pour stocker les fichiers chiffrés EFS[1][4].
+
+2. Configurer les stratégies de groupe pour restreindre le déplacement des fichiers chiffrés vers des systèmes non compatibles.
+
+3. Former les utilisateurs aux risques liés au déplacement de fichiers EFS[1].
+
+4. Implémenter des contrôles d'accès stricts sur les fichiers et dossiers chiffrés[3].
+
+5. Utiliser des méthodes de transfert sécurisées, comme des VPN, pour déplacer des fichiers sensibles si nécessaire.
+
+6. Activer la journalisation des événements pour surveiller les tentatives de déplacement de fichiers chiffrés.
+
+## Nouvelle réponse après implémentation des mesures
+
+Si ces mesures de sécurité sont correctement mises en place, la nouvelle réponse à la question "Que se passe-t-il si un fichier EFS est déplacé vers un système de fichiers non compatible avec EFS ?" serait :
+
+D) Il génère une alerte d'erreur
+
+En effet, avec les restrictions et contrôles mis en place :
+
+1. Le système empêchera le déplacement du fichier vers un système non compatible.
+2. Une alerte sera générée pour signaler la tentative non autorisée.
+3. Le fichier restera dans son emplacement d'origine, toujours chiffré et sécurisé[2].
+
+Cette approche garantit que les fichiers EFS restent protégés et que toute tentative de compromission de leur sécurité est détectée et empêchée.
+
+# Citations:
+
+[1] https://next.ink/1073/encrypted-file-system-efs-explorons-possibilites-systeme-chiffrement-fichiers-sous-windows/
+
+[2] https://canada.lenovo.com/fr/ca/en/glossary/what-is-efs/
+
+[3] https://learn.microsoft.com/fr-fr/windows/win32/fileio/file-encryption
+
+[4] https://learn.microsoft.com/fr-fr/security-updates/security/20200345
