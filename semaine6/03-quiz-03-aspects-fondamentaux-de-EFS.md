@@ -1,4 +1,4 @@
-# EFS - Encrypting File System**
+# EFS - Encrypting File System
 
 1. **Quelle version de Windows inclut nativement EFS ?**
    - A) Windows XP Home
