@@ -1,4 +1,4 @@
-# WinRM - Gestion des abonnements d’événements et Transfert des Journaux d'Événements
+# WinRM (Windows Remote Management) - Gestion des abonnements d’événements et Transfert des Journaux d'Événements
 
 
 ### Objectif:
