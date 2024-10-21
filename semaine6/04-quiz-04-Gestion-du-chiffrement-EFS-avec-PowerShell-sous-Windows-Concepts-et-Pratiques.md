@@ -1,4 +1,4 @@
-# Configuration et l'utilisation de **EFS (Encrypting File System)** sous **Windows 10 Professionnel**
+# EFS (Encrypting File System) - AVANCÉ 
 
 ### Partie 1 : Concepts de base EFS
 1. **Qu'est-ce que le système de fichiers EFS sur Windows ?**
