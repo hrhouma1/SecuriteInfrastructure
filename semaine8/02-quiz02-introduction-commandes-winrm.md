@@ -1,4 +1,4 @@
-# Quiz QCM : **WinRM** (Windows Remote Management) et les commandes associées
+### Quiz QCM : **WinRM** (Windows Remote Management) et les commandes associées
 
 1. **Quelle commande permet d'activer WinRM sur une machine ?**  
    a) `winrm enable`  
