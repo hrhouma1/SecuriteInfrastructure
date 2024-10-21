@@ -1,4 +1,4 @@
-**Quiz : Configuration et gestion avancée d'IPSec**
+# **IPSec - AVANCÉ**
 
 1. Quelle commande permet d'afficher toutes les politiques IPSec existantes sur un système Windows ?
    - A) `netsh ipsec static show filteraction`
