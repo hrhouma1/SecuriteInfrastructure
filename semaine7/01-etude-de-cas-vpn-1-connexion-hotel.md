@@ -1,4 +1,4 @@
-# Titre : **Problèmes de Connexion VPN sur un Réseau Public : Causes et Solutions**
+# Étude de cas #1 : **Problèmes de Connexion VPN sur un Réseau Public : Causes et Solutions**
 
 ---
 
