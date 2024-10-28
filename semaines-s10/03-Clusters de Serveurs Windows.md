@@ -1,6 +1,6 @@
 # **3. Clusters de Serveurs Windows**
 
----
+# Introduction :
 
 Les clusters de serveurs Windows sont essentiels pour améliorer la disponibilité et la performance des services dans un environnement informatique. Ils permettent de répartir la charge entre plusieurs serveurs ou d'assurer la continuité des services en cas de panne. Ce cours aborde trois techniques de clustering : **Distribution Round-robin (RR)**, **Network Load Balancing (NLB)**, et **Failover Cluster**.
 
