@@ -1,6 +1,11 @@
 # **2. Les Fondamentaux de la Performance**
 
 ---
+# Introduction:
+
+*Cette partie sur les **Fondamentaux de la Performance** couvre tous les éléments essentiels pour comprendre, analyser et améliorer les performances des infrastructures TI, y compris les concepts de capacité, de charge, d’optimisation, de surveillance, de scalabilité, d’amélioration continue et des études de cas réelles pour illustrer les pratiques.*
+
+
 
 #### **2.1 Comprendre la Capacité et la Charge**
 
