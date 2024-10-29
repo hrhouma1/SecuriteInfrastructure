@@ -118,9 +118,7 @@ Pour améliorer les performances d'un système TI, plusieurs stratégies peuvent
 | Stratégie               | Description                                       | Avantages                               | Exemple                                  |
 |-------------------------|---------------------------------------------------|-----------------------------------------|------------------------------------------|
 | Caching                 | Stocker temporairement des données pour accélérer l’accès | Réduction des requêtes, gain de temps   | Images de site mises en cache via CDN    |
-| Load Balancing          | Répartir les requêtes entre plusieurs serveurs    | Prévention de surcharge                 | Site
-
- e-commerce avec plusieurs serveurs  |
+| Load Balancing          | Répartir les requêtes entre plusieurs serveurs    | Prévention de surcharge                 | Site e-commerce avec plusieurs serveurs  |
 | Compression des Données | Réduire la taille des fichiers transférés         | Amélioration de la vitesse de transmission | Site web avec compression GZIP         |
 | Optimisation de la BD   | Accélérer les requêtes en optimisant la base de données | Réduction du temps de réponse des requêtes | Indexation de la base de données        |
 
