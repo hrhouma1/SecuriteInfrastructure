@@ -56,8 +56,9 @@ BitLocker est une fonctionnalité de chiffrement de disque intégrée à certain
 
 BitLocker offre donc une solution de sécurité robuste pour protéger les données sensibles. C'est un excellent outil pour les entreprises et pour les utilisateurs soucieux de leur confidentialité.
 
-
-# Annexe : Questions/Réponses
+-----------------------------------------
+# Annexe 1 : Questions/Réponses
+-----------------------------------------
 
 ## Question de Rayan :
 
@@ -91,3 +92,70 @@ Dans des environnements non-AD, BitLocker fonctionne de manière autonome sur ch
 
 ### Conclusion
 BitLocker est compatible avec des environnements AD et non-AD, offrant des options de protection des données dans les deux cas. Avec AD, il permet une gestion et une récupération centralisées des clés, facilitant le déploiement à grande échelle et les politiques de sécurité d'entreprise. Sans AD, BitLocker reste efficace pour protéger les données, mais sa gestion est plus manuelle et individuelle.
+
+
+--------------------------
+# Annexe 2  - BitLocker vs EFS
+--------------------------
+
+
+Je vous présente un tableau comparatif entre **EFS (Encrypting File System)** et **BitLocker**, qui souligne les cas d'utilisation spécifiques et les différences principales pour aider à décider lequel utiliser dans un contexte donné.
+
+
+| **Caractéristiques**               | **BitLocker**                                        | **EFS (Encrypting File System)**                   |
+|------------------------------------|------------------------------------------------------|----------------------------------------------------|
+| **Type de chiffrement**            | Chiffrement de disque complet                        | Chiffrement au niveau des fichiers et dossiers     |
+| **Utilisation recommandée**        | Pour protéger l'intégralité d'un disque dur ou d'un volume (ex. disque système ou disques externes) | Pour chiffrer des fichiers ou dossiers spécifiques sans affecter tout le disque |
+| **Environnement**                  | Idéal pour les postes de travail, ordinateurs portables, et serveurs sensibles | Idéal pour les environnements de collaboration nécessitant un accès flexible aux fichiers |
+| **Fonctionnement**                 | Chiffre l’intégralité du disque à l’aide du TPM, d’une clé USB ou d’un mot de passe | Les fichiers ou dossiers sélectionnés sont chiffrés individuellement |
+| **Intégration avec Active Directory (AD)** | Compatible avec AD pour sauvegarder les clés de récupération de manière centralisée | Peut être configuré pour que les certificats de récupération EFS soient gérés par AD |
+| **Récupération des données**       | Clé de récupération nécessaire pour accéder aux données si l'authentification échoue | Utilise des certificats et clés individuels ; récupération possible via un compte administrateur (AD peut aider) |
+| **Performance**                    | Impact plus important sur la performance, car il chiffre l'intégralité du disque | Impact plus faible car seuls certains fichiers/dossiers sont chiffrés |
+| **Protection contre le vol de données** | Protège toutes les données du disque ; utile pour les appareils volés ou perdus | Protège uniquement les fichiers/dossiers chiffrés ; autres données non chiffrées restent accessibles |
+| **Gestion centralisée**            | Gérée via GPO avec AD pour une centralisation des politiques BitLocker | Gérée via GPO pour les certificats EFS, mais moins centralisé que BitLocker |
+| **Compatibilité**                  | Nécessite des versions de Windows spécifiques (ex. Pro, Enterprise) | Disponible sur les éditions professionnelles de Windows et plus |
+| **Cas d’utilisation recommandé**   | Sécuriser l’intégralité d’un appareil ou d’un disque pour une protection accrue en cas de vol | Sécuriser des fichiers sensibles sans devoir chiffrer tout le disque |
+
+### Conclusion
+- **Utilisez BitLocker** si vous avez besoin de sécuriser un appareil entier, comme un ordinateur portable ou un serveur sensible, et que vous voulez une protection contre les accès non autorisés en cas de vol ou de perte.
+- **Utilisez EFS** si vous avez besoin de chiffrer des fichiers ou dossiers individuels sans impacter tout le disque, par exemple pour protéger des documents sensibles dans un environnement de collaboration.
+
+
+--------------------------
+# Annexe 3  - BitLocker peut chiffrer un volume système ?
+--------------------------
+
+
+
+Oui, **BitLocker peut chiffrer un volume système** (le disque contenant le système d’exploitation) en plus des autres disques. En fait, cette fonctionnalité est souvent l’un de ses principaux atouts dans les environnements professionnels ou pour les utilisateurs soucieux de la sécurité de leurs données, car elle protège le système d’exploitation et les données en cas de perte ou de vol de l’appareil. Voici comment cela fonctionne et ce que cela implique :
+
+### Fonctionnement du chiffrement du volume système par BitLocker
+
+1. **Chiffrement au démarrage (Pre-Boot Authentication)** :
+   - Lorsqu'un volume système est chiffré avec BitLocker, une **authentification au démarrage** est souvent requise. Avant que Windows ne charge le système d'exploitation, BitLocker vérifie que l’appareil est légitime et n’a pas subi de modifications non autorisées (comme un accès physique aux composants internes).
+   - Cette vérification est possible grâce à un module TPM (Trusted Platform Module), une puce matérielle qui stocke en toute sécurité les clés de chiffrement et vérifie l'intégrité de la machine au démarrage.
+
+2. **Clé de démarrage et TPM** :
+   - Le chiffrement BitLocker pour le volume système repose souvent sur le **TPM**, qui stocke la clé de déchiffrement. Cette clé n'est libérée que si le démarrage de l'ordinateur passe les contrôles d'intégrité effectués par le TPM.
+   - Dans les cas où le TPM n'est pas présent, BitLocker peut être configuré pour fonctionner avec une clé USB contenant la clé de démarrage ou avec un mot de passe que l'utilisateur doit saisir au démarrage.
+
+3. **Protection des données sensibles et de l’OS** :
+   - En chiffrant le volume système, BitLocker protège l’ensemble des fichiers système et des données de l’utilisateur contre tout accès non autorisé. Par exemple, si un ordinateur portable chiffré avec BitLocker est volé, il sera extrêmement difficile pour un voleur d’accéder aux données sans la clé BitLocker ou le mot de passe.
+   - Ce chiffrement inclut le fichier **hiberfil.sys** (fichier d'hibernation) et le **fichier de page** (pagefile.sys) pour empêcher la récupération de données sensibles stockées dans ces fichiers temporaires.
+
+4. **Compatibilité avec les versions de Windows** :
+   - BitLocker pour le chiffrement du volume système est disponible sur les éditions **Windows Pro**, **Enterprise**, et **Education** (Windows 10 et Windows 11). Les éditions de base de Windows ne prennent pas en charge BitLocker.
+
+5. **Clé de récupération et gestion en entreprise** :
+   - Lors de la configuration, BitLocker génère une **clé de récupération** unique pour le volume système. Cette clé permet de déverrouiller le volume en cas de problème (comme un dysfonctionnement du TPM ou un mot de passe oublié).
+   - Dans les environnements d’entreprise, cette clé de récupération peut être stockée de manière centralisée dans Active Directory (AD), facilitant ainsi la gestion des appareils et la récupération des données si nécessaire.
+
+6. **Protection avancée contre les menaces physiques** :
+   - BitLocker offre une **protection contre les attaques physiques**, comme le démarrage d’un autre système d'exploitation sur le même appareil ou l'accès au disque dur via un autre ordinateur. Le chiffrement du volume système empêche tout accès non autorisé, rendant les données illisibles sans la clé de déchiffrement.
+
+### Scénarios où le chiffrement du volume système avec BitLocker est recommandé
+- **Ordinateurs portables et appareils mobiles** : Le chiffrement du volume système empêche les accès aux données en cas de perte ou de vol.
+- **Environnements professionnels** : BitLocker permet de respecter les normes de sécurité des données pour les entreprises, surtout si des informations sensibles sont présentes sur les appareils.
+- **Protection des appareils personnels** : Pour les utilisateurs soucieux de la sécurité, chiffrer le volume système avec BitLocker est une solution efficace pour protéger l’accès aux données.
+
+En résumé, BitLocker est capable de chiffrer le volume système, ce qui renforce considérablement la sécurité des données et empêche tout accès non autorisé, même si le disque est extrait de l’appareil.
