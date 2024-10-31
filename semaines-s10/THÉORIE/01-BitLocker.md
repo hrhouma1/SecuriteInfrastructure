@@ -1,7 +1,6 @@
 # Introduction
 
-BitLocker est une fonctionnalité de chiffrement de disque intégrée à certaines versions de Windows, conçue pour protéger les données en les rendant inaccessibles aux utilisateurs non autorisés. Voici un aperçu détaillé qui pourrait constituer un cours pour comprendre et utiliser BitLocker.
-
+BitLocker est une fonctionnalité de chiffrement de disque intégrée à certaines versions de Windows, conçue pour protéger les données en les rendant inaccessibles aux utilisateurs non autorisés. 
 ### 1. **Qu'est-ce que BitLocker ?**
    BitLocker est un outil de chiffrement de disque complet qui permet de protéger les données d’un ordinateur en les chiffrant. Cela signifie que toutes les données du disque dur sont transformées en un code illisible sans la clé de déchiffrement. BitLocker est disponible sur les versions professionnelles et entreprises de Windows (notamment Windows 10 Pro, Enterprise, et Windows Server).
 
