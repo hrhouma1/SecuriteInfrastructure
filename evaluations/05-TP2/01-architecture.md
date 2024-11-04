@@ -1,5 +1,8 @@
 *Cette version précise chaque machine par son nom de fonction, son rôle, et ses adresses IP/interfaces pour faciliter l’installation et la configuration de l’architecture.*
 
+![image](https://github.com/user-attachments/assets/14b14be9-42a1-4e64-8366-5a003e854a5d)
+
+
 ```
                           +----------------+
                           |    Internet    |
