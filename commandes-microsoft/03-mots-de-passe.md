@@ -34,7 +34,7 @@ netsh wlan show profile name="MonWifi" key=clear
 Cela affichera les détails de la configuration du réseau `"MonWifi"`, y compris le mot de passe sous "Contenu de la clé" (Key Content) si celui-ci est stocké.
 
 
-# 03 - Script
+# 03 - Script-version-01
 
 
 Voici un script PowerShell qui récupère automatiquement tous les profils Wi-Fi enregistrés, extrait les mots de passe pour chaque profil, et les exporte dans un fichier CSV :
@@ -70,3 +70,35 @@ Write-Output "Exportation des mots de passe Wi-Fi terminée. Fichier CSV disponi
 - **`Out-File -Append`** : Ajoute chaque profil et mot de passe au fichier CSV.
 
 Après exécution, un fichier `wifi_passwords.csv` contenant tous les profils Wi-Fi et leurs mots de passe sera créé sur le bureau.
+
+
+
+# 04 - Script-version-02 (sans warnings ou erreur)
+
+$outputFile = "$env:USERPROFILE\Desktop\wifi_passwords.csv"
+
+# Créer ou vider le fichier CSV avec les en-têtes
+"Profile Name,Password" | Out-File -FilePath $outputFile -Encoding UTF8
+
+# Obtenir tous les profils Wi-Fi
+$profiles = netsh wlan show profiles | Select-String "All User Profile\s*:\s*(.*)" | ForEach-Object { $_.Matches[0].Groups[1].Value }
+
+foreach ($profile in $profiles) {
+    # Obtenir les informations du profil, y compris le mot de passe
+    $profileInfo = netsh wlan show profile name="$profile" key=clear
+    
+    # Extraire le mot de passe si présent
+    $passwordMatch = $profileInfo | Select-String "Key Content\s*:\s*(.*)"
+    
+    # Vérifier si un mot de passe a été trouvé
+    if ($passwordMatch) {
+        $password = $passwordMatch.Matches[0].Groups[1].Value
+    } else {
+        $password = "Non disponible"
+    }
+
+    # Ajouter les données au fichier CSV
+    "$profile,$password" | Out-File -FilePath $outputFile -Encoding UTF8 -Append
+}
+
+Write-Output "Exportation des mots de passe Wi-Fi terminée. Fichier CSV disponible à : $outputFile"
