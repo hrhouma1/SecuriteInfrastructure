@@ -2,6 +2,8 @@
 # Introduction
 -------------------------
 
+# Objectif: 
+- Permettre-a-un-reseaux-multi-vlan-acceder-a-internet
 - Je vous présente une comparaison détaillée des deux solutions pour permettre aux machines d’un réseau multi-VLAN d’accéder à Internet, avec les configurations possibles en utilisant soit un **routeur classique** ou **pfSense** (un firewall/routeur open-source). 
 - Je vais également détailler les choix de configuration pour chaque option.
 
