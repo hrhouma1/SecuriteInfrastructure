@@ -225,8 +225,6 @@ En fonction de vos besoins en matière d’accès Internet et de sécurité, vou
 
 # Question : 
 
-**Question :**
-
 Dans le cadre de la configuration d'un cluster NLB, pensez-vous qu'il soit nécessaire que chaque serveur du cluster ait un accès direct à Internet pour que le répartiteur de charge fonctionne correctement ? Justifiez votre réponse en expliquant le rôle de l'adresse IP virtuelle (VIP) dans le processus de répartition de charge et l'impact (ou non) d'un accès Internet direct pour chaque serveur.
 
 
