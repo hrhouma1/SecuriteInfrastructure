@@ -1,6 +1,6 @@
+# NLB vs SLB ?
 
-
-D'après les informations fournies dans les résultats de recherche, voici les points clés concernant NLB (Network Load Balancing) et SLB (Software Load Balancing) sur Windows Server 2019 :
+## ==> points clés concernant NLB (Network Load Balancing) et SLB (Software Load Balancing) sur Windows Server 2019 :
 
 1. NLB est toujours supporté sur Windows Server 2019 pour les déploiements non-SDN (Software-Defined Networking)[3].
 
