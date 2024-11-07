@@ -4,7 +4,7 @@
 
 # Par exemple :
 
-- regardez le .1
+- regardez le 192.168.0.1/24
 
 ### Tableau de Configuration 1
 
