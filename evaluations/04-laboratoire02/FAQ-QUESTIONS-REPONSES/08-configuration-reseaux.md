@@ -7,7 +7,6 @@ Ce document présente deux scénarios de configuration réseau pour un cluster N
 1. **Scénario avec deux cartes réseau** : Une carte pour le réseau de gestion et une autre pour le réseau de répartition de charge (NLB).
 2. **Scénario avec trois cartes réseau** : Une carte pour le réseau de gestion, une pour le réseau NLB, et une troisième pour permettre un accès Internet via un routeur en mode Bridge.
 
-Ces scénarios sont expliqués de manière exhaustive pour un débutant, avec des schémas, des tables de configuration, et des explications pas à pas.
 
 ---
 
