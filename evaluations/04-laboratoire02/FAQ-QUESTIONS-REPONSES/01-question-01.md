@@ -9,7 +9,7 @@ Dans ce laboratoire, la configuration des serveurs Windows est précisée comme 
 
 1. **Mode Core** :
    - Seul le serveur **WinCoreND3** est explicitement configuré en mode Core. Le mode Core signifie que le serveur fonctionne sans interface graphique, rendant le système plus léger et sécurisé pour des tâches spécifiques, comme celles de répartition de charge.
-   - Les autres serveurs, **Win2012ND1** et **Win2012ND2**, ne sont pas obligatoirement en mode Core. En l'absence de précisions supplémentaires, on peut supposer qu’ils sont configurés avec une interface graphique, bien que ce ne soit pas une obligation. Le choix de l’interface dépend des besoins de gestion et d’administration pour le laboratoire.
+   - Les autres serveurs, **Win2012ND1** et **Win2012ND2**, ne sont pas obligatoirement en mode Core. *On peut considérer que les autres serveurs sont configurés avec une interface graphique*, bien que ce ne soit pas une obligation. Le choix de l’interface dépend des besoins de gestion et d’administration pour le laboratoire.
 
 2. **Rôle du Contrôleur de Domaine et du DNS** :
    - Le **contrôleur de domaine** est le serveur qui gère le domaine `test.local`. Il assure la gestion centralisée des identités et des accès pour les utilisateurs et machines du domaine. C’est lui qui permet aux autres serveurs d’être intégrés dans un environnement sécurisé où les ressources et permissions sont administrées de manière centralisée.
