@@ -112,7 +112,7 @@ Si le service n'est pas démarré, vous pouvez le lancer avec :
 Start-Service nlb
 ```
 
-Ces commandes devraient vous permettre d'installer et de configurer correctement NLB sur Windows Server 2019[1][2][4].
+Ces commandes devraient vous permettre d'installer et de configurer correctement NLB sur Windows Server 2019.
 
 
 
