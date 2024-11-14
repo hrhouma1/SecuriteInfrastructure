@@ -1,8 +1,6 @@
-Voici un cours détaillé sur les **Clusters de serveurs Linux** en utilisant le **Linux Virtual Server (LVS)** pour l’équilibrage de charge. Ce cours couvre les concepts de base, les différentes méthodes d’équilibrage de charge avec LVS, et leurs applications.
 
----
 
-### 📌 Introduction aux Clusters de Serveurs Linux (Linux Virtual Server - LVS)
+# 📌 Introduction aux Clusters de Serveurs Linux (Linux Virtual Server - LVS)
 
 Le **Linux Virtual Server (LVS)** est une technologie open-source qui permet de configurer un cluster de serveurs pour équilibrer la charge réseau et fournir une haute disponibilité. Il est couramment utilisé pour répartir les requêtes entrantes sur plusieurs serveurs, assurant ainsi que le système peut gérer plus de connexions tout en assurant la redondance.
 
