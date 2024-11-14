@@ -384,3 +384,173 @@ ud2** : 192.168.100.20/24
    - Téléchargez et ouvrez `captureVRRP.pcap` dans Wireshark pour analyser les paquets VRRP.
 
 
+
+
+-----
+
+# Annexe : 
+
+
+
+### **1. Préparation du Serveur Directeur (Master et Backup)**
+
+1. **Installer ipvsadm**
+   - Installez `ipvsadm` sur les serveurs Master et Backup pour configurer le LVS :
+     ```bash
+     sudo apt update
+     sudo apt install -y ipvsadm
+     ```
+
+2. **Configurer l’Adresse IP Virtuelle (VIP)**
+   - L’IP virtuelle (VIP) pour le service LVS sera `10.11.12.99`. 
+   - Sur chaque serveur directeur, ajoutez cette VIP en configurant `keepalived` (ce qui a déjà été fait dans la configuration de **Keepalived** ci-dessus).
+   - Pour vérifier que l'IP virtuelle est active, utilisez la commande suivante :
+     ```bash
+     ip addr show eth0
+     ```
+   - Si l'IP virtuelle `10.11.12.99` est configurée correctement, elle devrait apparaître ici.
+
+---
+
+### **2. Configuration des Serveurs Backend (Noeud1 et Noeud2)**
+
+1. **Configurer les Interfaces Réseau pour Répondre à la VIP**
+   - Modifiez les interfaces réseau des serveurs backend pour qu’elles puissent répondre aux requêtes envoyées à la VIP `10.11.12.99`.
+   - Ajoutez la VIP en tant qu'alias sur chaque serveur backend, en créant une interface de type `lo:0`.
+
+   Sur Noeud1 et Noeud2, exécutez :
+   ```bash
+   sudo ip addr add 10.11.12.99 dev lo
+   ```
+   
+   - Pour rendre cette configuration persistante, ajoutez-la à `/etc/network/interfaces` (ou créez un script d'initialisation au démarrage si vous utilisez une autre configuration réseau).
+
+2. **Configurer sysctl pour Ignorer les ARP**
+   - Sur chaque backend (Noeud1 et Noeud2), désactivez la réponse ARP pour éviter les conflits avec la VIP.
+     ```bash
+     sudo sysctl -w net.ipv4.conf.all.arp_ignore=1
+     sudo sysctl -w net.ipv4.conf.all.arp_announce=2
+     echo "net.ipv4.conf.all.arp_ignore=1" | sudo tee -a /etc/sysctl.conf
+     echo "net.ipv4.conf.all.arp_announce=2" | sudo tee -a /etc/sysctl.conf
+     ```
+
+3. **Installer et Configurer Apache (ou un autre serveur web)**
+   - Assurez-vous qu’un serveur web (Apache) est installé et fonctionnel sur les deux serveurs backend pour tester l'équilibrage de charge :
+     ```bash
+     sudo apt install -y apache2
+     ```
+   - Modifiez le fichier `/var/www/html/index.html` sur chaque serveur pour afficher un contenu différent, indiquant le nom du serveur (`Noeud1` ou `Noeud2`), afin de pouvoir identifier quel serveur répond à chaque requête.
+
+---
+
+### **3. Configuration de LVS avec ipvsadm sur le Serveur Directeur**
+
+1. **Ajouter un Service LVS avec ipvsadm**
+   - Utilisez la commande `ipvsadm` pour configurer un service LVS en mode NAT, en utilisant la VIP `10.11.12.99` et en définissant une stratégie de round-robin pour l'équilibrage de charge.
+   
+   Sur le serveur directeur (Master), exécutez :
+   ```bash
+   sudo ipvsadm -A -t 10.11.12.99:80 -s rr
+   ```
+   - Cette commande crée un service LVS pour les connexions TCP sur le port 80 (HTTP) avec une stratégie de **round-robin**.
+
+2. **Ajouter les Serveurs Backend au Service**
+   - Ajoutez les serveurs backend (Noeud1 et Noeud2) en utilisant le mode NAT (`-m`), ce qui est approprié pour une configuration LVS-NAT.
+
+   Ajoutez Noeud1 :
+   ```bash
+   sudo ipvsadm -a -t 10.11.12.99:80 -r 192.168.100.10:80 -m
+   ```
+   
+   Ajoutez Noeud2 :
+   ```bash
+   sudo ipvsadm -a -t 10.11.12.99:80 -r 192.168.100.20:80 -m
+   ```
+
+3. **Vérifier la Configuration LVS**
+   - Utilisez la commande suivante pour vérifier la configuration actuelle de LVS et afficher les serveurs backend configurés :
+     ```bash
+     sudo ipvsadm -L -n
+     ```
+   - La sortie devrait lister la VIP avec le port 80, et chaque serveur backend avec sa méthode d’accès (`NAT` dans ce cas).
+
+4. **Rendre la Configuration Persistante**
+   - Pour que la configuration LVS soit persistante après un redémarrage, créez un fichier de configuration `ipvsadm` :
+     ```bash
+     sudo ipvsadm-save > /etc/ipvsadm.rules
+     ```
+   - Créez un script de démarrage pour recharger cette configuration automatiquement :
+     ```bash
+     sudo nano /etc/rc.local
+     ```
+     Ajoutez la ligne suivante avant `exit 0` :
+     ```bash
+     ipvsadm-restore < /etc/ipvsadm.rules
+     ```
+
+---
+
+### **4. Surveillance et Gestion avec ipvsadm**
+
+1. **Surveiller l’État de LVS**
+   - Utilisez la commande suivante pour voir les statistiques de connexion et l'état des serveurs backend :
+     ```bash
+     sudo ipvsadm -L -n
+     ```
+
+2. **Vérification des Logs**
+   - Consultez les journaux sur chaque serveur directeur (Master et Backup) pour suivre les basculements ou les erreurs :
+     ```bash
+     sudo tail -f /var/log/syslog
+     ```
+
+---
+
+### **5. Tests et Validation**
+
+1. **Tester l’accès à l’IP Virtuelle (VIP)**
+   - Depuis une machine cliente ou directement sur le serveur directeur, envoyez des requêtes HTTP vers la VIP pour tester l’équilibrage de charge :
+     ```bash
+     curl http://10.11.12.99
+     ```
+   - Vous devriez voir des réponses alternées provenant de `Noeud1` et `Noeud2`, indiquant que le trafic est bien équilibré entre les serveurs backend.
+
+2. **Vérifier la Résilience**
+   - Pour tester la haute disponibilité, arrêtez le service Apache sur l’un des serveurs backend :
+     ```bash
+     sudo systemctl stop apache2
+     ```
+   - Envoyez de nouvelles requêtes vers la VIP :
+     ```bash
+     curl http://10.11.12.99
+     ```
+   - Assurez-vous que LVS redirige automatiquement les requêtes uniquement vers le backend actif.
+
+3. **Tests de Basculement (Failover)**
+   - Testez le basculement entre Master et Backup en arrêtant le service Keepalived sur Master :
+     ```bash
+     sudo systemctl stop keepalived
+     ```
+   - Vérifiez que Backup prend le relais de la VIP en envoyant une requête vers `10.11.12.99`.
+
+---
+
+### **6. Surveillance et Maintenance**
+
+- Pour surveiller les connexions en temps réel, utilisez la commande :
+  ```bash
+  sudo ipvsadm -L -n --stats
+  ```
+- Pour supprimer une entrée d'équilibrage de charge :
+  ```bash
+  sudo ipvsadm -D -t 10.11.12.99:80
+  ```
+
+---
+
+### **Cas d’Utilisation de LVS**
+Voici comment choisir le mode LVS en fonction des besoins :
+1. **LVS-NAT** : Idéal pour les réseaux privés où le serveur directeur et les serveurs backend sont dans le même sous-réseau.
+2. **LVS-DR (Direct Routing)** : Utilisé pour des applications à fort trafic où la réponse rapide est nécessaire.
+3. **LVS-TUN (Tunneling)** : Adapté pour des applications géographiquement distribuées, où les serveurs backend peuvent se trouver dans différents datacenters.
+
