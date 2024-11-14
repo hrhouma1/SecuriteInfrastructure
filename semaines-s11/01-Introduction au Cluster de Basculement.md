@@ -1,8 +1,5 @@
-Voici un cours sur le **Cluster de Basculement (Failover Cluster)**, structuré en plusieurs sections pour aborder les concepts de base, l'installation, et la gestion. Ce cours est conçu pour vous donner une compréhension complète et pratique du sujet.
 
----
-
-### 🚀 Introduction au Cluster de Basculement
+# 🚀 Introduction au Cluster de Basculement
 
 Un **Cluster de Basculement** est un ensemble de serveurs ou de nœuds qui fonctionnent ensemble pour garantir la disponibilité des services en cas de panne matérielle ou logicielle. Si l'un des serveurs rencontre un problème, un autre prend automatiquement la relève, minimisant ainsi les interruptions de service.
 
