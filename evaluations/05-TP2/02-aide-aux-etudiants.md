@@ -2,7 +2,7 @@
 # 01 - Poropostion de travail
 
 
-Voici le schéma global **mis à jour** avec les **systèmes d'exploitation (OS)** pour chaque machine, expliqué clairement !
+###### Schéma global **mis à jour** avec les **systèmes d'exploitation (OS)** pour chaque machine
 
 ---
 
