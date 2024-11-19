@@ -1,4 +1,4 @@
-# Configure IGW
+# Configurer le IGW
 
 ## **1. Préparer l'environnement de laboratoire**
 
