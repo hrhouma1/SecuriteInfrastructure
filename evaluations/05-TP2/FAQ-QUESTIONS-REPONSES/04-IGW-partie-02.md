@@ -1,3 +1,5 @@
+# Introduction
+
 Le **VGW** (Virtual Gateway) est une **passerelle virtuelle**. Elle est utilisée dans des configurations de haute disponibilité pour offrir une **adresse IP stable et partagée** entre plusieurs machines (ou serveurs) afin de gérer le trafic réseau de manière redondante.
 
 Dans le contexte de votre infrastructure avec **Keepalived**, le **VGW** permet de garantir que les clients ou les services connectés continuent de communiquer sans interruption, même si l'un des serveurs principaux tombe en panne.
