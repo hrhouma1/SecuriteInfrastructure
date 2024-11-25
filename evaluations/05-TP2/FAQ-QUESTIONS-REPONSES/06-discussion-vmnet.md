@@ -1,3 +1,6 @@
+
+![image](https://github.com/user-attachments/assets/14b14be9-42a1-4e64-8366-5a003e854a5d)
+
 - L'objectif de cette architecture est d'assurer la haute disponibilité avec **Keepalived**
 - Vous configurez des **VIP (Virtual IP)** et un **VGW (Virtual Gateway)** pour assurer la haute disponibilité avec **Keepalived**
 - Discutons les détails sur les **VMnet nécessaires** dans VMware. 
