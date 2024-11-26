@@ -1,8 +1,54 @@
-Pour clarifier et confirmer : 
 
-Avec une configuration **Host-Only**, les machines **dans un même VMnet** pourront communiquer entre elles sans problème, ce qui est essentiel pour les VIP et VGW dans ce TP. Voici pourquoi **Host-Only est suffisant pour ce TP avec Keepalived**, et pourquoi les machines pourront se connecter correctement.
+
+**Question : Configuration des réseaux pour la haute disponibilité avec Keepalived**
+
+Dans une infrastructure virtuelle utilisant VMware, vous devez configurer plusieurs machines connectées à différents réseaux pour assurer la haute disponibilité avec **Keepalived**, en utilisant une **VIP (Virtual IP)** et une **VGW (Virtual Gateway)**.
+
+### **Objectifs :**
+1. Configurer **4 réseaux virtuels distincts (VMnet)** pour simuler les différentes zones réseau (Interne, DMZ, Backend, et Synchronisation).
+2. Vérifier que les machines connectées à chaque réseau peuvent communiquer entre elles.
+3. Garantir que la VIP (10.11.12.99) et le VGW (192.168.100.99) fonctionnent correctement avec Keepalived.
 
 ---
+
+### **Contexte de l'architecture :**
+- **Machines et réseaux concernés** :
+  - **Réseau Interne (20.21.22.0/24)** : Pour le DNS et le serveur mail.
+  - **Réseau DMZ (10.11.12.0/24)** : Pour la VIP gérée par Keepalived.
+  - **Réseau Backend (192.168.100.0/24)** : Pour la VGW gérée par Keepalived.
+  - **Réseau Sync (172.168.1.0/30)** : Pour la synchronisation entre le Master et le Backup.
+- **Nombre total de VMnet** : 4.
+- **Configuration réseau** :
+  - Les adresses IP doivent être définies statiquement.
+  - Chaque VMnet est configuré en **Host-Only**, sauf si un accès externe est nécessaire.
+
+---
+
+### **Questions :**
+
+1. **Création des VMnet :**
+   - Quels types de VMnet configurez-vous pour chaque réseau ? Justifiez le choix de **Host-Only** pour ce TP.
+   - Si vous devez permettre un accès externe (par exemple, pour la DMZ), quel type de VMnet conviendrait ?
+
+2. **Connectivité entre les machines :**
+   - Expliquez comment les machines (par exemple, Master et Backup) peuvent communiquer entre elles dans un réseau **Host-Only**.
+   - Décrivez les tests que vous effectuerez pour valider la connectivité et le fonctionnement des VIP et VGW.
+
+3. **Alternative à Host-Only :**
+   - Dans quel cas envisageriez-vous de configurer un réseau en **Bridged** ?
+   - Quels seraient les impacts d’un réseau Bridged sur la sécurité et la gestion des adresses IP dans ce TP ?
+
+4. **VRRP et Keepalived :**
+   - Pourquoi le protocole VRRP fonctionne-t-il correctement dans un réseau Host-Only ?
+   - Si le VGW (192.168.100.99) ou la VIP (10.11.12.99) ne répond pas, quels outils utiliseriez-vous pour diagnostiquer les problèmes ?
+
+----------------------
+# Réponse : 
+Pour clarifier et confirmer : 
+
+Avec une configuration **Host-Only**, les machines **dans un même VMnet** pourront communiquer entre elles sans problème, ce qui est essentiel pour les VIP et VGW dans ce TP. 
+- Voici pourquoi **Host-Only est suffisant pour ce TP avec Keepalived**, et pourquoi les machines pourront se connecter correctement.
+
 
 ### **Comment fonctionne Host-Only pour ce TP ?**
 
