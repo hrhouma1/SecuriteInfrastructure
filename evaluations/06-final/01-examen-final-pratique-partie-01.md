@@ -122,5 +122,5 @@ L’examen final pratique s’appuie sur une infrastructure réseau basée sur d
 # Bonus :
 -----------------
 
-- *Rédigez un document clair et structuré détaillant les étapes de votre préparation, puis envoyez-le avant la date de l'examen. Vous avez également le droit de modifier les adresses IP, à condition de fournir une cartographie précise et détaillée de votre configuration.*
+*Rédigez un document clair, structuré et élégant, détaillant les étapes de votre préparation. Assurez-vous qu’il soit facile à reproduire, avec des explications précises et non de simples captures d’écran. Vous avez également le droit de modifier les adresses IP, à condition de fournir une cartographie précise et bien détaillée de votre configuration. La clarté et la présentation sont essentielles : un document non présentable ou difficile à comprendre entraînera une perte de points (examen du 05 décembre 2024)*
 
