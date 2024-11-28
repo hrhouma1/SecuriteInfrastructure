@@ -82,7 +82,7 @@ Face à ces défis, une solution comme Microsoft ATA se distingue par sa capacit
 - Simplifier la réponse aux incidents grâce à des recommandations concrètes.
 
 
-#### ** Résumé Pourquoi ATA ?**
+## Résumé Pourquoi ATA ?
 Microsoft ATA (Advanced Threat Analytics) est une solution conçue pour détecter, analyser et répondre aux comportements anormaux dans les environnements Active Directory (AD). ATA aide à :
 - Surveiller en temps réel les activités des utilisateurs et des entités.
 - Identifier les anomalies et les attaques avant qu'elles ne causent des dégâts.
@@ -108,6 +108,7 @@ ATA repose sur trois approches clés :
    - Combine plusieurs événements pour détecter des patterns complexes.
    - Réduit les faux positifs en ajoutant du contexte aux alertes.
 
+### ==> Voir Annexe 01
 ---
 
 ### **1.2 Avantages d’ATA**
