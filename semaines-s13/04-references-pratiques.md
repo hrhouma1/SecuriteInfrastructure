@@ -1,0 +1,5 @@
+- https://www.youtube.com/watch?v=_dPH60-k64g&ab_channel=EPCGroup.net
+- https://www.youtube.com/watch?v=FjOJGmiKL0Y&ab_channel=BD-ServerSolutions
+- https://www.youtube.com/watch?v=nI4gHUoAt6U&ab_channel=InstituteofInformationSecurity
+- https://www.youtube.com/watch?v=RAS-TI6PUrg&ab_channel=MicrosoftMechanics
+- https://www.youtube.com/watch?v=vVvDoIJMuvE&ab_channel=FoetronAcademy
