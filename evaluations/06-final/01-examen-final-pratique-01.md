@@ -1,6 +1,12 @@
-# Architecture de l'examen final
+### **Architecture Réseau pour l'Examen Final**
 
-----------------
+# **Présentation**
+
+L’examen final pratique s’appuie sur une infrastructure réseau basée sur deux réseaux virtuels (VMnet1 et VMnet2) pour simuler un environnement réaliste de gestion de domaine Active Directory et de répartition de charge réseau (NLB). 
+
+---
+
+# 01 - **Diagramme de l’Architecture**
 
 ```
                           +-------------------+
@@ -21,7 +27,7 @@
            | 2019 (AD DS)    | | 2019           | | 2019           |
            |-----------------| |----------------| |----------------|
            | VMnet1          | | VMnet1         | | VMnet1         |
-           | IP: 192.168.1.1 | | IP: 192.168.1.10| | IP: 192.168.1.20|
+           | IP: 192.168.1.5 | | IP: 192.168.1.10| | IP: 192.168.1.20|
            | DNS/DHCP        | | VIP: 192.168.2.100 (via NLB)      |
            +-----------------+ +----------------+ +----------------+
                                  |                 |
@@ -40,151 +46,81 @@
 
 ---
 
-### **Explications des réseaux et interfaces**
+# 02 - **Tableau des Rôles et Adresses IP**
 
-1. **Réseaux (VMnets) :**
-   - **VMnet1 (Gestion et Domaine)** :
-     - Gère les communications entre le **Contrôleur de Domaine (DC)**, les serveurs (SRV1 et SRV2), et le client (CLIENT).
-     - IP utilisées : `192.168.1.x`.
-   - **VMnet2 (Trafic NLB)** :
-     - Utilisé exclusivement pour le trafic du cluster NLB.
-     - IP utilisées : `192.168.2.x`.
-
-2. **Détails des Machines et Rôles :**
-   - **DC** :
-     - Connecté uniquement à **VMnet1**.
-     - Fournit les services de **DNS, DHCP, et Active Directory**.
-   - **SRV1 et SRV2** :
-     - Chaque serveur a deux interfaces réseau :
-       - **VMnet1** : Pour la gestion et la communication avec le domaine.
-       - **VMnet2** : Pour le trafic NLB.
-     - Partagent une adresse IP virtuelle (VIP) sur **VMnet2** : `192.168.2.100`.
-   - **CLIENT** :
-     - Connecté à **VMnet1** uniquement.
-     - Utilisé pour tester l’accès au cluster NLB (`http://192.168.2.100`) et au domaine.
-
-3. **VIP (Virtual IP)** :
-   - L’adresse virtuelle du cluster NLB est configurée sur **VMnet2** : `192.168.2.100`.
-   - Gérée par les serveurs SRV1 et SRV2 pour la répartition de charge.
+| **Nom**         | **Réseau (VMnet)** | **Adresse IP**         | **Rôle**                              | **Fonctionnalités**                                                                                |
+|------------------|--------------------|-------------------------|----------------------------------------|---------------------------------------------------------------------------------------------------|
+| **DC**           | VMnet1            | 192.168.1.5            | Contrôleur de domaine (AD DS), DNS    | - Gère les utilisateurs, groupes et ordinateurs dans le domaine `exam.local`.<br>- Fournit DNS.  |
+| **SRV1**         | VMnet1            | 192.168.1.10           | Nœud 1 du cluster NLB (gestion)       | - IIS personnalisé.<br>- Participe au domaine `exam.local`.<br>- Configure une interface sur VMnet2. |
+|                  | VMnet2            | 192.168.2.10           | Trafic NLB                             | - Reçoit les requêtes via la **VIP (192.168.2.100)**.                                             |
+| **SRV2**         | VMnet1            | 192.168.1.20           | Nœud 2 du cluster NLB (gestion)       | - IIS personnalisé.<br>- Participe au domaine `exam.local`.<br>- Configure une interface sur VMnet2. |
+|                  | VMnet2            | 192.168.2.20           | Trafic NLB                             | - Reçoit les requêtes via la **VIP (192.168.2.100)**.                                             |
+| **VIP (Cluster)**| VMnet2            | 192.168.2.100          | Adresse virtuelle partagée (NLB)      | - Répartit les requêtes entre SRV1 et SRV2.<br>- Assure la haute disponibilité et le basculement.|
+| **CLIENT**       | VMnet1            | DHCP ou 192.168.1.50   | Machine cliente                        | - Teste les accès à `http://192.168.2.100` et `http://192.168.1.x`.<br>- Participe au domaine.   |
 
 ---
 
-### **Table des Adresses et Rôles**
+# 03 - **Description des Réseaux**
 
-| **Nom**         | **VMnet** | **Adresse IP**         | **Rôle**                              |
-|------------------|-----------|-------------------------|----------------------------------------|
-| **DC**           | VMnet1    | 192.168.1.1            | Contrôleur de domaine (AD DS), DNS    |
-| **SRV1**         | VMnet1    | 192.168.1.10           | Nœud 1 du cluster NLB (gestion)       |
-|                  | VMnet2    | 192.168.2.10           | Trafic NLB                             |
-| **SRV2**         | VMnet1    | 192.168.1.20           | Nœud 2 du cluster NLB (gestion)       |
-|                  | VMnet2    | 192.168.2.20           | Trafic NLB                             |
-| **VIP (Cluster)**| VMnet2    | 192.168.2.100          | Adresse virtuelle partagée (NLB)      |
-| **CLIENT**       | VMnet1    | DHCP ou 192.168.1.50   | Machine cliente pour tests et accès   |
+1. **VMnet1 (Gestion & Domaine) :**
+   - Interconnecte le **Contrôleur de Domaine (DC)**, les serveurs (SRV1 et SRV2), et le client.
+   - Fournit les services DNS/DHCP nécessaires pour la gestion du domaine.
 
-
-
-----------------
-# ANNEXE :Architecture Réseau, Composants et Connexions
-----------------
-
-
-### **Table Détailée de l’Architecture Réseau**
-
-Voici une table améliorée détaillant chaque composant, son rôle, son réseau, ses connexions, et ses fonctionnalités attendues.
-
-| **Nom**           | **Réseau (VMnet)** | **Adresse IP**       | **Rôle**                              | **Fonctionnalité / Membres**                                                                                      |
-|--------------------|--------------------|-----------------------|----------------------------------------|-------------------------------------------------------------------------------------------------------------------|
-| **DC**            | **VMnet1**         | `192.168.1.1`        | **Contrôleur de Domaine (AD DS)**      | - Fournit le service Active Directory.<br>- Gère les utilisateurs, groupes et ordinateurs du domaine `exam.local`.<br>- Fournit DNS et (optionnel) DHCP.|
-| **SRV1**          | **VMnet1**         | `192.168.1.10`       | **Nœud 1 du cluster NLB**              | - Participe au domaine `exam.local`.<br>- Fournit une page IIS personnalisée.<br>- Configure une interface sur VMnet2 pour le trafic NLB.              |
-|                   | **VMnet2**         | `192.168.2.10`       | Trafic NLB                             | - Reçoit les requêtes via la **VIP (192.168.2.100)** partagée avec SRV2.                                         |
-| **SRV2**          | **VMnet1**         | `192.168.1.20`       | **Nœud 2 du cluster NLB**              | - Participe au domaine `exam.local`.<br>- Fournit une page IIS personnalisée.<br>- Configure une interface sur VMnet2 pour le trafic NLB.              |
-|                   | **VMnet2**         | `192.168.2.20`       | Trafic NLB                             | - Reçoit les requêtes via la **VIP (192.168.2.100)** partagée avec SRV1.                                         |
-| **VIP (Cluster)** | **VMnet2**         | `192.168.2.100`      | Adresse virtuelle partagée (NLB)       | - Répartit les requêtes entre SRV1 et SRV2.<br>- Permet la haute disponibilité et le basculement en cas de panne.|
-| **CLIENT**        | **VMnet1**         | DHCP ou `192.168.1.50`| **Machine cliente pour tests**         | - Utilisé pour vérifier les accès à la VIP (`http://192.168.2.100`) et aux serveurs IIS individuels.<br>- Participe au domaine `exam.local`.           |
+2. **VMnet2 (Trafic NLB) :**
+   - Connecte uniquement les serveurs SRV1 et SRV2 pour assurer le trafic lié au cluster NLB.
+   - Permet une isolation complète entre le trafic NLB et le réseau de gestion.
 
 ---
 
-### **Détails sur les Composants et Connexions**
+# 04 - **Détails des Composants**
 
-#### **1. Contrôleur de Domaine (DC)**
-- **Rôle** :
-  - Cœur du domaine Active Directory `exam.local`.
-  - Gère la base de données des objets Active Directory (utilisateurs, groupes, ordinateurs).
-  - Fournit les services DNS pour la résolution des noms.
-  - Optionnel : Peut être configuré pour attribuer des adresses IP via DHCP.
+## **1. Contrôleur de Domaine (DC)**
+- Fournit Active Directory Domain Services (AD DS) pour le domaine `exam.local`.
+- Gère les enregistrements DNS pour la résolution des noms.
+- Optionnellement, distribue des adresses IP via DHCP.
 
-- **Fonctionnalités principales :**
-  - **Gestion des membres du domaine :**
-    - Les machines SRV1, SRV2, et CLIENT doivent être **membres du domaine** `exam.local`.
-    - Chaque machine est ajoutée au domaine via `Add-Computer` ou l'interface graphique.
-  - **DNS :**
-    - Gère les enregistrements pour que les machines puissent résoudre les noms (exemple : `SRV1.exam.local`).
-  - **Services optionnels :**
-    - DHCP (peut être activé pour attribuer dynamiquement les IP dans le réseau VMnet1).
+## **2. Serveurs du Cluster NLB (SRV1 & SRV2)**
+- Hébergent une page IIS personnalisée (exemple : *"Bienvenue sur SRV1"*).
+- Configurés en cluster NLB pour répartir les requêtes entre les deux nœuds via l’adresse virtuelle `192.168.2.100`.
+
+## **3. Client (CLIENT)**
+- Teste les services IIS sur SRV1 et SRV2.
+- Vérifie le bon fonctionnement du cluster NLB.
+- Participe au domaine `exam.local`.
 
 ---
 
-#### **2. Serveurs du Cluster (SRV1 & SRV2)**
-- **Rôle :**
-  - Partagent la charge des requêtes via le **cluster NLB**.
-  - Fournissent des pages IIS personnalisées pour vérifier le fonctionnement du cluster.
+# 05 - **Instructions pour la Préparation**
 
-- **Fonctionnalités principales :**
-  - **Participation au domaine :**
-    - Chaque serveur est ajouté au domaine `exam.local` pour la gestion centralisée.
-  - **IIS (Internet Information Services) :**
-    - SRV1 et SRV2 hébergent une page personnalisée (ex. : *"Bienvenue sur SRV1"* ou *"Bienvenue sur SRV2"*).
-  - **NLB (Network Load Balancing) :**
-    - Configuré sur **VMnet2** pour assurer la répartition des requêtes.
-    - Les deux serveurs partagent la VIP `192.168.2.100` et répondent aux requêtes via VMnet2.
+1. **Créer les machines virtuelles nécessaires :**
+   - Une **machine Windows Server 2019** pour le contrôleur de domaine.
+   - Deux **machines Windows Server 2019** pour SRV1 et SRV2.
+   - Une **machine Windows 10 Professionnel** pour le client.
 
----
+2. **Configurer les réseaux (VMnets) :**
+   - Assigner **VMnet1** pour la gestion et le domaine.
+   - Assigner **VMnet2** pour le trafic NLB uniquement.
 
-#### **3. VIP (Virtual IP - Cluster NLB)**
-- **Rôle :**
-  - Adresse virtuelle `192.168.2.100` utilisée pour accéder au cluster.
-  - Répartit les requêtes entre SRV1 et SRV2.
+3. **Configurer les adresses IP :**
+   - Utilisez les adresses précisées dans le tableau.
 
-- **Trafic :**
-  - Exclusivement sur **VMnet2**.
-  - Testée depuis la machine CLIENT avec l’URL : `http://192.168.2.100`.
+4. **Tester la communication réseau :**
+   - Vérifiez que toutes les machines sur **VMnet1** peuvent se pinger entre elles.
+   - Assurez-vous que SRV1 et SRV2 communiquent correctement sur **VMnet2**.
+
+5. **Vérifier les services :**
+   - DNS doit résoudre les noms des serveurs et du domaine.
+   - Le client doit pouvoir accéder à `http://192.168.2.100`.
 
 ---
 
-#### **4. Machine Cliente (CLIENT)**
-- **Rôle :**
-  - Permet de tester les services IIS sur SRV1 et SRV2.
-  - Vérifie le fonctionnement de la VIP NLB (`192.168.2.100`).
-  - Doit être un membre du domaine `exam.local`.
+# **Validation**
+- Avant l’examen, confirmez que les machines sont opérationnelles et que les configurations réseau sont fonctionnelles.
+- Testez l’accès au domaine et au cluster NLB pour garantir le bon fonctionnement.
 
-- **Fonctionnalités principales :**
-  - **Tests d’accès :**
-    - Accès direct aux serveurs IIS via `http://192.168.1.10` (SRV1) et `http://192.168.1.20` (SRV2).
-    - Accès au cluster NLB via `http://192.168.2.100`.
-  - **Analyse des journaux :**
-    - Accède aux journaux des événements sur le DC ou les serveurs pour analyser les connexions et activités.
+-----------------
+# Bonus :
+-----------------
 
----
+- *Rédigez un document clair et structuré détaillant les étapes de votre préparation, puis envoyez-le avant la date de l'examen. Vous avez également le droit de modifier les adresses IP, à condition de fournir une cartographie précise et détaillée de votre configuration.*
 
-### **Connexions Résumées par Réseau**
-
-| **Réseau** | **Nom du réseau** | **Machines connectées**                                                                                     | **Fonction principale**                                               |
-|------------|--------------------|-------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------|
-| **VMnet1** | Gestion & Domaine  | DC, SRV1, SRV2, CLIENT                                                                                      | Communication entre le domaine, les serveurs, et le client.           |
-| **VMnet2** | Trafic NLB         | SRV1, SRV2 (avec VIP `192.168.2.100`)                                                                       | Répartition des requêtes via le cluster NLB.                          |
-
----
-
-### **Validation de l’Architecture**
-Avant l'examen, vous devez vérifier :
-1. **Communication réseau :**
-   - **VMnet1** : Toutes les machines doivent pouvoir se pinger entre elles (`ping 192.168.1.x`).
-   - **VMnet2** : Les serveurs SRV1 et SRV2 doivent communiquer entre eux (`ping 192.168.2.x`).
-
-2. **Fonctionnement du domaine :**
-   - Assurez-vous que SRV1, SRV2, et CLIENT sont ajoutés au domaine `exam.local`.
-
-3. **Accès aux services :**
-   - CLIENT doit pouvoir accéder :
-     - Aux pages IIS des serveurs via leurs IP individuelles (`http://192.168.1.10` et `http://192.168.1.20`).
-     - À la VIP NLB via `http://192.168.2.100`.
