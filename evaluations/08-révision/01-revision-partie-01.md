@@ -351,3 +351,184 @@ Pourquoi est-il important que les serveurs du cluster NLB synchronisent leurs se
   - **Mauvaise expérience utilisateur :** L’utilisateur pourrait être obligé de se reconnecter ou de recommencer ses actions.
 
 
+
+
+
+---
+
+# Partie 03 -  **Quiz sur les concepts liés à IGW, Clusters, VIP, et VMnet**
+
+---
+
+#### **Section 1: Concepts de base (IGW, VIP, et NLB)**
+
+1. **Quel est le rôle d’une Internet Gateway (IGW) dans un réseau cloud ?**  
+   a) Répartir les requêtes entre plusieurs serveurs  
+   b) Fournir une connexion Internet à un réseau privé  
+   c) Créer un domaine Active Directory  
+   d) Définir des adresses IP statiques  
+
+   **Réponse : b**
+
+2. **La Virtual IP (VIP) dans un cluster NLB est utilisée pour :**  
+   a) Identifier chaque serveur individuellement  
+   b) Servir de passerelle Internet pour le réseau  
+   c) Présenter une seule adresse IP pour l'ensemble des serveurs du cluster  
+   d) Configurer les adresses MAC des interfaces réseau  
+
+   **Réponse : c**
+
+3. **Dans un cluster NLB, la VIP doit être configurée :**  
+   a) Sur un réseau distinct de celui des serveurs du cluster  
+   b) Sur le même réseau que les interfaces réseau NLB des serveurs  
+   c) Sur le serveur DNS uniquement  
+   d) Sur le client qui teste l’accès au cluster  
+
+   **Réponse : b**
+
+4. **Que se passe-t-il si un serveur du cluster NLB tombe en panne ?**  
+   a) Le cluster cesse complètement de fonctionner  
+   b) La VIP est automatiquement désactivée  
+   c) Les autres serveurs prennent en charge les requêtes via la VIP  
+   d) Le réseau bascule sur un IGW secondaire  
+
+   **Réponse : c**
+
+5. **Pourquoi utilise-t-on une VIP au lieu d’une adresse IP physique dans un cluster ?**  
+   a) Pour permettre une haute disponibilité et un basculement transparent  
+   b) Pour réduire les conflits d’adresses IP  
+   c) Pour configurer les adresses MAC automatiquement  
+   d) Pour accéder directement à Internet via l'IGW  
+
+   **Réponse : a**
+
+---
+
+#### **Section 2: Configuration et choix des réseaux VMnet**
+
+6. **Quel est l’avantage principal d’utiliser plusieurs réseaux (VMnets) dans une architecture réseau ?**  
+   a) Réduire la consommation de bande passante  
+   b) Séparer les différents types de trafic pour éviter les conflits  
+   c) Rendre les adresses IP statiques inutiles  
+   d) Simplifier la configuration des machines virtuelles  
+
+   **Réponse : b**
+
+7. **Dans l’architecture donnée, VMnet1 est utilisé pour :**  
+   a) Le trafic NLB uniquement  
+   b) La gestion et le domaine Active Directory  
+   c) Les communications entre les serveurs NLB uniquement  
+   d) Connecter les machines au réseau Internet  
+
+   **Réponse : b**
+
+8. **VMnet2 est configuré pour :**  
+   a) Le domaine Active Directory  
+   b) Le trafic NLB et la communication entre les nœuds du cluster  
+   c) Fournir des services DNS aux serveurs NLB  
+   d) Héberger l’Internet Gateway (IGW)  
+
+   **Réponse : b**
+
+9. **Quel problème pourrait survenir si le trafic de gestion et NLB partageait un seul réseau VMnet ?**  
+   a) Les adresses IP des serveurs seraient mal configurées  
+   b) Le réseau pourrait être saturé, impactant les performances du domaine et du NLB  
+   c) Le cluster NLB ne fonctionnerait pas sans une IGW supplémentaire  
+   d) La VIP ne pourrait pas être activée  
+
+   **Réponse : b**
+
+10. **Pour une architecture incluant un NLB et un domaine, combien de réseaux VMnet sont recommandés au minimum ?**  
+    a) Un seul  
+    b) Deux : un pour la gestion et un pour le trafic NLB  
+    c) Trois : un pour la gestion, un pour le domaine, et un pour le trafic NLB  
+    d) Quatre : un par machine virtuelle  
+
+    **Réponse : b**
+
+---
+
+#### **Section 3: Active Directory et domaines**
+
+11. **Quelle machine fournit les services DNS et gère les utilisateurs dans un domaine Active Directory ?**  
+    a) Un serveur NLB  
+    b) Le contrôleur de domaine (DC)  
+    c) Une machine cliente  
+    d) L’Internet Gateway (IGW)  
+
+    **Réponse : b**
+
+12. **Dans un domaine Active Directory, pourquoi est-il nécessaire que toutes les machines soient connectées au même réseau (VMnet1 dans l’exemple) ?**  
+    a) Pour garantir une résolution DNS et une gestion centralisée des membres du domaine  
+    b) Pour synchroniser les configurations NLB  
+    c) Pour activer la VIP sur toutes les machines  
+    d) Pour permettre un accès direct à Internet  
+
+    **Réponse : a**
+
+13. **Que se passe-t-il si une machine cliente n’est pas membre du domaine Active Directory ?**  
+    a) Elle ne pourra pas accéder au cluster NLB  
+    b) Elle ne pourra pas utiliser les services gérés par le DC, comme le DNS  
+    c) Elle ne pourra pas utiliser une VIP  
+    d) Elle pourra fonctionner normalement, sans aucune restriction  
+
+    **Réponse : b**
+
+---
+
+#### **Section 4: Concepts avancés**
+
+14. **Une VIP peut-elle exister dans un réseau cloud sans un cluster NLB ?**  
+    a) Oui, elle peut être utilisée indépendamment pour d'autres services  
+    b) Non, elle est spécifique aux clusters NLB  
+    c) Oui, mais uniquement dans un réseau local (LAN)  
+    d) Non, elle nécessite toujours une IGW  
+
+    **Réponse : a**
+
+15. **Pourquoi une IGW n’est-elle pas nécessaire dans une architecture NLB locale ?**  
+    a) Parce que la communication reste interne au réseau local  
+    b) Parce que la VIP remplace le rôle de l’IGW  
+    c) Parce qu’un IGW est réservé aux environnements cloud  
+    d) Parce que le contrôleur de domaine remplit déjà ce rôle  
+
+    **Réponse : a**
+
+16. **Dans un environnement NLB, que signifie le basculement (failover) ?**  
+    a) Une nouvelle VIP est générée si un serveur tombe en panne  
+    b) Les requêtes sont automatiquement redirigées vers un autre serveur fonctionnel  
+    c) Une IGW est activée pour gérer le trafic supplémentaire  
+    d) Le domaine Active Directory est suspendu temporairement  
+
+    **Réponse : b**
+
+17. **Que faut-il vérifier pour garantir que la VIP fonctionne correctement ?**  
+    a) La synchronisation des adresses IP entre les interfaces NLB et DNS  
+    b) Que toutes les interfaces NLB des serveurs sont sur le même réseau  
+    c) Que le client est connecté directement à VMnet2  
+    d) Que le DNS pointe vers une IGW configurée  
+
+    **Réponse : b**
+
+---
+
+#### **Section 5: Questions scénarios**
+
+18. **Scénario :**  
+   Un étudiant configure SRV1 avec `192.168.1.10` sur VMnet1 et `192.168.1.11` sur VMnet2. Que se passera-t-il avec le cluster NLB ?  
+   a) Le cluster fonctionnera normalement  
+   b) Le cluster échouera car les adresses sur VMnet2 doivent être dans le réseau `192.168.2.x`  
+   c) Le domaine sera affecté par la configuration NLB  
+   d) Le client ne pourra pas accéder au cluster NLB  
+
+   **Réponse : b**
+
+19. **Scénario :**  
+   Le client peut accéder à la VIP (`192.168.2.100`) mais reçoit des erreurs aléatoires. Quelle pourrait être la cause ?  
+   a) La synchronisation des sessions n’est pas activée dans le cluster NLB  
+   b) L’adresse VIP n’est pas configurée dans le DNS  
+   c) Le client n’est pas membre du domaine  
+   d) L’IGW n’est pas active  
+
+   **Réponse : a**
+
