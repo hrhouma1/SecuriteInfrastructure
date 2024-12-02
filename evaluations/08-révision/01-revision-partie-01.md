@@ -532,3 +532,361 @@ Pourquoi est-il important que les serveurs du cluster NLB synchronisent leurs se
 
    **Réponse : a**
 
+
+
+------
+
+### **Section 6: Concepts Avancés et Scénarios Pratiques**  
+*(Questions 20 à 50)*  
+
+---
+
+#### **20.**  
+Pourquoi est-il recommandé d’attribuer des adresses IP fixes aux interfaces réseau des serveurs dans un cluster NLB ?  
+a) Pour éviter les conflits d'adresses lors de l’attribution par DHCP  
+b) Pour permettre une résolution DNS rapide  
+c) Pour garantir la cohérence des communications au sein du cluster  
+d) Toutes ces réponses  
+
+**Réponse : d**
+
+---
+
+#### **21.**  
+Dans un cluster NLB, quelle commande PowerShell est utilisée pour ajouter un nouveau nœud ?  
+a) `Add-NlbClusterNode`  
+b) `Set-NlbClusterVip`  
+c) `New-NlbClusterNode`  
+d) `Configure-NlbClusterNode`  
+
+**Réponse : a**
+
+---
+
+#### **22.**  
+Pourquoi faut-il configurer une interface séparée pour le trafic NLB (VMnet2) ?  
+a) Pour améliorer les performances du cluster  
+b) Pour isoler le trafic NLB du réseau de gestion  
+c) Pour éviter les saturations sur le réseau VMnet1  
+d) Toutes ces réponses  
+
+**Réponse : d**
+
+---
+
+#### **23.**  
+Dans un domaine Active Directory, quelle est la fonction principale du DNS ?  
+a) Gérer les requêtes HTTP  
+b) Résoudre les noms des machines et services au sein du domaine  
+c) Attribuer des adresses IP aux interfaces réseau  
+d) Configurer les clusters NLB  
+
+**Réponse : b**
+
+---
+
+#### **24.**  
+Que se passe-t-il si une VIP est configurée avec une adresse IP en dehors du réseau VMnet2 ?  
+a) Le cluster NLB fonctionnera sans problème  
+b) Les serveurs ne pourront pas communiquer avec la VIP  
+c) La VIP sera automatiquement réattribuée  
+d) Le domaine Active Directory cessera de fonctionner  
+
+**Réponse : b**
+
+---
+
+#### **25.**  
+Lorsqu’un client envoie une requête à un cluster NLB, comment le serveur choisi est-il déterminé ?  
+a) Par un algorithme basé sur l’adresse IP source du client  
+b) Par le serveur DNS du domaine  
+c) Par l’ordre d’enregistrement des serveurs dans le cluster  
+d) Par l’adresse IP de l’Internet Gateway  
+
+**Réponse : a**
+
+---
+
+#### **26.**  
+Quels sont les avantages de configurer une synchronisation de session dans un cluster NLB ?  
+a) Maintenir la cohérence des données pour les utilisateurs  
+b) Répartir les sessions de manière égale entre tous les serveurs  
+c) Augmenter la vitesse des requêtes  
+d) Éliminer complètement les pannes  
+
+**Réponse : a**
+
+---
+
+#### **27.**  
+Quel test effectuer pour vérifier que les serveurs NLB partagent correctement la VIP ?  
+a) `ping 192.168.2.100` depuis le CLIENT  
+b) Accéder à `http://192.168.2.100` via un navigateur sur le CLIENT  
+c) Simuler une panne d’un serveur et vérifier l’accès à la VIP  
+d) Toutes ces réponses  
+
+**Réponse : d**
+
+---
+
+#### **28.**  
+Pourquoi la configuration d’une VIP est-elle une bonne pratique pour la haute disponibilité ?  
+a) Elle permet de basculer automatiquement les requêtes en cas de panne d’un nœud  
+b) Elle simplifie la configuration des clients  
+c) Elle garantit une performance constante du réseau  
+d) Toutes ces réponses  
+
+**Réponse : d**
+
+---
+
+#### **29.**  
+Quelle commande PowerShell peut être utilisée pour vérifier la configuration d’un cluster NLB existant ?  
+a) `Get-NlbCluster`  
+b) `Check-NlbCluster`  
+c) `Test-NlbCluster`  
+d) `Inspect-NlbCluster`  
+
+**Réponse : a**
+
+---
+
+#### **30.**  
+Si le client n’arrive pas à résoudre `exam.local`, quelle serait une cause probable ?  
+a) Le contrôleur de domaine (DC) est hors ligne  
+b) Le client n’est pas configuré pour utiliser le serveur DNS  
+c) Une erreur dans les enregistrements DNS  
+d) Toutes ces réponses  
+
+**Réponse : d**
+
+---
+
+#### **31.**  
+Dans une architecture réseau avec plusieurs VMnets, comment s’assurer que les serveurs peuvent communiquer entre eux ?  
+a) Configurer les adresses IP sur le même sous-réseau pour chaque VMnet  
+b) Activer les services DHCP pour attribuer automatiquement des IP  
+c) Configurer une passerelle entre les VMnets  
+d) Ajouter les interfaces réseau au même domaine Active Directory  
+
+**Réponse : a**
+
+---
+
+#### **32.**  
+Dans un cluster NLB, pourquoi est-il important de tester l’accès direct à chaque serveur (SRV1, SRV2) avant de tester la VIP ?  
+a) Pour vérifier que les services individuels fonctionnent correctement  
+b) Pour s’assurer que les interfaces réseau sont actives  
+c) Pour identifier rapidement les problèmes liés à un serveur spécifique  
+d) Toutes ces réponses  
+
+**Réponse : d**
+
+---
+
+#### **33.**  
+Que représente l’adresse IP `192.168.1.5` dans l’architecture réseau donnée ?  
+a) La VIP du cluster NLB  
+b) L’adresse IP du contrôleur de domaine (DC)  
+c) L’adresse du client  
+d) L’adresse du serveur DNS secondaire  
+
+**Réponse : b**
+
+---
+
+#### **34.**  
+Quels outils peuvent être utilisés pour analyser le trafic réseau entre les serveurs NLB ?  
+a) Wireshark  
+b) Microsoft Message Analyzer  
+c) Commande `ping`  
+d) Toutes ces réponses  
+
+**Réponse : d**
+
+---
+
+#### **35.**  
+Que signifie "basculement" (failover) dans un cluster NLB ?  
+a) Le remplacement automatique de la VIP en cas de panne  
+b) La redirection des requêtes vers un autre serveur disponible  
+c) La création d’une nouvelle session pour chaque client  
+d) La désactivation temporaire du domaine Active Directory  
+
+**Réponse : b**
+
+---
+
+#### **36.**  
+Comment tester qu’un serveur SRV1 a bien rejoint le domaine Active Directory `exam.local` ?  
+a) En accédant à la page IIS de SRV1 via la VIP  
+b) En vérifiant que SRV1 peut résoudre le nom `exam.local`  
+c) En effectuant un ping vers `192.168.2.100` depuis SRV1  
+d) En accédant à `http://192.168.1.10` depuis le CLIENT  
+
+**Réponse : b**
+
+---
+
+#### **37.**  
+Quel est le rôle de la VIP dans un cluster NLB ?  
+a) Fournir un accès direct à chaque serveur du cluster  
+b) Présenter une adresse unique pour distribuer les requêtes entre les serveurs  
+c) Remplacer les adresses IP des serveurs en cas de panne  
+d) Synchroniser les sessions entre les serveurs  
+
+**Réponse : b**
+
+---
+
+#### **38.**  
+Pourquoi est-il recommandé d’utiliser deux interfaces réseau sur chaque serveur NLB (gestion et trafic NLB) ?  
+a) Pour éviter les conflits de trafic entre les tâches de gestion et de production  
+b) Pour améliorer la sécurité des données  
+c) Pour simplifier la configuration des VIP  
+d) Toutes ces réponses  
+
+**Réponse : d**
+
+---
+
+#### **39.**  
+Que se passe-t-il si un serveur NLB est configuré avec une adresse IP incorrecte sur VMnet2 ?  
+a) Il sera exclu du cluster  
+b) Il continuera à fonctionner uniquement sur VMnet1  
+c) La VIP sera automatiquement désactivée  
+d) Toutes les requêtes du client échoueront  
+
+**Réponse : a**
+
+---
+
+#### **40.**  
+Dans un environnement NLB, que signifie "affinité" dans le contexte de la gestion des sessions ?  
+a) La synchronisation des requêtes entre les serveurs  
+b) La redirection des requêtes successives d’un client vers le même serveur  
+c) L’attribution d’une nouvelle session à chaque requête  
+d) La configuration des interfaces réseau sur le même sous-réseau  
+
+**Réponse : b**
+
+
+
+#### **41.**  
+Quel est le rôle principal d’un contrôleur de domaine (DC) dans une infrastructure réseau ?  
+a) Fournir des services web via IIS  
+b) Gérer les utilisateurs, groupes et machines dans un domaine Active Directory  
+c) Assurer le basculement dans un cluster NLB  
+d) Attribuer des adresses IP aux machines  
+
+**Réponse : b**
+
+---
+
+#### **42.**  
+Dans une configuration NLB, que signifie le mode "Multicast" ?  
+a) Le trafic NLB est distribué à tous les serveurs via une adresse MAC partagée  
+b) Les requêtes des clients sont acheminées vers un seul serveur disponible  
+c) Chaque serveur reçoit une copie des requêtes et les traite simultanément  
+d) La VIP est partagée entre deux réseaux différents  
+
+**Réponse : a**
+
+---
+
+#### **43.**  
+Pourquoi est-il important de vérifier la résolution DNS pour la VIP dans un cluster NLB ?  
+a) Pour garantir que les clients puissent atteindre le cluster via un nom convivial  
+b) Pour synchroniser les serveurs NLB avec le contrôleur de domaine  
+c) Pour tester la configuration des interfaces NLB  
+d) Pour permettre l’accès direct aux interfaces réseau des serveurs  
+
+**Réponse : a**
+
+---
+
+#### **44.**  
+Quel type de données peut-on analyser dans les journaux d’événements liés au cluster NLB ?  
+a) Les connexions des clients à la VIP  
+b) Les erreurs réseau entre les interfaces NLB  
+c) Les changements dans la configuration du cluster  
+d) Toutes ces réponses  
+
+**Réponse : d**
+
+---
+
+#### **45.**  
+Lors de l’accès à `http://192.168.2.100`, vous remarquez que les requêtes ne parviennent qu’à un seul serveur du cluster. Quelle configuration vérifier en priorité ?  
+a) Le mode d’affinité du cluster NLB  
+b) Les enregistrements DNS pour la VIP  
+c) Les permissions des utilisateurs dans le domaine  
+d) La configuration des adresses IP dans le réseau VMnet1  
+
+**Réponse : a**
+
+---
+
+#### **46.**  
+Dans un cluster NLB, quelle est la commande PowerShell pour activer une adresse IP virtuelle (VIP) sur un nœud spécifique ?  
+a) `Set-NlbClusterVip`  
+b) `Enable-NlbClusterVip`  
+c) `Add-NlbClusterVip`  
+d) `Configure-NlbClusterVip`  
+
+**Réponse : c**
+
+---
+
+#### **47.**  
+Quel problème peut survenir si deux clusters NLB partagent la même VIP ?  
+a) Les clients ne pourront pas atteindre le cluster  
+b) Un conflit d’adresse IP entraînera une panne réseau  
+c) Les serveurs ne pourront pas synchroniser leurs sessions  
+d) Les nœuds du cluster seront exclus automatiquement  
+
+**Réponse : b**
+
+---
+
+#### **48.**  
+Dans quel cas utiliseriez-vous un protocole de type IGMP (Internet Group Management Protocol) dans une configuration NLB ?  
+a) Pour gérer les sessions synchronisées entre les serveurs  
+b) Pour limiter le trafic multicast aux routeurs ou commutateurs configurés  
+c) Pour basculer automatiquement entre les interfaces réseau  
+d) Pour assurer la sécurité des communications NLB  
+
+**Réponse : b**
+
+---
+
+#### **49.**  
+Si un client accède à `http://192.168.2.100` mais reçoit des réponses incohérentes (ex. : différentes pages IIS), quelle configuration est probablement incorrecte ?  
+a) La synchronisation des sessions NLB n’est pas activée  
+b) Les adresses IP des interfaces NLB ne sont pas dans le même sous-réseau  
+c) Les serveurs ne sont pas dans le domaine Active Directory  
+d) Les permissions DNS pour le domaine sont mal configurées  
+
+**Réponse : a**
+
+---
+
+#### **50.**  
+Pourquoi est-il essentiel d’utiliser deux réseaux VMnet (gestion et NLB) dans l’architecture décrite ?  
+a) Pour éviter la saturation d’un réseau unique  
+b) Pour séparer les tâches administratives et le trafic NLB  
+c) Pour simplifier la gestion des configurations IP et VIP  
+d) Toutes ces réponses  
+
+**Réponse : d**
+
+---
+
+# **Résumé des Thématiques**  
+
+Ces 50 questions couvrent :  
+1. Les concepts fondamentaux (VIP, NLB, IGW).  
+2. Les configurations spécifiques (réseaux VMnet, DNS, gestion des sessions).  
+3. Les scénarios pratiques (dépannage, basculement, connectivité).  
+4. Les outils et commandes nécessaires pour tester et analyser l’infrastructure.  
+
