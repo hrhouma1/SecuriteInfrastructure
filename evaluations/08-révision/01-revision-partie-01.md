@@ -1,14 +1,14 @@
 -----------------
-# Partie 01 - *Architecture Réseau pour l'Examen Final*
+# Partie 01 - *Architecture*
 -----------------
 
-# **Présentation**
+### **Présentation**
 
 L’examen final pratique s’appuie sur une infrastructure réseau basée sur deux réseaux virtuels (VMnet1 et VMnet2) pour simuler un environnement réaliste de gestion de domaine Active Directory et de répartition de charge réseau (NLB). 
 
 ---
 
-# 01 - **Diagramme de l’Architecture**
+### 01 - **Diagramme de l’Architecture**
 
 ```
                           +-------------------+
@@ -48,7 +48,7 @@ L’examen final pratique s’appuie sur une infrastructure réseau basée sur d
 
 ---
 
-# 02 - **Tableau des Rôles et Adresses IP**
+### 02 - **Tableau des Rôles et Adresses IP**
 
 | **Nom**         | **Réseau (VMnet)** | **Adresse IP**         | **Rôle**                              | **Fonctionnalités**                                                                                |
 |------------------|--------------------|-------------------------|----------------------------------------|---------------------------------------------------------------------------------------------------|
@@ -62,7 +62,7 @@ L’examen final pratique s’appuie sur une infrastructure réseau basée sur d
 
 ---
 
-# 03 - **Description des Réseaux**
+### 03 - **Description des Réseaux**
 
 1. **VMnet1 (Gestion & Domaine) :**
    - Interconnecte le **Contrôleur de Domaine (DC)**, les serveurs (SRV1 et SRV2), et le client.
@@ -74,7 +74,7 @@ L’examen final pratique s’appuie sur une infrastructure réseau basée sur d
 
 ---
 
-# 04 - **Détails des Composants**
+### 04 - **Détails des Composants**
 
 ## **1. Contrôleur de Domaine (DC)**
 - Fournit Active Directory Domain Services (AD DS) pour le domaine `exam.local`.
@@ -92,7 +92,7 @@ L’examen final pratique s’appuie sur une infrastructure réseau basée sur d
 
 ---
 
-# 05 - **Instructions pour la Préparation**
+### 05 - **Instructions pour la Préparation**
 
 1. **Créer les machines virtuelles nécessaires :**
    - Une **machine Windows Server 2019** pour le contrôleur de domaine.
@@ -116,22 +116,17 @@ L’examen final pratique s’appuie sur une infrastructure réseau basée sur d
 
 ---
 
-# **Validation**
+### **Validation**
 - Avant l’examen, confirmez que les machines sont opérationnelles et que les configurations réseau sont fonctionnelles.
 - Testez l’accès au domaine et au cluster NLB pour garantir le bon fonctionnement.
 
------------------
-# Bonus :
------------------
-
-*Rédigez un document clair, structuré et élégant, détaillant les étapes de votre préparation. Assurez-vous qu’il soit facile à reproduire, avec des explications précises et non de simples captures d’écran. Vous avez également le droit de modifier les adresses IP, à condition de fournir une cartographie précise et bien détaillée de votre configuration. La clarté et la présentation sont essentielles : un document non présentable ou difficile à comprendre entraînera une perte de points (examen du 05 décembre 2024)*
 
 
 -----------------
 # Partie 02 - *QUESTIONS*
 -----------------
 
-**Question :**
+*Exemple de Question et de réponse:*
 
 Dans la configuration du TP, la Virtual IP (VIP) du cluster NLB est définie comme étant `192.168.2.100` sur le réseau **VMnet2**. Expliquez pourquoi il est essentiel que cette adresse soit sur le même réseau (VMnet2) que les adresses des interfaces NLB des serveurs SRV1 et SRV2 (`192.168.2.10` et `192.168.2.20`). Que se passerait-il si la VIP était configurée sur un réseau différent, comme VMnet1 ?
 
@@ -168,7 +163,7 @@ Si l'énoncé respecte ces principes, il est correct. L'étudiant semble avoir m
 
 # Exemples - **Questions et Réponses en relation avec la configuration du cluster NLB et VIP :**
 
-#### **Question 1 :**
+# **Question 1 :**
 Dans la configuration, pourquoi est-il crucial que la Virtual IP (VIP) du cluster NLB soit sur le même réseau (VMnet2) que les interfaces NLB des serveurs SRV1 et SRV2 ? Que se passerait-il si la VIP était configurée sur un autre réseau, comme VMnet1 ?
 
 **Réponse :**
@@ -180,7 +175,7 @@ Dans la configuration, pourquoi est-il crucial que la Virtual IP (VIP) du cluste
 
 ---
 
-#### **Question 2 :**
+# **Question 2 :**
 Quelle est la différence entre les deux réseaux VMnet1 et VMnet2 dans cette configuration, et comment leurs rôles respectifs garantissent-ils la stabilité et la performance du cluster NLB ?
 
 **Réponse :**
@@ -195,7 +190,7 @@ Quelle est la différence entre les deux réseaux VMnet1 et VMnet2 dans cette co
 
 ---
 
-#### **Question 3 :**
+# **Question 3 :**
 Lors de la configuration du cluster NLB, pourquoi est-il nécessaire d’attribuer deux interfaces réseau (VMnet1 et VMnet2) aux serveurs SRV1 et SRV2 ?
 
 **Réponse :**
@@ -210,8 +205,8 @@ Lors de la configuration du cluster NLB, pourquoi est-il nécessaire d’attribu
 
 ---
 
-#### **Question 4 :**
-Quels tests réseau pouvez-vous effectuer pour vérifier que la configuration NLB fonctionne correctement avant l’examen ?
+# **Question 4 :**
+Quels tests réseau pouvez-vous effectuer pour vérifier que la configuration NLB fonctionne correctement ?
 
 **Réponse :**
 1. **Ping entre les interfaces NLB sur VMnet2 :**
@@ -227,7 +222,7 @@ Quels tests réseau pouvez-vous effectuer pour vérifier que la configuration NL
 
 ---
 
-#### **Question 5 :**
+# **Question 5 :**
 Si le CLIENT ne parvient pas à accéder à la VIP (`192.168.2.100`), quelles vérifications et corrections pourriez-vous effectuer ?
 
 **Réponse :**
@@ -243,11 +238,7 @@ Si le CLIENT ne parvient pas à accéder à la VIP (`192.168.2.100`), quelles v�
    - Si la VIP est configurée avec un enregistrement DNS, vérifier que le CLIENT peut résoudre le nom de la VIP.
 
 
-### **Questions pour approfondir la compréhension des concepts de VIP, NLB, et réseaux**
-
----
-
-#### **Question 6 :**
+# **Question 6 :**
 Expliquez la différence entre une **Virtual IP (VIP)** et une **adresse IP physique**. Pourquoi utilise-t-on une VIP dans un cluster NLB ?
 
 **Réponse :**
@@ -263,9 +254,9 @@ Expliquez la différence entre une **Virtual IP (VIP)** et une **adresse IP phys
 - Permet de présenter une seule adresse IP pour le service, même si plusieurs serveurs fonctionnent en arrière-plan.
 - Assure la haute disponibilité : si un serveur tombe en panne, les autres continuent de répondre via la même VIP.
 
----
 
-#### **Question 7 :**
+
+# **Question 7 :**
 Que se passe-t-il si deux serveurs dans un cluster NLB revendiquent simultanément la VIP sans une configuration correcte ? Quels problèmes cela pourrait-il engendrer ?
 
 **Réponse :**
@@ -274,9 +265,9 @@ Que se passe-t-il si deux serveurs dans un cluster NLB revendiquent simultanéme
   - **Perte de requêtes :** Les clients peuvent recevoir des réponses incohérentes ou ne pas être servis du tout.
   - **Risque de panne généralisée :** D’autres services réseau dépendant de la VIP pourraient être impactés.
 
----
 
-#### **Question 8 :**
+
+# **Question 8 :**
 Expliquez le rôle d’une **Internet Gateway (IGW)** dans un réseau cloud et comment il diffère d’une VIP utilisée dans un réseau NLB.
 
 **Réponse :**
@@ -296,9 +287,9 @@ Expliquez le rôle d’une **Internet Gateway (IGW)** dans un réseau cloud et c
 | **Utilisation**        | Réseaux cloud ou hybrides           | Réseaux locaux ou répartis          |
 | **Communication**      | Entre réseau privé et public        | Entre clients et serveurs d’un cluster |
 
----
 
-#### **Question 9 :**
+
+# **Question 9 :**
 Dans un cluster NLB, que se passe-t-il si un serveur tombe en panne ? Comment la VIP continue-t-elle de fonctionner ?
 
 **Réponse :**
@@ -309,9 +300,9 @@ Dans un cluster NLB, que se passe-t-il si un serveur tombe en panne ? Comment la
 **Pourquoi la VIP fonctionne toujours ?**
 - La VIP n'est pas liée à un serveur individuel mais au cluster dans son ensemble. Tant qu'un ou plusieurs serveurs dans le cluster fonctionnent, la VIP reste disponible.
 
----
 
-#### **Question 10 :**
+
+# **Question 10 :**
 Quels avantages présente la séparation des réseaux (gestion et NLB) dans une architecture réseau ? Que pourrait-il se passer si tout le trafic passait par un seul réseau ?
 
 **Réponse :**
@@ -324,9 +315,9 @@ Quels avantages présente la séparation des réseaux (gestion et NLB) dans une 
   - **Conflits de trafic :** Les requêtes NLB pourraient saturer le réseau, rendant difficile la gestion des serveurs et du domaine.
   - **Risque de panne généralisée :** Une surcharge sur le réseau unique pourrait affecter à la fois la gestion et la production.
 
----
 
-#### **Question 11 :**
+
+# **Question 11 :**
 Expliquez comment un client accède à un service sur un cluster NLB. Décrivez le rôle du DNS dans ce processus.
 
 **Réponse :**
@@ -344,9 +335,9 @@ Expliquez comment un client accède à un service sur un cluster NLB. Décrivez 
 4. **Réponse :**
    - Le serveur sélectionné répond directement au client.
 
----
 
-#### **Question 12 :**
+
+# **Question 12 :**
 Pourquoi est-il important que les serveurs du cluster NLB synchronisent leurs sessions ? Quelles conséquences en cas d’absence de synchronisation ?
 
 **Réponse :**
