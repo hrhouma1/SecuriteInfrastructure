@@ -1,4 +1,4 @@
-# Partie 02 - *Architecture du TP2 : Haute Disponibilité avec Keepalived*
+# Partie 02 - *Exemple d'architecture : Haute Disponibilité avec Keepalived*
 
 ---
 
