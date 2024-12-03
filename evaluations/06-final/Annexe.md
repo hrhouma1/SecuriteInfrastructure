@@ -42,7 +42,7 @@ L'absence d'Internet dans cette configuration n'est pas une erreur. Elle est int
 
 Je vous propose un script PowerShell complet pour installer et configurer les outils NLB (Network Load Balancing) sur une machine Windows Server vierge, en tenant compte de l'installation des outils RSAT nécessaires. Ce script est divisé en étapes claires pour une exécution simple.
 
-## **1. Installation des Outils NLB et RSAT**
+## **3.1. Installation des Outils NLB et RSAT**
 Exécutez ce script pour installer les fonctionnalités nécessaires, y compris NLB et RSAT.
 
 ```powershell
@@ -53,7 +53,7 @@ Install-WindowsFeature -Name NLB, RSAT-NLB -IncludeAllSubFeature -IncludeManagem
 Get-WindowsFeature | Where-Object { $_.Name -like "NLB*" }
 ```
 
-## **2. Configuration Réseau**
+## **3.2. Configuration Réseau**
 Avant de configurer NLB, vous devez préparer les interfaces réseau.
 
 ```powershell
@@ -70,7 +70,7 @@ Set-DnsClientServerAddress -InterfaceAlias "Ethernet0" -ServerAddresses 192.168.
 Get-NetIPAddress | Format-Table
 ```
 
-## **3. Création du Cluster NLB**
+## **3.3. Création du Cluster NLB**
 Utilisez ce script pour créer le cluster et ajouter la VIP (Virtual IP).
 
 ```powershell
@@ -84,7 +84,7 @@ New-NlbCluster -InterfaceName "Ethernet1" -ClusterPrimaryIP 192.168.2.100 -Subne
 Add-NlbClusterPortRule -ClusterName "NLBCluster" -StartPort 80 -EndPort 80 -Protocol Both -Affinity Single
 ```
 
-## **4. Ajouter un Nœud au Cluster**
+## **3.4. Ajouter un Nœud au Cluster**
 Si vous configurez plusieurs serveurs, ajoutez-les au cluster.
 
 ```powershell
@@ -92,7 +92,7 @@ Si vous configurez plusieurs serveurs, ajoutez-les au cluster.
 Add-NlbClusterNode -HostName "SRV2" -InterfaceName "Ethernet1"
 ```
 
-## **5. Vérification du Cluster**
+## **3.5. Vérification du Cluster**
 Après la configuration, vérifiez que tout fonctionne correctement.
 
 ```powershell
@@ -106,7 +106,7 @@ Get-NlbClusterNode
 Get-NlbClusterPortRule
 ```
 
-## **6. Tests de Connectivité**
+## **3.6. Tests de Connectivité**
 1. **Ping la VIP** :
    Depuis une autre machine (CLIENT), exécutez :
    ```powershell
@@ -116,7 +116,7 @@ Get-NlbClusterPortRule
 2. **Tester via un navigateur** :
    Ouvrez `http://192.168.2.100` et vérifiez que les pages IIS des serveurs apparaissent.
 
-## **7. Automatisation Supplémentaire (Optionnel)**
+## **3.7. Automatisation Supplémentaire (Optionnel)**
 Si vous souhaitez automatiser tout le processus sur plusieurs machines, utilisez ce script sur chaque serveur.
 
 ```powershell
@@ -133,6 +133,123 @@ foreach ($Server in $Servers) {
 }
 ```
 
+# 4. Routage ? - Communication entre VMnet1 et VMnet2 ?
+
+
+### **Question :**
+
+- Dans l’architecture donnée, le **client connecté à VMnet1** doit accéder à la **Virtual IP (VIP)** située sur **VMnet2**. 
+- Cela est en effet impossible sans une configuration spécifique permettant la communication entre ces deux réseaux distincts.
+
+---
+
+### **Explication **
+
+Les réseaux **VMnet1** et **VMnet2** représentent deux segments distincts. Par défaut, une machine dans **VMnet1** (par exemple, le CLIENT) **ne peut pas communiquer avec les machines ou la VIP dans VMnet2**, car ils n’appartiennent pas au même réseau logique. 
+
+**Pourquoi ?**
+- Les **réseaux locaux (VMnets)** fonctionnent comme des isolations virtuelles. Les machines sur VMnet1 ne connaissent pas l’existence de VMnet2 et vice versa.
+- Sans un appareil ou une configuration qui agit comme un **routeur**, les paquets réseau ne peuvent pas être transférés d’un réseau à l’autre.
+
+---
+
+### **Solutions : Comment permettre la communication entre VMnet1 et VMnet2 ?**
+
+Vous avez deux options principales pour résoudre ce problème, selon le niveau de complexité et vos objectifs.
+
+---
+
+#### **Solution 1 : Utilisation d’un Serveur Windows comme Routeur**
+Un serveur Windows peut être configuré pour jouer le rôle de **routeur** entre les réseaux VMnet1 et VMnet2. Voici comment procéder :
+
+1. **Configuration Réseau sur le Serveur Routeur :**
+   - Sélectionnez une machine connectée à **VMnet1** et **VMnet2** (par exemple, SRV1 ou un serveur dédié).
+   - Assurez-vous que cette machine a deux interfaces réseau :
+     - Une sur **VMnet1** (exemple : IP 192.168.1.254).
+     - Une sur **VMnet2** (exemple : IP 192.168.2.254).
+
+2. **Activer le Routage sur le Serveur :**
+   Exécutez ces commandes PowerShell sur la machine choisie comme routeur :
+   ```powershell
+   # Activer le service de routage
+   Install-WindowsFeature -Name RemoteAccess -IncludeManagementTools
+
+   # Configurer le routage LAN-LAN
+   Install-WindowsFeature -Name RSAT-RemoteAccess
+
+   # Activer l’IP Forwarding
+   Set-NetIPInterface -InterfaceAlias "Ethernet0" -Forwarding Enabled
+   Set-NetIPInterface -InterfaceAlias "Ethernet1" -Forwarding Enabled
+   ```
+
+3. **Configurer les Routes sur les Machines Client :**
+   Ajoutez une route statique sur le CLIENT pour diriger le trafic destiné à VMnet2 via le routeur :
+   ```powershell
+   route add 192.168.2.0 mask 255.255.255.0 192.168.1.254
+   ```
+
+---
+
+#### **Solution 2 : Utilisation de pfSense comme Routeur**
+
+pfSense est un pare-feu et routeur open-source facile à configurer. Voici les étapes pour utiliser pfSense comme routeur entre VMnet1 et VMnet2.
+
+1. **Installer pfSense :**
+   - Téléchargez l’ISO de pfSense et créez une machine virtuelle dédiée.
+   - Configurez deux interfaces réseau pour pfSense :
+     - Interface **WAN** connectée à **VMnet1**.
+     - Interface **LAN** connectée à **VMnet2**.
+
+2. **Configurer les Interfaces dans pfSense :**
+   - Accédez à l’interface web de pfSense (par défaut : `192.168.1.1` sur WAN).
+   - Configurez une passerelle entre WAN (VMnet1) et LAN (VMnet2).
+   - Exemple :
+     - WAN (VMnet1) : IP 192.168.1.254
+     - LAN (VMnet2) : IP 192.168.2.254
+
+3. **Configurer les Règles de Routage :**
+   - Ajoutez une règle autorisant le trafic entre les deux réseaux dans pfSense :
+     - Source : 192.168.1.0/24
+     - Destination : 192.168.2.0/24
+
+4. **Configurer le CLIENT :**
+   - Ajoutez une route sur le CLIENT ou configurez son **passerelle par défaut** pour utiliser pfSense comme routeur :
+     ```powershell
+     route add 192.168.2.0 mask 255.255.255.0 192.168.1.254
+     ```
+
+---
+
+### **Accès à Internet**
+
+Si vous souhaitez que les machines dans VMnet1 et VMnet2 accèdent à Internet, voici les étapes :
+
+1. **Configurer une Interface WAN vers l’Internet :**
+   - Ajoutez une troisième interface à pfSense ou au serveur routeur, configurée pour accéder à votre connexion Internet.
+   - Exemple :
+     - Interface WAN : DHCP ou IP publique.
+
+2. **Configurer le NAT (Network Address Translation) :**
+   - Dans pfSense, activez le NAT pour permettre aux machines locales (VMnet1 et VMnet2) d’accéder à Internet via l’interface WAN.
+
+3. **Configurer les Passerelles :**
+   - Configurez chaque machine pour utiliser le routeur (pfSense ou Windows) comme passerelle par défaut.
+
+---
+
+### **Quelle Solution Choisir ?**
+1. **Simplicité et Familiarité :** Utilisez un serveur Windows comme routeur si vous préférez rester dans un environnement Windows.
+2. **Performance et Flexibilité :** Utilisez pfSense pour une solution professionnelle, évolutive et mieux adaptée aux scénarios avancés (NAT, filtrage, etc.).
+
+---
+
+# **Conclusion**
+Il est **essentiel** de comprendre que sans une configuration de routage explicite, **VMnet1 et VMnet2 ne peuvent pas communiquer**. Ces solutions permettent de résoudre ce problème tout en respectant les objectifs pédagogiques du laboratoire.
+
+
+
+
+
 ## **Notes Importantes :**
 - **Réseau** :
   Assurez-vous que les serveurs sont connectés sur le même réseau pour Ethernet1.
@@ -147,15 +264,6 @@ foreach ($Server in $Servers) {
 Une fois le cluster configuré :
 - Redémarrez un des serveurs pour tester le basculement.
 - Vérifiez que la VIP reste accessible.
-
-Ce script est prêt à l'emploi et couvre tout le nécessaire pour configurer un cluster NLB à partir de zéro.
-
-
-
-
-
-
-
 
 
 
