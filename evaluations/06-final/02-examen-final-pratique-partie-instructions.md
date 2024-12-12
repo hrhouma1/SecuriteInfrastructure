@@ -9,15 +9,6 @@
 
 
 
-# **Examen Pratique : Infrastructure Réseau et Sécurité**
-
----
-
-**Durée :** 4 heures  
-**Points totaux :** 100 points  
-
----
-
 # Consignes générales
 
 ### ** Préalable : Configuration initiale**
