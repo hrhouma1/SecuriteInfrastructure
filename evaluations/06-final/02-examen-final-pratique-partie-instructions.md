@@ -18,7 +18,7 @@
 
 ---
 
-# ** Consignes générales**
+# Consignes générales
 
 ### ** Préalable : Configuration initiale**
 
