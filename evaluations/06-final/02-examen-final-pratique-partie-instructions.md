@@ -11,7 +11,7 @@
 
 # Consignes générales
 
-### ** Préalable : Configuration initiale**
+### Préalable : Configuration initiale
 
 Avant de commencer cet examen, assurez-vous que la configuration réseau partagée il y a deux semaines (01-examen-final-pratique-partie-01.md) est **opérationnelle**. 
 
