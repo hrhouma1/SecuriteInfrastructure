@@ -7,7 +7,23 @@
 
 ---
 
-# **1. Consignes générales**
+
+
+# **Examen Pratique : Infrastructure Réseau et Sécurité**
+
+---
+
+**Durée :** 4 heures  
+**Points totaux :** 100 points  
+
+---
+
+# ** Consignes générales**
+
+### ** Préalable : Configuration initiale**
+
+Avant de commencer cet examen, assurez-vous que la configuration réseau partagée il y a deux semaines (01-examen-final-pratique-partie-01.md) est **opérationnelle**. 
+
 
 #### **Objectif de l’examen**
 Vous serez évalué.e.s sur votre capacité à :  
