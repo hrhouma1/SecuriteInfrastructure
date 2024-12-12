@@ -41,7 +41,7 @@ Vous serez évalué.e.s sur votre capacité à :
 # **2. Structure du rapport**
 
 #### **Page de garde**
-- **Titre :** Examen Pratique : Infrastructure Réseau et Sécurité.  
+- **Titre :** Examen Pratique : 420-5R4-MA SÉCURITÉ DE L'INFRASTRUCTURE groupe 00001.  
 - **Informations personnelles :**  
   - Nom et prénom.  
   - Classe.  
